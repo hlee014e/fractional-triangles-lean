@@ -53,6 +53,75 @@ theorem root_character_coprime
   exact Section4.root_character_is_unit δ p s h
 
 /-!
+/--
+Arithmetic form of the character obstruction in Lemma 4.2.
+
+If
+    δ * s ≡ -1 (mod p)
+and
+    m * s ≡ 0 (mod p),
+then
+    p ∣ m.
+
+Thus, once `s` is the stabilizer character of `L` at a stacky point,
+a nonzero invariant value in the fiber of `L^m` can occur only when
+the stabilizer order divides `m`.
+-/
+theorem p_dvd_m_of_root_character_and_trivial_power
+    (δ p m : ℕ) (s : ℤ)
+    (hroot : Int.ModEq p ((δ : ℤ) * s) (-1 : ℤ))
+    (hm : Int.ModEq p ((m : ℤ) * s) 0) :
+    p ∣ m := by
+  rw [Int.modEq_iff_dvd] at hroot hm
+
+  have hroot' : (p : ℤ) ∣ (δ : ℤ) * s + 1 := by
+    simpa [sub_eq_add_neg] using hroot
+
+  have hm' : (p : ℤ) ∣ (m : ℤ) * s := by
+    simpa using hm
+
+  rcases hroot' with ⟨a, ha⟩
+  rcases hm' with ⟨b, hb⟩
+
+  have hmZ : (p : ℤ) ∣ (m : ℤ) := by
+    refine ⟨(m : ℤ) * a - (δ : ℤ) * b, ?_⟩
+    calc
+      (m : ℤ)
+          = (m : ℤ) * ((δ : ℤ) * s + 1)
+              - (δ : ℤ) * ((m : ℤ) * s) := by ring
+      _ = (m : ℤ) * ((p : ℤ) * a)
+              - (δ : ℤ) * ((p : ℤ) * b) := by rw [ha, hb]
+      _ = (p : ℤ) * ((m : ℤ) * a - (δ : ℤ) * b) := by ring
+
+  exact_mod_cast hmZ
+
+
+/--
+The group-theoretic gcd statement behind the second equality in (4.2).
+
+If `d` has the universal gcd property for a set `Σ` of positive degrees,
+then an element `λ` satisfies `λ^m = 1` for every `m ∈ Σ`
+if and only if `λ^d = 1`.
+-/
+theorem pow_eq_one_on_set_iff_pow_setGCD
+    {G : Type*} [Group G]
+    (Σ : Set ℕ) (d : ℕ)
+    (hd : IsSetGCD Σ d)
+    (λ : G) :
+    (∀ m, m ∈ Σ → λ ^ m = 1) ↔ λ ^ d = 1 := by
+  constructor
+  · intro hall
+    have hord : orderOf λ ∣ d := by
+      apply hd.2
+      intro m hm
+      exact (orderOf_dvd_iff_pow_eq_one).2 (hall m hm)
+    exact (orderOf_dvd_iff_pow_eq_one).1 hord
+
+  · intro hpow m hm
+    have hdm : d ∣ m := hd.1 m hm
+    rcases hdm with ⟨k, rfl⟩
+    rw [pow_mul, hpow]
+    simp
 ## Exact external geometric inputs needed for a full Lean proof of Lemma 4.2
 
 1. **Geigle–Lenzing Cox identification**
@@ -96,6 +165,58 @@ theorem root_character_coprime
 Once these seven geometric results are available as formal theorems, the
 printed Lemma 4.2 can be formalized without adding any mathematical argument.
 -/
+/--
+Final gcd step in Lemma 4.2.
 
+Assume:
+1. every degree in Σ is divisible by p;
+2. every sufficiently large multiple of p belongs to Σ.
+
+Then p has the universal gcd property for Σ.
+
+The second hypothesis is exactly what the geometric
+evaluation/Serre-vanishing argument supplies.
+-/
+theorem isSetGCD_of_eventual_multiples
+    (Σ : Set ℕ) (p N : ℕ)
+    (hp : 0 < p)
+    (hall : ∀ m, m ∈ Σ → p ∣ m)
+    (heventual :
+      ∀ m, N ≤ m → p ∣ m → m ∈ Σ) :
+    IsSetGCD Σ p := by
+  let a : ℕ := p * (N + 1)
+  let b : ℕ := p * (N + 2)
+
+  have hNa : N ≤ a := by
+    dsimp [a]
+    omega
+
+  have hNb : N ≤ b := by
+    dsimp [b]
+    omega
+
+  have hpa : p ∣ a := by
+    exact dvd_mul_right p (N + 1)
+
+  have hpb : p ∣ b := by
+    exact dvd_mul_right p (N + 2)
+
+  have ha : a ∈ Σ :=
+    heventual a hNa hpa
+
+  have hb : b ∈ Σ :=
+    heventual b hNb hpb
+
+  have hg : Nat.gcd a b = p := by
+    dsimp [a, b]
+    rw [Nat.gcd_mul_left]
+    have hsucc :
+        Nat.gcd (N + 1) (N + 2) = 1 := by
+      omega
+    rw [hsucc]
+    simp
+
+  exact isSetGCD_of_two_witnesses
+    Σ p a b hall ha hb hg
 end Section4Lemma42
 end FractionalTriangles
