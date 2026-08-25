@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Arithmetic
+import FractionalTriangles.Core.Arithmetic
 
 namespace FractionalTriangles
 
