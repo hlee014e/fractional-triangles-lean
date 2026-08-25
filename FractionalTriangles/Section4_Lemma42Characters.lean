@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Grading
+import FractionalTriangles.Section2.GradingGroup
 import FractionalTriangles.Section4_Lemma42
 
 namespace FractionalTriangles

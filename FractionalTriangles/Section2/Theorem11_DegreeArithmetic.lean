@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section2_RootCriterion
+import FractionalTriangles.Section2.Main
 
 namespace FractionalTriangles
 

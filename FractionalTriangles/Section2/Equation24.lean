@@ -1,6 +1,6 @@
 import Mathlib
-import FractionalTriangles.Grading
-import FractionalTriangles.Section2_FinalArithmetic
+import FractionalTriangles.Section2.GradingGroup
+import FractionalTriangles.Section2.Theorem11_MaximalRoot
 
 namespace FractionalTriangles
 

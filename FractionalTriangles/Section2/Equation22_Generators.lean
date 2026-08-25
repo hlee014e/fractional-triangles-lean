@@ -1,6 +1,6 @@
 import Mathlib
-import FractionalTriangles.Grading
-import FractionalTriangles.ScaledDegree
+import FractionalTriangles.Section2.GradingGroup
+import FractionalTriangles.Section2.ScaledDegree
 
 namespace FractionalTriangles
 

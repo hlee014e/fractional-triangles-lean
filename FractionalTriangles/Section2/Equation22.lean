@@ -1,8 +1,8 @@
 import Mathlib
-import FractionalTriangles.Grading
-import FractionalTriangles.ScaledDegree
-import FractionalTriangles.Eq22
-import FractionalTriangles.TorsionStep
+import FractionalTriangles.Section2.GradingGroup
+import FractionalTriangles.Section2.ScaledDegree
+import FractionalTriangles.Section2.Equation22_Generators
+import FractionalTriangles.Section2.Lemma21_Torsion
 
 namespace FractionalTriangles
 

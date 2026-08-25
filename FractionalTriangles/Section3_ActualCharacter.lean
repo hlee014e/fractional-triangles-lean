@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Eq24
+import FractionalTriangles.Section2.Equation24
 import FractionalTriangles.Section3_Prop31Relations
 
 namespace FractionalTriangles

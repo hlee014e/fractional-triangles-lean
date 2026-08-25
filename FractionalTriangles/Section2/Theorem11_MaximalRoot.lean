@@ -1,6 +1,6 @@
 import Mathlib
-import FractionalTriangles.Section2_RootCriterion
-import FractionalTriangles.Section2_DegreeAndRootArithmetic
+import FractionalTriangles.Section2.Main
+import FractionalTriangles.Section2.Theorem11_DegreeArithmetic
 
 namespace FractionalTriangles
 

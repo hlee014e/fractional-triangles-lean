@@ -1,11 +1,11 @@
 import Mathlib
-import FractionalTriangles.Grading
-import FractionalTriangles.ScaledDegree
-import FractionalTriangles.Eq22
-import FractionalTriangles.Eq22All
-import FractionalTriangles.TorsionStep
-import FractionalTriangles.Lemma21
-import FractionalTriangles.Roots
+import FractionalTriangles.Section2.GradingGroup
+import FractionalTriangles.Section2.ScaledDegree
+import FractionalTriangles.Section2.Equation22_Generators
+import FractionalTriangles.Section2.Equation22
+import FractionalTriangles.Section2.Lemma21_Torsion
+import FractionalTriangles.Section2.Lemma21
+import FractionalTriangles.Section2.Theorem11_RootCriterion
 
 namespace FractionalTriangles
 

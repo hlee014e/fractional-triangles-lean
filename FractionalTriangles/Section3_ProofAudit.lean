@@ -1,6 +1,6 @@
 import Mathlib
 import FractionalTriangles.Section3
-import FractionalTriangles.Lemma21
+import FractionalTriangles.Section2.Lemma21
 
 namespace FractionalTriangles
 
