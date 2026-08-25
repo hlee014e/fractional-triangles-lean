@@ -1,6 +1,6 @@
 import Mathlib
 import FractionalTriangles.Section2_RootCriterion
-import FractionalTriangles.Section2_PaperProof
+import FractionalTriangles.Section2_DegreeAndRootArithmetic
 
 namespace FractionalTriangles
 
