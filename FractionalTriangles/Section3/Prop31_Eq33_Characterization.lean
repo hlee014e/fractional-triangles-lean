@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section3.ActualCharacter
+import FractionalTriangles.Section3.Prop31_Eq33_GradingCharacters
 import FractionalTriangles.Section3.Prop31Relations
 
 namespace FractionalTriangles

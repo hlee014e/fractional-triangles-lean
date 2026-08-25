@@ -1,13 +1,12 @@
 import FractionalTriangles.Section3.ProofAudit
 import FractionalTriangles.Section3.Prop31Next
 import FractionalTriangles.Section3.Prop31Relations
-import FractionalTriangles.Section3.ActualCharacter
-import FractionalTriangles.Section3.GtauCharacterization
+import FractionalTriangles.Section3.Prop31_Eq33_GradingCharacters
+import FractionalTriangles.Section3.Prop31_Eq33_Characterization
 import FractionalTriangles.Section3.Prop31OrderInvariants
-import FractionalTriangles.Section3.ConcreteOrder
-import FractionalTriangles.Section3.InvariantDegree
-import FractionalTriangles.Section3.MolienReciprocity
-import FractionalTriangles.Section3.StandardHypotheses
+import FractionalTriangles.Section3.Prop31_Eq34_Order
+import FractionalTriangles.Section3.Prop31_Eq35_InvariantDegrees
+import FractionalTriangles.Section3.Prop32_Eq38_39_MolienReciprocity
 
 namespace FractionalTriangles
 

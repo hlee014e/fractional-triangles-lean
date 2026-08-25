@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section3.GtauCharacterization
+import FractionalTriangles.Section3.Prop31_Eq33_Characterization
 import FractionalTriangles.Section3.Prop31OrderInvariants
 
 namespace FractionalTriangles
