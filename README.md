@@ -2,566 +2,382 @@
 
 Lean 4 verification accompanying the *Fractional Triangles* manuscript.
 
-All files compile with
+The repository is organized according to the sections of the manuscript.
+For each Lean file below, the README records the corresponding paper content and the part that is checked in Lean.
+
+All current Lean files compile without `sorry`.
+
+## Build
 
 ```bash
 lake build
 ```
 
-without `sorry`.
+---
+
+# Section 2 — Grading group and roots
+
+Directory: [`FractionalTriangles/Section2`](FractionalTriangles/Section2)
+
+### [`GradingGroup.lean`](FractionalTriangles/Section2/GradingGroup.lean)
+
+Defines the grading group
+
+$$
+L(p,q,r)=\langle \vec x,\vec y,\vec z,\vec c\mid
+p\vec x=q\vec y=r\vec z=\vec c\rangle
+$$
+
+and
+
+$$
+\vec\omega=\vec c-\vec x-\vec y-\vec z.
+$$
+
+### [`ScaledDegree.lean`](FractionalTriangles/Section2/ScaledDegree.lean)
+
+Constructs the integral scaled-degree map
+
+$$
+D=N\deg,
+\qquad
+D(\vec x)=\frac{N}{p},\;
+D(\vec y)=\frac{N}{q},\;
+D(\vec z)=\frac{N}{r},\;
+D(\vec c)=N.
+$$
+
+### [`Equation22_Generators.lean`](FractionalTriangles/Section2/Equation22_Generators.lean)
+
+Checks equation (2.2) on the generators.
+
+### [`Equation22.lean`](FractionalTriangles/Section2/Equation22.lean)
+
+Checks equation (2.2) for every $\vec v\in L$:
+
+$$
+N\vec v=(N\deg\vec v)\vec c.
+$$
+
+### [`Equation24.lean`](FractionalTriangles/Section2/Equation24.lean)
+
+Formalizes
+
+$$
+L/\mathbb Z\vec c
+\cong
+\mathbb Z/p\mathbb Z\oplus
+\mathbb Z/q\mathbb Z\oplus
+\mathbb Z/r\mathbb Z.
+$$
+
+### [`Lemma21_Torsion.lean`](FractionalTriangles/Section2/Lemma21_Torsion.lean)
+
+Checks the torsion/Bézout arithmetic used in Lemma 2.1, beginning with
+
+$$
+\deg(\vec v)=0\Longrightarrow N\vec v=0.
+$$
+
+### [`Lemma21.lean`](FractionalTriangles/Section2/Lemma21.lean)
+
+Checks
+
+$$
+\gcd(e,N)=1
+\Longrightarrow
+[\vec v\mapsto e\vec v]
+\text{ is injective on }L(p,q,r).
+$$
+
+### [`Theorem11_RootCriterion.lean`](FractionalTriangles/Section2/Theorem11_RootCriterion.lean)
+
+Checks the arithmetic root criterion in Theorem 1.1.
+
+### [`Theorem11_DegreeArithmetic.lean`](FractionalTriangles/Section2/Theorem11_DegreeArithmetic.lean)
+
+Checks the degree/root arithmetic arising from
+
+$$
+\delta\vec\tau=\vec\omega.
+$$
+
+### [`Theorem11_MaximalRoot.lean`](FractionalTriangles/Section2/Theorem11_MaximalRoot.lean)
+
+Checks the final maximal-root arithmetic, including the consequences corresponding to (2.5) and (2.6). In particular,
+
+$$
+d_{\max}\vec\varpi=\vec\omega,
+\qquad
+\delta\mid d_{\max}
+\Longrightarrow
+\vec\tau=\frac{d_{\max}}{\delta}\vec\varpi.
+$$
+
+### [`Main.lean`](FractionalTriangles/Section2/Main.lean)
+
+Collects the Section 2 verification files.
 
 ---
+
+# Section 3 — The group $G_{\vec\tau}$ and invariant-ring numerics
+
+Directory: [`FractionalTriangles/Section3`](FractionalTriangles/Section3)
+
+### [`ProofAudit.lean`](FractionalTriangles/Section3/ProofAudit.lean)
+
+Checks the group-theoretic and arithmetic steps used in Propositions 3.1 and 3.2. In particular,
+
+$$
+a^\delta=1,\qquad
+a^N=1,\qquad
+\gcd(\delta,N)=1
+\Longrightarrow
+a=1.
+$$
+
+### [`Prop31Next.lean`](FractionalTriangles/Section3/Prop31Next.lean)
+
+Checks the finite-group quotient mechanism behind (3.4):
+
+$$
+|A/\langle\tau\rangle|\,|\langle\tau\rangle|=|A|,
+$$
+
+together with the character-annihilator argument used in (3.3).
+
+### [`Prop31Relations.lean`](FractionalTriangles/Section3/Prop31Relations.lean)
+
+Checks the character relations in Proposition 3.1.
+
+### [`ActualCharacter.lean`](FractionalTriangles/Section3/ActualCharacter.lean)
+
+Connects the abstract character relations with the concrete grading characters.
+
+### [`GtauCharacterization.lean`](FractionalTriangles/Section3/GtauCharacterization.lean)
+
+Checks the character/arithmetic criterion used to characterize $G_{\vec\tau}$.
+
+### [`Prop31OrderInvariants.lean`](FractionalTriangles/Section3/Prop31OrderInvariants.lean)
+
+Checks the order and invariant-degree consequences used in Proposition 3.1.
+
+### [`ConcreteOrder.lean`](FractionalTriangles/Section3/ConcreteOrder.lean)
+
+Checks
+
+$$
+|\operatorname{tors}L|=\frac{pqr}{N}
+$$
+
+and the integral form
+
+$$
+N|G_{\vec\tau}|=u\,pqr.
+$$
+
+### [`InvariantDegree.lean`](FractionalTriangles/Section3/InvariantDegree.lean)
+
+Checks the degree arithmetic used for the $G_{\vec\tau}$-invariant part.
+
+### [`MolienReciprocity.lean`](FractionalTriangles/Section3/MolienReciprocity.lean)
+
+Checks the algebraic and numerical identities used after the standard Molien/invariant-ring inputs, including the numerical parts of Proposition 3.2.
+
+Molien's theorem, invariant-ring normality, the graded invariant-ring identification, the equivariant exact sequence, and the canonical-module theorem remain external inputs.
+
+### [`StandardHypotheses.lean`](FractionalTriangles/Section3/StandardHypotheses.lean)
+
+Records elementary interfaces around the standard invariant-theoretic inputs. This file may be removed or merged later.
+
+### [`Main.lean`](FractionalTriangles/Section3/Main.lean)
+
+Collects the Section 3 verification files.
+
+---
+
+# Section 4 — Stacky reconstruction and classification
+
+Directory: [`FractionalTriangles/Section4`](FractionalTriangles/Section4)
 
 ## Lemma 4.2
 
-Let
+### [`Lemma42.lean`](FractionalTriangles/Section4/Lemma42.lean)
 
-\[
-L=L(p,q,r)
-=
-\langle x,y,z,c
-\mid
-px=qy=rz=c
-\rangle ,
-\]
+Checks the arithmetic core of Lemma 4.2 and isolates the stack-theoretic inputs needed for the complete reconstruction argument.
 
-and
+### [`Lemma42Characters.lean`](FractionalTriangles/Section4/Lemma42Characters.lean)
 
-\[
-\omega=c-x-y-z,
-\qquad
-\delta\tau=\omega.
-\]
+At a stacky point of order $p_i$, with character $s_i$ of $\mathcal O_X(\vec\tau)$, Lean checks
 
-For the three stacky points
+$$
+\delta\vec\tau=\vec\omega
+\Longrightarrow
+\delta s_i\equiv-1\pmod{p_i}
+\Longrightarrow
+\gcd(s_i,p_i)=1.
+$$
 
-\[
-G_1\simeq B\mu_p,\qquad
-G_2\simeq B\mu_q,\qquad
-G_3\simeq B\mu_r,
-\]
+Thus the stabilizer character is faithful.
 
-consider the character maps
+### [`Lemma42Fiber.lean`](FractionalTriangles/Section4/Lemma42Fiber.lean)
 
-\[
-\chi_1:L\to\mathbf Z/p\mathbf Z,
-\qquad
-\chi_2:L\to\mathbf Z/q\mathbf Z,
-\qquad
-\chi_3:L\to\mathbf Z/r\mathbf Z.
-\]
+Checks the character/fiber obstruction leading to
 
-### Character computation
-
-**Lean files**
-
-- `FractionalTriangles/Grading.lean`
-- `FractionalTriangles/Section4_Lemma42Characters.lean`
-
-Lean constructs the maps from the quotient presentation of \(L(p,q,r)\) and verifies
-
-\[
-\begin{array}{c|cccc}
- &x&y&z&c\\ \hline
-\chi_1&1&0&0&0\\
-\chi_2&0&1&0&0\\
-\chi_3&0&0&1&0
-\end{array}
-\]
-
-and hence
-
-\[
-\chi_i(\omega)
-=
-\chi_i(c-x-y-z)
-=
--1.
-\]
-
-If
-
-\[
-s_i:=\chi_i(\tau),
-\]
-
-then
-
-\[
-\delta\tau=\omega
-\]
-
-implies
-
-\[
-\boxed{\delta s_i=-1\pmod {p_i}}.
-\]
-
-Therefore
-
-\[
-\boxed{\gcd(s_i,p_i)=1}.
-\]
-
-In particular,
-
-\[
-ms_i=0\pmod {p_i}
-\quad\Longrightarrow\quad
-p_i\mid m.
-\]
-
----
-
-### Fiber character at \(G_i\)
-
-**Lean file**
-
-- `FractionalTriangles/Section4_Lemma42Fiber.lean`
-
-For
-
-\[
-L^m|_{G_i},
-\]
-
-the fiber character is
-
-\[
-ms_i\in\mathbf Z/p_i\mathbf Z.
-\]
-
-The elementary invariant-vector calculation formalized in Lean is
-
-\[
-a\neq1,\qquad av=v
-\quad\Longrightarrow\quad
-v=0.
-\]
-
-Together with the standard identification
-
-\[
-H^0(B\mu_{p_i},V)=V^{\mu_{p_i}},
-\]
-
-this gives
-
-\[
-H^0(G_i,L^m|_{G_i})
-=
-\begin{cases}
-\mathbf C,& ms_i=0,\\[2mm]
-0,& ms_i\neq0.
-\end{cases}
-\]
-
-Since \(s_i\) is a unit,
-
-\[
+$$
 ms_i=0
-\iff
+\Longleftrightarrow
 p_i\mid m.
-\]
+$$
 
-Thus
+### [`Lemma42Serre.lean`](FractionalTriangles/Section4/Lemma42Serre.lean)
 
-\[
-\boxed{
-H^0(G_i,L^m|_{G_i})\neq0
-\iff
-p_i\mid m.
-}
-\]
+Checks the arithmetic consequence of eventual occurrence of sufficiently large multiples of $p_i$, leading to
 
-The identification
-
-\[
-H^0(B\mu_p,V)=V^{\mu_p}
-\]
-
-is used as a standard external stack-theoretic input.
-
----
-
-### Evaluation and Serre vanishing
-
-Let \(I_i\) be the ideal sheaf of \(G_i\). The geometric exact sequence is
-
-\[
-0
-\longrightarrow I_iL^m
-\longrightarrow L^m
-\longrightarrow L^m|_{G_i}
-\longrightarrow0.
-\]
-
-Hence
-
-\[
-H^0(X,L^m)
-\longrightarrow
-H^0(G_i,L^m|_{G_i})
-\longrightarrow
-H^1(X,I_iL^m).
-\]
-
-Therefore
-
-\[
-H^1(X,I_iL^m)=0
-\]
-
-implies
-
-\[
-H^0(X,L^m)
-\twoheadrightarrow
-H^0(G_i,L^m|_{G_i}).
-\]
-
-For
-
-\[
-p_i\mid m,\qquad m\gg0,
-\]
-
-this gives
-
-\[
-\exists s\in H^0(X,L^m),
-\qquad
-s|_{G_i}\neq0,
-\]
-
-and consequently
-
-\[
-\boxed{m\in\Sigma_{P_i}}.
-\]
-
----
-
-### Finite residue classes
-
-**Lean file**
-
-- `FractionalTriangles/Section4_Lemma42Serre.lean`
-
-For \(M>0\),
-
-\[
-m=qM+r,
-\qquad
-0\le r<M.
-\]
-
-Lean verifies the finite-residue deduction
-
-\[
-\left[
-\forall r<M,\;
-\exists Q_r,\;
-q\ge Q_r\Rightarrow P(q,r)
-\right]
-\]
-
-\[
-\Longrightarrow
-\]
-
-\[
-\boxed{
-\exists Q,\;
-\forall r<M,\;
-q\ge Q\Rightarrow P(q,r).
-}
-\]
-
-This is the finite arithmetic step used after applying Serre vanishing in the finitely many residue classes modulo \(M\).
-
-Serre vanishing itself and the coarse-space projection/cohomology comparison are external geometric inputs.
-
----
-
-### Computation of \(\gcd(\Sigma_{P_i})\)
-
-**Lean file**
-
-- `FractionalTriangles/Section4_Lemma42.lean`
-
-The two directions are
-
-\[
-m\in\Sigma_{P_i}
-\quad\Longrightarrow\quad
-p_i\mid m,
-\]
-
-and, for \(m\gg0\),
-
-\[
-p_i\mid m
-\quad\Longrightarrow\quad
-m\in\Sigma_{P_i}.
-\]
-
-Thus for some sufficiently large \(K\),
-
-\[
-p_iK,\;
-p_i(K+1),\;
-p_i(K+2),\ldots
-\in\Sigma_{P_i}.
-\]
-
-Lean verifies
-
-\[
-\gcd\bigl(p_iK,p_i(K+1)\bigr)
-=
-p_i\gcd(K,K+1)
-=
-p_i.
-\]
-
-Since
-
-\[
-p_i\mid m
-\qquad
-(\forall m\in\Sigma_{P_i}),
-\]
-
-it follows that
-
-\[
-\boxed{
+$$
 \gcd(\Sigma_{P_i})=p_i.
-}
-\]
+$$
 
-Consequently, using the stacky-Proj stabilizer formula,
+### [`Lemma42Polarization.lean`](FractionalTriangles/Section4/Lemma42Polarization.lean)
 
-\[
-\operatorname{Stab}(P_i)
-=
-\mu_{\gcd(\Sigma_{P_i})}
-=
-\boxed{\mu_{p_i}}.
-\]
+Packages
+
+$$
+\delta\vec\tau=\vec\omega
+\Longrightarrow
+\delta s_i\equiv-1\pmod{p_i}
+\Longrightarrow
+s_i\in(\mathbb Z/p_i\mathbb Z)^\times
+\Longrightarrow
+ms_i=0\iff p_i\mid m.
+$$
+
+External geometric inputs include the Geigle–Lenzing Cox/section-ring identification, residual gerbes $B\mu_{p_i}$, the representation-theoretic description of fibers, Serre vanishing on the coarse curve, Veronese reconstruction, and the final stacky-Proj normality/isomorphism argument.
+
+## Later Section 4 files
+
+### [`Early.lean`](FractionalTriangles/Section4/Early.lean)
+
+Contains the currently formalized discrete/arithmetic parts of the early Section 4 lemmas, including the discrete-data core used in Lemma 4.3.
+
+### [`GraphBranched.lean`](FractionalTriangles/Section4/GraphBranched.lean)
+
+Checks the case arithmetic in the graph/branched analysis leading to Proposition 4.7.
+
+### [`Table2Audit.lean`](FractionalTriangles/Section4/Table2Audit.lean)
+
+Checks the divisibility and gcd calculations associated with Lemma 4.8, Table 2, and (4.13).
+
+### [`Mutation.lean`](FractionalTriangles/Section4/Mutation.lean)
+
+Checks the arithmetic part of Lemma 4.9 and the subsequent classification argument, including
+
+$$
+|\det E_g|=h_0=qh.
+$$
 
 ---
 
-## Formalization boundary for Lemma 4.2
+# Section 5 — Atomic models and divisor arithmetic
 
-The Lean files verify the concrete algebraic/arithmetic chain
+Directory: [`FractionalTriangles/Section5`](FractionalTriangles/Section5)
 
-\[
-\delta\tau=\omega
-\]
+### [`Prop51.lean`](FractionalTriangles/Section5/Prop51.lean)
 
-\[
-\Downarrow
-\]
+Checks the arithmetic part of Proposition 5.1, including the finite-group cardinality implication used in the order computation.
 
-\[
-\delta s_i=-1
-\]
+### [`AtomicDivisor.lean`](FractionalTriangles/Section5/AtomicDivisor.lean)
 
-\[
-\Downarrow
-\]
+Checks the divisor arithmetic associated with the atomic cases and the numerical part of the classification leading to Theorem 5.6.
 
-\[
-s_i\in(\mathbf Z/p_i\mathbf Z)^\times
-\]
+### [`Prop57.lean`](FractionalTriangles/Section5/Prop57.lean)
 
-\[
-\Downarrow
-\]
+Checks the sufficiency arithmetic in Proposition 5.7.
 
-\[
-ms_i=0
-\iff
-p_i\mid m
-\]
+### [`Prop57Necessity.lean`](FractionalTriangles/Section5/Prop57Necessity.lean)
 
-together with
+Checks the necessity arithmetic in Proposition 5.7.
 
-\[
-\text{finite-residue eventuality}
-\]
+### [`L3Section6.lean`](FractionalTriangles/Section5/L3Section6.lean)
 
-and
-
-\[
-\text{eventual }p_i\text{-multiples in }\Sigma_{P_i}
-\Longrightarrow
-\gcd(\Sigma_{P_i})=p_i.
-\]
-
-The following standard geometric results are presently external inputs:
-
-\[
-L(p,q,r)\simeq\operatorname{Pic}(X),
-\]
-
-\[
-G_i\simeq B\mu_{p_i},
-\]
-
-\[
-\operatorname{Pic}(B\mu_{p_i})
-\simeq
-\operatorname{Hom}(\mu_{p_i},\mathbf C^*)
-\simeq
-\mathbf Z/p_i\mathbf Z,
-\]
-
-\[
-H^0(B\mu_p,V)=V^{\mu_p},
-\]
-
-\[
-0\to I_iL^m\to L^m\to L^m|_{G_i}\to0,
-\]
-
-the coarse-space projection/cohomology comparison,
-
-\[
-H^1(X,I_iL^m)=0
-\qquad (m\gg0)
-\]
-
-in the required residue classes, and the final stacky-Proj reconstruction/normalization theorem.
+Checks the remaining $L3$ gcd/divisibility calculation and the arithmetic transition from Section 5 to Section 6.
 
 ---
 
-## Build status
+# Section 6 — Finite census and low-index enumeration
 
-\[
-\boxed{\texttt{lake build}\quad\text{completed successfully}}
-\]
+Directory: [`FractionalTriangles/Section6`](FractionalTriangles/Section6)
 
-for the current project.
-### Polarization and faithful character
+### [`Census.lean`](FractionalTriangles/Section6/Census.lean)
 
-\[
-S_m=T_{m\tau},
-\qquad
-S_1=T_\tau.
-\]
+Provides the arithmetic infrastructure for the finite census.
 
-Hence degree \(1\) in the section-ring grading corresponds to
-\(\tau\) in the \(L(p,q,r)\)-grading:
+### [`IndependentLowIndex.lean`](FractionalTriangles/Section6/IndependentLowIndex.lean)
 
-\[
-1\longleftrightarrow\tau.
-\]
+Performs an independent low-index enumeration as a cross-check.
 
-For
+### [`LowIndexActualEnumeration.lean`](FractionalTriangles/Section6/LowIndexActualEnumeration.lean)
 
-\[
-Y=\operatorname{Proj}^{st}S,
-\]
+Checks the implemented low-index enumeration for
 
-the geometric identification is
+$$
+\delta=2,3,4,5,6.
+$$
 
-\[
-f^*\mathcal O_Y(1)\simeq\mathcal O_X(\tau).
-\]
+The resulting class counts are
 
-Thus at the \(i\)-th stacky point,
+$$
+6,\ 8,\ 8,\ 21,\ 0.
+$$
 
-\[
-\operatorname{char}_{P_i}\mathcal O_Y(1)
-=
-s_i
-=
-\chi_i(\tau).
-\]
+### [`FullCensusActual.lean`](FractionalTriangles/Section6/FullCensusActual.lean)
 
-Lean verifies
+Carries out the full implemented census in the checked range and reproduces
 
-\[
-\delta\tau=\omega
-\]
+$$
+506
+$$
 
-\[
-\Downarrow
-\]
+class keys.
 
-\[
-\delta s_i=-1
-\]
+### [`Remark63Audit.lean`](FractionalTriangles/Section6/Remark63Audit.lean)
 
-\[
-\Downarrow
-\]
+Checks the explicit arithmetic systems appearing in Remark 6.3.
 
-\[
-s_i\in(\mathbf Z/p_i\mathbf Z)^\times
-\]
+---
 
-\[
-\Downarrow
-\]
+# Core
 
-\[
-\chi_{s_i}:\mu_{p_i}\to\mathbf C^*
-\quad\text{is faithful}.
-\]
+Directory: [`FractionalTriangles/Core`](FractionalTriangles/Core)
 
-It also verifies the group-theoretic implication
+### [`Arithmetic.lean`](FractionalTriangles/Core/Arithmetic.lean)
 
-\[
-\boxed{
-\text{faithful pulled-back }\mathcal O(1)
-\Longrightarrow
-\text{injective stabilizer map}.
-}
-\]
+Contains small arithmetic lemmas reused by the paper-specific verification files.
 
-The subsequent implication
+---
 
-\[
-\text{injective stabilizer maps}
-\Longrightarrow
-f\text{ representable}
-\]
+# Formalization boundary
 
-is the standard representability criterion for morphisms of
-Deligne--Mumford stacks and is presently an external geometric input.
-The remaining stack-theoretic reconstruction uses
+The repository distinguishes
 
-\[
-L^M=\pi^*\bar L
-\]
+$$
+\boxed{\text{paper-specific deductions checked in Lean}}
+$$
 
-for sufficiently divisible \(M\), ordinary Proj reconstruction on the
-coarse \(\mathbf P^1\),
+from
 
-\[
-X_{\mathrm{coarse}}\simeq Y_{\mathrm{coarse}},
-\]
+$$
+\boxed{\text{standard geometric or theoretical inputs used externally}}.
+$$
 
-the representability criterion,
+The Lean development focuses on arithmetic, finite-group, character, divisibility, and finite-enumeration steps.
 
-\[
-\text{proper}+\text{quasifinite}
-\Longrightarrow
-\text{finite},
-\]
+Results requiring substantial additional infrastructure for Deligne–Mumford stacks, Geigle–Lenzing curves, stacky Proj, deformation theory, invariant-ring normality, Molien theory, or canonical modules are explicitly identified as external inputs rather than silently introduced as axioms.
 
-and
+The current project builds successfully with
 
-\[
-\text{finite representable birational}
-+
-\text{normal target}
-\Longrightarrow
-\text{isomorphism}.
-\]
+```bash
+lake build
+```
 
-These stack-theoretic results are presently external inputs.
+and the verification files contain no `sorry`.
