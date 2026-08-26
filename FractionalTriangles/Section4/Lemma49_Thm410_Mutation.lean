@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section4.Table2Audit
+import FractionalTriangles.Section4.Lemma48_Table2_Eq413
 
 namespace FractionalTriangles
 namespace Section4
@@ -15,13 +15,6 @@ No `sorry`, no axioms.
 -/
 
 /-! ## Lemma 4.9: equation (4.14) and case arithmetic -/
-
-theorem eq414_rewrite
-    (detAbs h0 q h : ℕ)
-    (hdet : detAbs = h0)
-    (hh0 : h0 = q*h) :
-    detAbs = q*h := by
-  omega
 
 theorem fff_two_active_forces_two
     (q a : ℕ)
@@ -60,37 +53,6 @@ theorem ec_minus_one_eq_two
     (h : e*(c-1)=2) :
     (e=1 ∧ c=3) ∨ (e=2 ∧ c=2) := by
   omega
-
-theorem genus_zero_q_minus_one
-    (q : ℕ)
-    (h : q-1 = 0) :
-    q = 1 := by
-  omega
-
-theorem q_minus_two_positive
-    (q : ℕ) (hq : 4 ≤ q) :
-    0 < (q:ℤ)-2 := by
-  omega
-
-theorem replacement1_primitive
-    (ell k : ℕ)
-    (h : Nat.Coprime ell (2*k)) :
-    Nat.gcd ell (2*k)=1 := h.gcd_eq_one
-
-theorem replacement2_primitive
-    (ell : ℕ)
-    (h : Nat.Coprime ell 3) :
-    Nat.gcd ell 3 = 1 := h.gcd_eq_one
-
-theorem replacement3_primitive
-    (ell k : ℕ)
-    (h : Nat.Coprime ell (2*k+1)) :
-    Nat.gcd ell (2*k+1)=1 := h.gcd_eq_one
-
-theorem replacement4_primitive
-    (alpha k : ℕ)
-    (h : Nat.Coprime alpha (2*k-1)) :
-    Nat.gcd alpha (2*k-1)=1 := h.gcd_eq_one
 
 /-! ## Theorem 4.10: paper-specific elementary steps -/
 

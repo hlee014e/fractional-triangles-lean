@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section4.Lemma42
+import FractionalTriangles.Section4.Lemma42_Reconstruction
 
 namespace FractionalTriangles
 namespace Section4Lemma42Serre

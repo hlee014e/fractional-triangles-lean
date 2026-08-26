@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section4.Early
+import FractionalTriangles.Section4.Lemma43_45_GeometricArithmetic
 
 namespace FractionalTriangles
 namespace Section4

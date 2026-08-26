@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section4.GraphBranched
+import FractionalTriangles.Section4.Lemma46_Prop47_BranchedCases
 
 namespace FractionalTriangles
 namespace Section4
@@ -108,38 +108,6 @@ theorem c3_d_divides_raw_weights
   · exact dvd_mul_of_dvd_right (Nat.gcd_dvd_left b (c-1)) a
 
 end DivisorCollapse
-
-section SignatureFormulas
-
-/--
-The q=1 signatures displayed in (4.13), packaged exactly as numerical triples.
--/
-def signatureFFF (a b c : ℕ) := (a,b,c)
-def signatureC2F (a b c : ℕ) := (a, c*(b-1), c)
-def signatureL2F (a b c : ℕ) := (c*(a-1), c*(b-1), c)
-def signatureC3  (a b c : ℕ) := (a, c*(b-1)+1, a*(c-1))
-def signatureL3  (a b c : ℕ) :=
-  (b*(a-1)+1, c*(b-1)+1, a*(c-1)+1)
-
-theorem signatures_413
-    (a b c : ℕ) :
-    signatureFFF a b c = (a,b,c) ∧
-    signatureC2F a b c = (a,c*(b-1),c) ∧
-    signatureL2F a b c = (c*(a-1),c*(b-1),c) ∧
-    signatureC3 a b c = (a,c*(b-1)+1,a*(c-1)) ∧
-    signatureL3 a b c =
-      (b*(a-1)+1,c*(b-1)+1,a*(c-1)+1) := by
-  rfl
-
-/-- Under a,b,c≥2 all displayed L3 orders are nontrivial. -/
-theorem l3_orders_at_least_two
-    (a b c : ℕ) (ha : 2 ≤ a) (hb : 2 ≤ b) (hc : 2 ≤ c) :
-    2 ≤ b*(a-1)+1 ∧
-    2 ≤ c*(b-1)+1 ∧
-    2 ≤ a*(c-1)+1 := by
-  omega
-
-end SignatureFormulas
 
 /-!
 FULL Lemma 4.8 still depends on the geometric statement that Table 2 is

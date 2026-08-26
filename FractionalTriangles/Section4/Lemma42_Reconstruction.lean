@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section4.Early
+import FractionalTriangles.Section4.Lemma43_45_GeometricArithmetic
 
 namespace FractionalTriangles
 namespace Section4Lemma42
@@ -42,15 +42,6 @@ theorem isSetGCD_of_two_witnesses
   · intro e he
     rw [← hg]
     exact Nat.dvd_gcd (he a ha) (he b hb)
-
-/-- The root-character arithmetic from Lemma 4.2: if
-    `δ s_i ≡ -1 (mod p_i)`, then `s_i` is coprime to `p_i`.
-    This theorem was already Lean-checked in `Section4_Early`. -/
-theorem root_character_coprime
-    (δ p : ℕ) (s : ℤ)
-    (h : Int.ModEq p ((δ : ℤ) * s) (-1 : ℤ)) :
-    Nat.Coprime (Int.natAbs s) p := by
-  exact Section4.root_character_is_unit δ p s h
 
 /-!
 /--

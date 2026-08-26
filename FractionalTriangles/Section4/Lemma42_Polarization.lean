@@ -1,6 +1,6 @@
 import Mathlib
 import FractionalTriangles.Section2.GradingGroup
-import FractionalTriangles.Section4.Lemma42Characters
+import FractionalTriangles.Section4.Lemma42_Reconstruction_Characters
 
 namespace FractionalTriangles
 namespace Section4Lemma42Polarization
@@ -27,23 +27,6 @@ The current project does not formalize stacky Proj or its tautological
 line bundle.  We therefore isolate this geometric identification as an
 explicit hypothesis and Lean-check its character-theoretic consequences.
 -/
-
-/--
-Abstract form of the statement
-
-    char_{P_i}(f^* O_Y(1)) = char_{P_i}(O_X(τ)).
-
-The right-hand side is the concrete character of `τ`.
--/
-theorem O1_character_eq_tau_character
-    {A : Type*} [AddGroup A]
-    (χ : A →+ ZMod 1)
-    (τ : A)
-    (sO1 : ZMod 1)
-    (hO1 : sO1 = χ τ) :
-    sO1 = χ τ := by
-  exact hO1
-
 
 /--
 At the p-stacky point, if the character of O(1) is identified with the

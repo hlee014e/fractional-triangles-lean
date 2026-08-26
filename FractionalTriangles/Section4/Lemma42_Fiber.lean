@@ -1,6 +1,6 @@
 import Mathlib
-import FractionalTriangles.Section4.Lemma42
-import FractionalTriangles.Section4.Lemma42Characters
+import FractionalTriangles.Section4.Lemma42_Reconstruction
+import FractionalTriangles.Section4.Lemma42_Reconstruction_Characters
 
 namespace FractionalTriangles
 namespace Section4Lemma42Fiber

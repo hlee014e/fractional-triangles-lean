@@ -23,10 +23,6 @@ namespace Section4
 def PrimitiveWeights (A B C : ℕ) : Prop :=
   Nat.gcd A (Nat.gcd B C) = 1
 
-theorem primitive_weights_iff
-    (A B C : ℕ) :
-    PrimitiveWeights A B C ↔ Nat.gcd A (Nat.gcd B C) = 1 := by
-  rfl
 
 /-! ## Lemma 4.2 — stabilizer from nonvanishing section degrees -/
 
@@ -138,9 +134,6 @@ Geometric dependencies for Lemma 4.4 (external):
 def CoordinateLineStabilizer (Ai Aj : ℕ) : ℕ :=
   Nat.gcd Ai Aj
 
-theorem coordinate_line_stabilizer_def (Ai Aj : ℕ) :
-    CoordinateLineStabilizer Ai Aj = Nat.gcd Ai Aj := by
-  rfl
 
 /--
 Algebraic equivalence of the adjunction formula in Lemma 4.5 with displayed
@@ -169,9 +162,6 @@ If a binomial on the effective torus becomes u^s - λ with λ ≠ 0 over C and
 has distinct roots, then the number of roots is |s|.  We record the natural
 number identity used for the orbit count.
 -/
-theorem abs_int_natAbs (s : ℤ) :
-    Int.natAbs s = Int.natAbs s := by
-  rfl
 
 /-!
 External geometric input for Lemma 4.5:

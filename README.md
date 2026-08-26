@@ -150,11 +150,11 @@ together with the character-annihilator argument used in (3.3).
 
 Checks the character relations in Proposition 3.1.
 
-### [`ActualCharacter.lean`](FractionalTriangles/Section3/ActualCharacter.lean)
+### [`Prop31_Eq33_GradingCharacters.lean`](FractionalTriangles/Section3/Prop31_Eq33_GradingCharacters.lean)
 
 Connects the abstract character relations with the concrete grading characters.
 
-### [`GtauCharacterization.lean`](FractionalTriangles/Section3/GtauCharacterization.lean)
+### [`Prop31_Eq33_Characterization.lean`](FractionalTriangles/Section3/Prop31_Eq33_Characterization.lean)
 
 Checks the character/arithmetic criterion used to characterize $G_{\vec\tau}$.
 
@@ -162,7 +162,7 @@ Checks the character/arithmetic criterion used to characterize $G_{\vec\tau}$.
 
 Checks the order and invariant-degree consequences used in Proposition 3.1.
 
-### [`ConcreteOrder.lean`](FractionalTriangles/Section3/ConcreteOrder.lean)
+### [`Prop31_Eq34_Order.lean`](FractionalTriangles/Section3/Prop31_Eq34_Order.lean)
 
 Checks
 
@@ -176,19 +176,15 @@ $$
 N|G_{\vec\tau}|=u\,pqr.
 $$
 
-### [`InvariantDegree.lean`](FractionalTriangles/Section3/InvariantDegree.lean)
+### [`Prop31_Eq35_InvariantDegrees.lean`](FractionalTriangles/Section3/Prop31_Eq35_InvariantDegrees.lean)
 
 Checks the degree arithmetic used for the $G_{\vec\tau}$-invariant part.
 
-### [`MolienReciprocity.lean`](FractionalTriangles/Section3/MolienReciprocity.lean)
+### [`Prop32_Eq38_39_MolienReciprocity.lean`](FractionalTriangles/Section3/Prop32_Eq38_39_MolienReciprocity.lean)
 
 Checks the algebraic and numerical identities used after the standard Molien/invariant-ring inputs, including the numerical parts of Proposition 3.2.
 
 Molien's theorem, invariant-ring normality, the graded invariant-ring identification, the equivariant exact sequence, and the canonical-module theorem remain external inputs.
-
-### [`StandardHypotheses.lean`](FractionalTriangles/Section3/StandardHypotheses.lean)
-
-Records elementary interfaces around the standard invariant-theoretic inputs. This file may be removed or merged later.
 
 ### [`Main.lean`](FractionalTriangles/Section3/Main.lean)
 
@@ -202,11 +198,11 @@ Directory: [`FractionalTriangles/Section4`](FractionalTriangles/Section4)
 
 ## Lemma 4.2
 
-### [`Lemma42.lean`](FractionalTriangles/Section4/Lemma42.lean)
+### [`Lemma42_Reconstruction.lean`](FractionalTriangles/Section4/Lemma42_Reconstruction.lean)
 
 Checks the arithmetic core of Lemma 4.2 and isolates the stack-theoretic inputs needed for the complete reconstruction argument.
 
-### [`Lemma42Characters.lean`](FractionalTriangles/Section4/Lemma42Characters.lean)
+### [`Lemma42_Characters.lean`](FractionalTriangles/Section4/Lemma42_Characters.lean)
 
 At a stacky point of order $p_i$, with character $s_i$ of $\mathcal O_X(\vec\tau)$, Lean checks
 
@@ -220,7 +216,7 @@ $$
 
 Thus the stabilizer character is faithful.
 
-### [`Lemma42Fiber.lean`](FractionalTriangles/Section4/Lemma42Fiber.lean)
+### [`Lemma42_Fiber.lean`](FractionalTriangles/Section4/Lemma42_Fiber.lean)
 
 Checks the character/fiber obstruction leading to
 
@@ -230,7 +226,7 @@ ms_i=0
 p_i\mid m.
 $$
 
-### [`Lemma42Serre.lean`](FractionalTriangles/Section4/Lemma42Serre.lean)
+### [`Lemma42_SerreVanishing.lean`](FractionalTriangles/Section4/Lemma42_SerreVanishing.lean)
 
 Checks the arithmetic consequence of eventual occurrence of sufficiently large multiples of $p_i$, leading to
 
@@ -238,7 +234,7 @@ $$
 \gcd(\Sigma_{P_i})=p_i.
 $$
 
-### [`Lemma42Polarization.lean`](FractionalTriangles/Section4/Lemma42Polarization.lean)
+### [`Lemma42_Polarization.lean`](FractionalTriangles/Section4/Lemma42_Polarization.lean)
 
 Packages
 
@@ -256,19 +252,19 @@ External geometric inputs include the Geigle–Lenzing Cox/section-ring identifi
 
 ## Later Section 4 files
 
-### [`Early.lean`](FractionalTriangles/Section4/Early.lean)
+### [`Lemma43_45_GeometricArithmetic.lean`](FractionalTriangles/Section4/Lemma43_45_GeometricArithmetic.lean)
 
 Contains the currently formalized discrete/arithmetic parts of the early Section 4 lemmas, including the discrete-data core used in Lemma 4.3.
 
-### [`GraphBranched.lean`](FractionalTriangles/Section4/GraphBranched.lean)
+### [`Lemma46_Prop47_BranchedCases.lean`](FractionalTriangles/Section4/Lemma46_Prop47_BranchedCases.lean)
 
 Checks the case arithmetic in the graph/branched analysis leading to Proposition 4.7.
 
-### [`Table2Audit.lean`](FractionalTriangles/Section4/Table2Audit.lean)
+### [`Lemma48_Table2_Eq413.lean`](FractionalTriangles/Section4/Lemma48_Table2_Eq413.lean)
 
 Checks the divisibility and gcd calculations associated with Lemma 4.8, Table 2, and (4.13).
 
-### [`Mutation.lean`](FractionalTriangles/Section4/Mutation.lean)
+### [`Lemma49_Thm410_Mutation.lean`](FractionalTriangles/Section4/Lemma49_Thm410_Mutation.lean)
 
 Checks the arithmetic part of Lemma 4.9 and the subsequent classification argument, including
 
