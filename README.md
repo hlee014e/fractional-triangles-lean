@@ -1925,22 +1925,32 @@ diagonal symmetry remains after quotienting by the grading subgroup.
 
 **External standard inputs for the full Proposition 5.1:**
 
-- the torus-kernel formula
-  \[
-  |G_f|=|\det A|;
-  \]
-- weighted homogeneity gives
-  \[
-  J_f\in G_f;
-  \]
-- the order formula
-  \[
-  |J_f|
-  =
-  \mathrm{lcm}_j
-  \frac{h}{\gcd(h,a_j)},
-  \]
-  together with its simplification to \(h\) for primitive weights.
+The torus-kernel formula is
+
+```math
+|G_f|=|\det A|.
+```
+
+Weighted homogeneity gives
+
+```math
+J_f\in G_f.
+```
+
+The order of the exponential grading element is
+
+```math
+|J_f|
+=
+\mathrm{lcm}_j
+\frac{h}{\gcd(h,a_j)}.
+```
+
+For primitive weights this simplifies to
+
+```math
+|J_f|=h.
+```
 
 The Lean file checks the final finite-group cardinality implication once these
 standard inputs are supplied.
