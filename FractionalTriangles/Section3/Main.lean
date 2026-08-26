@@ -1,4 +1,3 @@
-import FractionalTriangles.Section3.ProofAudit
 import FractionalTriangles.Section3.Prop31Next
 import FractionalTriangles.Section3.Prop31Relations
 import FractionalTriangles.Section3.Prop31_Eq33_GradingCharacters

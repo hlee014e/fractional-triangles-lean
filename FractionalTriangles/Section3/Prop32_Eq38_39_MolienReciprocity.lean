@@ -1,6 +1,5 @@
 import Mathlib
 import FractionalTriangles.Section3.Prop31_Eq35_InvariantDegrees
-import FractionalTriangles.Section3.ProofAudit
 
 namespace FractionalTriangles
 

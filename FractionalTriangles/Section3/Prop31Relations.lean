@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section3.ProofAudit
+import FractionalTriangles.Core.GroupArithmetic
 import FractionalTriangles.Section3.Prop31Next
 
 namespace FractionalTriangles
@@ -103,7 +103,7 @@ theorem prop31_converse_annihilator
     (hN : aτ^N = 1)
     (hcop : Nat.Coprime δ N) :
     aτ = 1 :=
-  prop31_character_converse aτ δ N hδ hN hcop
+  group_element_eq_one_of_coprime_powers aτ δ N hcop hδ hN
 
 end
 

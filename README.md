@@ -124,18 +124,6 @@ Collects the Section 2 verification files.
 
 Directory: [`FractionalTriangles/Section3`](FractionalTriangles/Section3)
 
-### [`ProofAudit.lean`](FractionalTriangles/Section3/ProofAudit.lean)
-
-Checks the group-theoretic and arithmetic steps used in Propositions 3.1 and 3.2. In particular,
-
-$$
-a^\delta=1,\qquad
-a^N=1,\qquad
-\gcd(\delta,N)=1
-\Longrightarrow
-a=1.
-$$
-
 ### [`Prop31Next.lean`](FractionalTriangles/Section3/Prop31Next.lean)
 
 Checks the finite-group quotient mechanism behind (3.4):
