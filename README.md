@@ -21,17 +21,40 @@ Directory: [`FractionalTriangles/Section2`](FractionalTriangles/Section2)
 
 ### [`GradingGroup.lean`](FractionalTriangles/Section2/GradingGroup.lean)
 
-Defines the grading group
+**Section 2 — the Geigle–Lenzing grading group**
+
+Lean constructs
 
 $$
-L(p,q,r)=\langle \vec x,\vec y,\vec z,\vec c\mid
-p\vec x=q\vec y=r\vec z=\vec c\rangle
+\boxed{
+L(p,q,r)
+=
+\langle
+\vec x,\vec y,\vec z,\vec c
+\mid
+p\vec x=q\vec y=r\vec z=\vec c
+\rangle .
+}
 $$
 
-and
+In particular it verifies the defining relations
 
 $$
-\vec\omega=\vec c-\vec x-\vec y-\vec z.
+\boxed{
+p\vec x=\vec c,\qquad
+q\vec y=\vec c,\qquad
+r\vec z=\vec c.
+}
+$$
+
+The dualizing element is defined exactly as in the manuscript:
+
+$$
+\boxed{
+\vec\omega
+=
+\vec c-\vec x-\vec y-\vec z.
+}
 $$
 
 ### [`ScaledDegree.lean`](FractionalTriangles/Section2/ScaledDegree.lean)
@@ -49,69 +72,445 @@ $$
 
 ### [`Equation22_Generators.lean`](FractionalTriangles/Section2/Equation22_Generators.lean)
 
-Checks equation (2.2) on the generators.
+**Equation (2.2) — generator checks**
+
+Let
+
+$$
+N=\operatorname{lcm}(p,q,r).
+$$
+
+Lean verifies the scaled degrees
+
+$$
+\operatorname{sdeg}(\vec c)=N,
+\qquad
+\operatorname{sdeg}(\vec x)=\frac Np,
+\qquad
+\operatorname{sdeg}(\vec y)=\frac Nq,
+\qquad
+\operatorname{sdeg}(\vec z)=\frac Nr.
+$$
+
+For each of the four generators it checks equation (2.2):
+
+$$
+\boxed{
+N\vec v
+=
+\operatorname{sdeg}(\vec v)\,\vec c.
+}
+$$
+
+Equivalently, using the paper's degree normalization,
+
+$$
+\boxed{
+N\vec v
+=
+N\deg(\vec v)\,\vec c.
+}
+$$
 
 ### [`Equation22.lean`](FractionalTriangles/Section2/Equation22.lean)
 
-Checks equation (2.2) for every $\vec v\in L$:
+**Equation (2.2) — all elements of \(L(p,q,r)\)**
+
+The generator calculation is extended to every
 
 $$
-N\vec v=(N\deg\vec v)\vec c.
+\vec v\in L(p,q,r).
 $$
+
+Lean proves
+
+$$
+\boxed{
+N\vec v
+=
+N\deg(\vec v)\,\vec c.
+}
+\tag{2.2}
+$$
+
+A direct consequence used later is
+
+$$
+\deg(\vec v)=0
+\Longrightarrow
+\boxed{
+N\vec v=0.
+}
+$$
+
+Thus every element in the kernel of the degree map is killed by \(N\).
 
 ### [`Equation24.lean`](FractionalTriangles/Section2/Equation24.lean)
 
-Formalizes
+**Equation (2.4) — quotient by \(\mathbb Z\vec c\)**
+
+Lean constructs the residue map
 
 $$
+L(p,q,r)
+\longrightarrow
+\mathbb Z/p\mathbb Z
+\oplus
+\mathbb Z/q\mathbb Z
+\oplus
+\mathbb Z/r\mathbb Z
+$$
+
+and proves that it is surjective with kernel
+
+$$
+\boxed{
+\mathbb Z\vec c.
+}
+$$
+
+Hence the formalized quotient description is
+
+$$
+\boxed{
 L/\mathbb Z\vec c
-\cong
-\mathbb Z/p\mathbb Z\oplus
-\mathbb Z/q\mathbb Z\oplus
+\simeq
+\mathbb Z/p\mathbb Z
+\oplus
+\mathbb Z/q\mathbb Z
+\oplus
 \mathbb Z/r\mathbb Z.
+}
+\tag{2.4}
+$$
+
+Lean also checks the second statement in (2.4):
+
+$$
+\boxed{
+\vec\omega
+\longmapsto
+(-1,-1,-1).
+}
+$$
+
+Therefore a root equation
+
+$$
+\delta\vec\tau=\vec\omega
+$$
+
+reduces componentwise to
+
+$$
+\boxed{
+\delta s_p\equiv-1\pmod p,\qquad
+\delta s_q\equiv-1\pmod q,\qquad
+\delta s_r\equiv-1\pmod r.
+}
 $$
 
 ### [`Lemma21_Torsion.lean`](FractionalTriangles/Section2/Lemma21_Torsion.lean)
 
-Checks the torsion/Bézout arithmetic used in Lemma 2.1, beginning with
+**Lemma 2.1 — torsion mechanism**
+
+From equation (2.2), Lean first proves
 
 $$
-\deg(\vec v)=0\Longrightarrow N\vec v=0.
+\deg(\vec v)=0
+\Longrightarrow
+\boxed{
+N\vec v=0.
+}
 $$
+
+It then verifies the Bézout step
+
+$$
+e\vec v=0,\qquad
+N\vec v=0,\qquad
+\gcd(e,N)=1
+\Longrightarrow
+\boxed{
+\vec v=0.
+}
+$$
+
+This is the group-theoretic mechanism behind Lemma 2.1.
 
 ### [`Lemma21.lean`](FractionalTriangles/Section2/Lemma21.lean)
 
-Checks
+**Lemma 2.1 — injectivity of multiplication**
+
+For the concrete grading group \(L(p,q,r)\), Lean proves
 
 $$
+\boxed{
 \gcd(e,N)=1
 \Longrightarrow
-[\vec v\mapsto e\vec v]
-\text{ is injective on }L(p,q,r).
+[\;e\;]\colon L(p,q,r)\to L(p,q,r)
+\text{ is injective}.
+}
 $$
+
+Equivalently,
+
+$$
+\boxed{
+e\vec v=0
+\Longrightarrow
+\vec v=0
+}
+\qquad
+\text{when }\gcd(e,N)=1.
+$$
+
+This is exactly the injectivity used at the end of the proof of Theorem 1.1.
 
 ### [`Theorem11_RootCriterion.lean`](FractionalTriangles/Section2/Theorem11_RootCriterion.lean)
 
-Checks the arithmetic root criterion in Theorem 1.1.
+**Theorem 1.1 — root index criterion and existence/uniqueness mechanism**
+
+The admissible root-index condition is
+
+$$
+\boxed{
+\delta\mid k,
+\qquad
+\gcd(\delta,N)=1.
+}
+$$
+
+Equivalently, in the Lean file,
+
+$$
+\operatorname{RootIndexAdmissible}(\delta;k,N)
+\iff
+\delta\mid k\ \text{ and }\ \gcd(\delta,N)=1.
+$$
+
+If \(d=d_{\max}\) is the maximal admissible index, Lean verifies
+
+$$
+\operatorname{RootIndexAdmissible}(\delta;k,N)
+\Longrightarrow
+\boxed{\delta\mid d_{\max}}.
+$$
+
+Once a maximal root
+
+$$
+d_{\max}\vec\varpi=\vec\omega
+$$
+
+is given, every divisor \(\delta\mid d_{\max}\) produces the root
+
+$$
+\boxed{
+\vec\tau=
+\frac{d_{\max}}{\delta}\vec\varpi,
+\qquad
+\delta\vec\tau=\vec\omega.
+}
+$$
+
+Lean also verifies the uniqueness step
+
+$$
+[\delta]\colon L\to L\ \text{injective},
+\qquad
+\delta\vec\tau_1=\delta\vec\tau_2=\vec\omega
+\Longrightarrow
+\boxed{\vec\tau_1=\vec\tau_2}.
+$$
+
+Thus, once the concrete necessity and injectivity results from the other
+Section 2 files are supplied, the final criterion is
+
+$$
+\boxed{
+\exists!\,\vec\tau\in L:
+\delta\vec\tau=\vec\omega
+\iff
+\delta\mid k\ \text{ and }\ \gcd(\delta,N)=1.
+}
+$$
 
 ### [`Theorem11_DegreeArithmetic.lean`](FractionalTriangles/Section2/Theorem11_DegreeArithmetic.lean)
 
-Checks the degree/root arithmetic arising from
+**Theorem 1.1 — existence and uniqueness from the maximal root**
+
+Assume that the maximal root satisfies
 
 $$
-\delta\vec\tau=\vec\omega.
+d_{\max}\vec\varpi=\vec\omega
 $$
+
+and that
+
+$$
+\delta\mid d_{\max}.
+$$
+
+Lean verifies the existence calculation
+
+$$
+\boxed{
+\delta
+\left(
+\frac{d_{\max}}{\delta}\vec\varpi
+\right)
+=
+\vec\omega.
+}
+$$
+
+For any other root
+
+$$
+\delta\vec\tau=\vec\omega,
+$$
+
+Lean checks the identity used in the paper:
+
+$$
+\boxed{
+\delta
+\left(
+\vec\tau-
+\frac{d_{\max}}{\delta}\vec\varpi
+\right)
+=0.
+}
+$$
+
+Using Lemma 2.1 and
+
+$$
+\gcd(\delta,N)=1,
+$$
+
+this gives the uniqueness formula
+
+$$
+\boxed{
+\vec\tau=
+\frac{d_{\max}}{\delta}\vec\varpi.
+}
+$$
+
+The file also isolates the elementary degree implication
+
+$$
+k=\delta t
+\Longrightarrow
+\delta\mid k.
+$$
+
+**Input used here:** the construction of the maximal root
+\(d_{\max}\vec\varpi=\vec\omega\) is taken as a hypothesis in this file;
+its explicit arithmetic construction is handled separately.
 
 ### [`Theorem11_MaximalRoot.lean`](FractionalTriangles/Section2/Theorem11_MaximalRoot.lean)
 
-Checks the final maximal-root arithmetic, including the consequences corresponding to (2.5) and (2.6). In particular,
+**Theorem 1.1 — equations (2.5), (2.6), and the maximal root**
+
+From the residue congruences
 
 $$
-d_{\max}\vec\varpi=\vec\omega,
+\delta s_p\equiv -1\pmod p,\qquad
+\delta s_q\equiv -1\pmod q,\qquad
+\delta s_r\equiv -1\pmod r,
+$$
+
+Lean proves
+
+$$
+\gcd(\delta,p)=
+\gcd(\delta,q)=
+\gcd(\delta,r)=1,
+$$
+
+and hence, for
+
+$$
+N=\operatorname{lcm}(p,q,r),
+$$
+
+$$
+\boxed{
+\gcd(\delta,N)=1.
+}
+$$
+
+This is the arithmetic content of equation (2.5).
+
+For equation (2.6), suppose
+
+$$
+b_p p\equiv1\pmod d,\qquad
+b_q q\equiv1\pmod d,\qquad
+b_r r\equiv1\pmod d.
+$$
+
+Lean extracts integral coefficients
+
+$$
+b_p p-1=dB_x,\qquad
+b_q q-1=dB_y,\qquad
+b_r r-1=dB_z,
+$$
+
+and, assuming
+
+$$
+1-b_p-b_q-b_r=dA,
+$$
+
+checks directly that
+
+$$
+\boxed{
+\vec\varpi
+=
+A\vec c+B_x\vec x+B_y\vec y+B_z\vec z
+}
+$$
+
+satisfies
+
+$$
+\boxed{
+d\vec\varpi=\vec\omega.
+}
+$$
+
+Thus, for \(d=d_{\max}\), this verifies the algebra in the explicit maximal-root
+formula (2.6).
+
+Finally, if
+
+$$
+\delta\mid d_{\max},
 \qquad
-\delta\mid d_{\max}
-\Longrightarrow
-\vec\tau=\frac{d_{\max}}{\delta}\vec\varpi.
+\delta\vec\tau=\vec\omega,
+\qquad
+d_{\max}\vec\varpi=\vec\omega,
+$$
+
+and
+
+$$
+\gcd(\delta,N)=1,
+$$
+
+Lean verifies
+
+$$
+\boxed{
+\vec\tau=
+\frac{d_{\max}}{\delta}\vec\varpi.
+}
 $$
 
 ### [`Main.lean`](FractionalTriangles/Section2/Main.lean)
@@ -120,63 +519,354 @@ Collects the Section 2 verification files.
 
 ---
 
-# Section 3 — The group $G_{\vec\tau}$ and invariant-ring numerics
+# Section 3 — invariant ring and Hilbert-series calculations
 
 Directory: [`FractionalTriangles/Section3`](FractionalTriangles/Section3)
 
-### [`Prop31Next.lean`](FractionalTriangles/Section3/Prop31Next.lean)
-
-Checks the finite-group quotient mechanism behind (3.4):
-
-$$
-|A/\langle\tau\rangle|\,|\langle\tau\rangle|=|A|,
-$$
-
-together with the character-annihilator argument used in (3.3).
-
-### [`Prop31Relations.lean`](FractionalTriangles/Section3/Prop31Relations.lean)
-
-Checks the character relations in Proposition 3.1.
+The files in this section verify the algebraic, group-theoretic, and numerical
+steps in Propositions 3.1 and 3.2.  The statements below emphasize the
+paper-level formulas rather than elementary helper lemmas.
 
 ### [`Prop31_Eq33_GradingCharacters.lean`](FractionalTriangles/Section3/Prop31_Eq33_GradingCharacters.lean)
 
-Connects the abstract character relations with the concrete grading characters.
+**Proposition 3.1 — grading relations behind equation (3.3)**
+
+For a character of the actual grading group
+
+$$
+\chi:L(p,q,r)\longrightarrow G,
+$$
+
+write
+
+$$
+\alpha_x=\chi(\vec x),\qquad
+\alpha_y=\chi(\vec y),\qquad
+\alpha_z=\chi(\vec z),\qquad
+\rho=\chi(\vec c).
+$$
+
+From
+
+$$
+p\vec x=q\vec y=r\vec z=\vec c,
+$$
+
+Lean derives, rather than assumes,
+
+$$
+\boxed{
+\alpha_x^p=\rho,\qquad
+\alpha_y^q=\rho,\qquad
+\alpha_z^r=\rho.
+}
+$$
+
 
 ### [`Prop31_Eq33_Characterization.lean`](FractionalTriangles/Section3/Prop31_Eq33_Characterization.lean)
 
-Checks the character/arithmetic criterion used to characterize $G_{\vec\tau}$.
+**Proposition 3.1, equation (3.3) — characterization of \(G_\tau\)**
 
-### [`Prop31OrderInvariants.lean`](FractionalTriangles/Section3/Prop31OrderInvariants.lean)
+Assume the paper's relations
 
-Checks the order and invariant-degree consequences used in Proposition 3.1.
+$$
+\delta\vec\tau=\vec\omega,
+\qquad
+N\vec\tau=u\vec c,
+\qquad
+\gcd(\delta,N)=1.
+$$
+
+Lean proves the actual-character equivalence
+
+$$
+\boxed{
+\chi(\vec\tau)=1
+}
+$$
+
+if and only if
+
+$$
+\boxed{
+\begin{aligned}
+\alpha_x^p&=\rho,\\
+\alpha_y^q&=\rho,\\
+\alpha_z^r&=\rho,\\
+\rho&=\alpha_x\alpha_y\alpha_z,\\
+\rho^u&=1.
+\end{aligned}
+}
+\tag{3.3}
+$$
+
+In particular, the product equation follows from
+
+$$
+\vec\omega=\vec c-\vec x-\vec y-\vec z,
+$$
+
+since
+
+$$
+\chi(\vec\omega)
+=
+\frac{\rho}{\alpha_x\alpha_y\alpha_z}.
+$$
+
+The converse uses both
+
+$$
+\chi(\vec\tau)^\delta=1,
+\qquad
+\chi(\vec\tau)^N=1,
+$$
+
+together with
+
+$$
+\gcd(\delta,N)=1.
+$$
+
+
+### [`Prop31Relations.lean`](FractionalTriangles/Section3/Prop31Relations.lean)
+
+**Equation (3.3) — relation layer**
+
+This file verifies explicitly the two nontrivial relations entering (3.3):
+
+$$
+\boxed{
+\chi(\vec\omega)=1
+\iff
+\rho=\alpha_x\alpha_y\alpha_z
+}
+$$
+
+and, from
+
+$$
+N\vec\tau=u\vec c,
+$$
+
+$$
+\boxed{
+\chi(\vec\tau)=1
+\Longrightarrow
+\rho^u=1.
+}
+$$
+
+These relations are then assembled in
+`Prop31_Eq33_Characterization.lean` for actual characters of \(L(p,q,r)\).
+
 
 ### [`Prop31_Eq34_Order.lean`](FractionalTriangles/Section3/Prop31_Eq34_Order.lean)
 
-Checks
+**Proposition 3.1, equation (3.4) — order of the finite group**
+
+Using
 
 $$
-|\operatorname{tors}L|=\frac{pqr}{N}
+|\operatorname{tors}L|
+=
+\frac{pqr}{N}
 $$
 
-and the integral form
+and the index contribution coming from \(\vec\tau\), Lean verifies the
+cardinality calculation leading to
 
 $$
-N|G_{\vec\tau}|=u\,pqr.
+\boxed{
+|G_\tau|
+=
+\mu pqr
+}
+\tag{3.4}
 $$
+
+when
+
+$$
+u=N\mu.
+$$
+
+In particular, the arithmetic reduction checked in Lean is
+
+$$
+u\,\frac{pqr}{N}
+=
+(N\mu)\frac{pqr}{N}
+=
+\boxed{\mu pqr}.
+$$
+
+
+### [`Prop31Next.lean`](FractionalTriangles/Section3/Prop31Next.lean)
+
+**Finite-group quotient step used in equation (3.4)**
+
+For a finite abelian group \(A\) and \(\tau\in A\), Lean verifies
+
+$$
+\boxed{
+|A/\langle\tau\rangle|\,
+|\langle\tau\rangle|
+=
+|A|.
+}
+$$
+
+This supplies the finite-group cardinality mechanism used in the derivation
+of (3.4).
+
+
+### [`Prop31OrderInvariants.lean`](FractionalTriangles/Section3/Prop31OrderInvariants.lean)
+
+**Proposition 3.1 — finite extension and character separation**
+
+Lean verifies the abstract finite-group cardinality step needed for (3.4)
+and the character-separation principle used before (3.5):
+
+$$
+\boxed{
+\chi(x)=1\text{ for every character }\chi
+\Longrightarrow x=0
+}
+$$
+
+under the stated character-separation hypothesis.
+
 
 ### [`Prop31_Eq35_InvariantDegrees.lean`](FractionalTriangles/Section3/Prop31_Eq35_InvariantDegrees.lean)
 
-Checks the degree arithmetic used for the $G_{\vec\tau}$-invariant part.
+**Proposition 3.1, equation (3.5) — invariant-degree criterion**
+
+For the quotient degree group, Lean formalizes the character-annihilator
+criterion and proves
+
+$$
+\boxed{
+\text{degree }v\text{ is invariant under all characters}
+\iff
+v\in\mathbb Z\vec\tau.
+}
+\tag{3.5}
+$$
+
+Thus the invariant degrees are precisely the multiples of the root
+\(\vec\tau\), assuming the stated character-separation property.
+
 
 ### [`Prop32_Eq38_39_MolienReciprocity.lean`](FractionalTriangles/Section3/Prop32_Eq38_39_MolienReciprocity.lean)
 
-Checks the algebraic and numerical identities used after the standard Molien/invariant-ring inputs, including the numerical parts of Proposition 3.2.
+**Equations (3.8)–(3.9) and Proposition 3.2**
 
-Molien's theorem, invariant-ring normality, the graded invariant-ring identification, the equivariant exact sequence, and the canonical-module theorem remain external inputs.
+This file verifies the algebraic and numerical calculations used after
+applying Molien's formula.
 
-### [`Main.lean`](FractionalTriangles/Section3/Main.lean)
+For a group element satisfying
 
-Collects the Section 3 verification files.
+$$
+\alpha_x^p=\alpha_y^q=\alpha_z^r=\rho,
+\qquad
+\rho=\alpha_x\alpha_y\alpha_z,
+$$
+
+Lean checks the inversion identity used in the transformed Molien summand.
+
+It also verifies the exponent calculation
+
+$$
+\nu
+=
+1-\frac1p-\frac1q-\frac1r,
+\qquad
+\nu=\mu\delta
+$$
+
+implies
+
+$$
+\boxed{
+\frac1\mu
+-\frac1{\mu p}
+-\frac1{\mu q}
+-\frac1{\mu r}
+=
+\delta.
+}
+\tag{3.9}
+$$
+
+For a hypersurface Hilbert series
+
+$$
+H(t)
+=
+\frac{1-t^h}
+{(1-t^a)(1-t^b)(1-t^c)},
+$$
+
+the reciprocity exponent comparison gives the numerical relation
+
+$$
+\boxed{
+h-a-b-c=\delta.
+}
+$$
+
+The identity contribution to the pole at \(t=1\) is checked to have
+coefficient
+
+$$
+\mu^2pqr,
+$$
+
+and division by
+
+$$
+|G_\tau|=\mu pqr
+$$
+
+gives
+
+$$
+\boxed{\mu}.
+$$
+
+Hence comparison with the hypersurface pole coefficient
+
+$$
+\frac{h}{abc}
+$$
+
+gives the second numerical identity of Proposition 3.2:
+
+$$
+\boxed{
+\frac{h}{abc}=\mu.
+}
+$$
+
+The file also records the corresponding canonical-module numerical shift.
+
+
+### What Section 3 does **not** claim to formalize
+
+The Lean files verify the character calculations, finite-group arithmetic,
+Molien-summand algebra, reciprocity exponents, and pole coefficients above.
+
+They do **not** claim a Lean proof of the external commutative-algebra input
+itself, in particular:
+
+$$
+\text{Molien's theorem},
+$$
+
+or the full theory of invariant-ring normality/canonical modules used in the
+paper.  Those are treated as mathematical inputs; the calculations made from
+them are what is checked here.
 
 ---
 
@@ -188,7 +878,107 @@ Directory: [`FractionalTriangles/Section4`](FractionalTriangles/Section4)
 
 ### [`Lemma42_Reconstruction.lean`](FractionalTriangles/Section4/Lemma42_Reconstruction.lean)
 
-Checks the arithmetic core of Lemma 4.2 and isolates the stack-theoretic inputs needed for the complete reconstruction argument.
+**Lemma 4.2 — reconstruction: arithmetic core**
+
+For a stacky point of order \(p_i\), define
+
+$$
+\Sigma_{P_i}
+=
+\left\{
+m\ge1\;:\;
+\exists\,s\in H^0(X,\mathcal L^m),
+\quad
+s(P_i)\neq0
+\right\}.
+$$
+
+The stabilizer of the reconstructed stack is governed by
+
+$$
+\operatorname{Stab}(P_i)
+=
+\mu_{\gcd(\Sigma_{P_i})}.
+$$
+
+The Lean-checked arithmetic part begins with the root-character relation
+
+$$
+\boxed{
+\delta s_i\equiv -1\pmod{p_i}.
+}
+$$
+
+If a section of degree \(m\) can have nonzero value at \(P_i\), its fiber
+character must be trivial:
+
+$$
+m s_i\equiv0\pmod{p_i}.
+$$
+
+Lean proves
+
+$$
+\boxed{
+\delta s_i\equiv-1\pmod{p_i},
+\qquad
+m s_i\equiv0\pmod{p_i}
+\Longrightarrow
+p_i\mid m.
+}
+$$
+
+Thus
+
+$$
+m\in\Sigma_{P_i}
+\Longrightarrow
+p_i\mid m.
+$$
+
+The geometric Serre-vanishing argument in the paper supplies the converse
+eventually:
+
+$$
+m\gg0,\qquad p_i\mid m
+\Longrightarrow
+m\in\Sigma_{P_i}.
+$$
+
+Lean then proves from these two properties that
+
+$$
+\boxed{
+\gcd(\Sigma_{P_i})=p_i.
+}
+$$
+
+Consequently the group-theoretic stabilizer calculation becomes
+
+$$
+\boxed{
+\{\lambda\in\mathbb G_m:
+\lambda^m=1\text{ for every }m\in\Sigma_{P_i}\}
+=
+\mu_{p_i}.
+}
+$$
+
+More generally Lean proves
+
+$$
+\boxed{
+\left(
+\forall m\in\Sigma,\ \lambda^m=1
+\right)
+\iff
+\lambda^{\gcd(\Sigma)}=1.
+}
+$$
+
+**External geometric input:** the Cox/section identification, residual-gerbe
+evaluation sequence, Serre vanishing, stacky Proj reconstruction, and the final
+normalization/isomorphism argument are not formalized in Lean here.
 
 ### [`Lemma42_Characters.lean`](FractionalTriangles/Section4/Lemma42_Characters.lean)
 
@@ -206,129 +996,1592 @@ Thus the stabilizer character is faithful.
 
 ### [`Lemma42_Fiber.lean`](FractionalTriangles/Section4/Lemma42_Fiber.lean)
 
-Checks the character/fiber obstruction leading to
+**Lemma 4.2 — fiber characters at the stacky points**
+
+At a stacky point of order \(p\), the root equation gives
 
 $$
-ms_i=0
-\Longleftrightarrow
-p_i\mid m.
+\boxed{
+\delta s\equiv-1\pmod p.
+}
+$$
+
+Lean proves the exact criterion
+
+$$
+\boxed{
+ms\equiv0\pmod p
+\iff
+p\mid m.
+}
+$$
+
+Hence
+
+$$
+p\nmid m
+\Longrightarrow
+ms\not\equiv0\pmod p,
+$$
+
+so the character of \(\mathcal L^m\) on the residual gerbe is nontrivial.
+
+Lean also checks the elementary invariant-vector implication
+
+$$
+a\neq1,\qquad av=v
+\Longrightarrow
+\boxed{v=0}.
+$$
+
+For the three stacky points the root equation
+\(\delta\vec\tau=\vec\omega\) gives simultaneously
+
+$$
+\boxed{
+\delta s_p=-1\in\mathbb Z/p,
+\quad
+\delta s_q=-1\in\mathbb Z/q,
+\quad
+\delta s_r=-1\in\mathbb Z/r.
+}
 $$
 
 ### [`Lemma42_SerreVanishing.lean`](FractionalTriangles/Section4/Lemma42_SerreVanishing.lean)
 
-Checks the arithmetic consequence of eventual occurrence of sufficiently large multiples of $p_i$, leading to
+**Lemma 4.2 — arithmetic behind the Serre-vanishing step**
+
+For \(M>0\), Lean verifies
 
 $$
-\gcd(\Sigma_{P_i})=p_i.
+\boxed{
+m=
+\left\lfloor\frac mM\right\rfloor M+(m\bmod M),
+\qquad
+0\le m\bmod M<M.
+}
 $$
+
+Suppose that for every residue class \(r\bmod M\) there is a threshold
+\(Q_r\) after which a property holds.
+
+Lean proves that the finitely many thresholds can be replaced by one common
+threshold:
+
+$$
+\boxed{
+\exists Q\;
+\forall r<M,\;
+q\ge Q
+\Longrightarrow
+P(q,r).
+}
+$$
+
+Consequently,
+
+$$
+\boxed{
+m\gg0
+\Longrightarrow
+P\!\left(
+\left\lfloor\frac mM\right\rfloor,
+m\bmod M
+\right).
+}
+$$
+
+This is the finite-residue arithmetic used in the paper's phrase
+“Serre vanishing, applied in the finitely many residue classes of \(m\).”
+
+**External input:** Serre vanishing itself is not proved in Lean here.
 
 ### [`Lemma42_Polarization.lean`](FractionalTriangles/Section4/Lemma42_Polarization.lean)
 
-Packages
+**Lemma 4.2 — polarization \(\mathcal O(1)\) and faithful stabilizer characters**
+
+For
 
 $$
-\delta\vec\tau=\vec\omega
-\Longrightarrow
-\delta s_i\equiv-1\pmod{p_i}
-\Longrightarrow
-s_i\in(\mathbb Z/p_i\mathbb Z)^\times
-\Longrightarrow
-ms_i=0\iff p_i\mid m.
+S_m=T_{m\vec\tau},
+\qquad
+Y=\operatorname{Proj}^{st}S,
 $$
 
-External geometric inputs include the Geigle–Lenzing Cox/section-ring identification, residual gerbes $B\mu_{p_i}$, the representation-theoretic description of fibers, Serre vanishing on the coarse curve, Veronese reconstruction, and the final stacky-Proj normality/isomorphism argument.
+the paper uses
 
-## Later Section 4 files
+$$
+f^*\mathcal O_Y(1)\simeq\mathcal O_X(\vec\tau).
+$$
+
+Taking this geometric identification as input, Lean verifies at each stacky
+point
+
+$$
+\boxed{
+\delta\,\operatorname{char}\mathcal O(1)=-1.
+}
+$$
+
+For a point of stabilizer order \(p\), Lean proves
+
+$$
+\delta s=-1\in\mathbb Z/p
+\Longrightarrow
+\boxed{
+\xi s=0\Longrightarrow\xi=0.
+}
+$$
+
+Thus the \(\mathcal O(1)\)-character is faithful.
+
+Lean then verifies the group-theoretic implication
+
+$$
+\boxed{
+\chi\circ\phi\text{ injective}
+\Longrightarrow
+\phi\text{ injective},
+}
+$$
+
+which is the stabilizer-injectivity step used before the standard
+representability criterion.
+
+**External geometric input:** the identification
+
+$$
+f^*\mathcal O_Y(1)\simeq\mathcal O_X(\vec\tau)
+$$
+
+and the stack-theoretic representability criterion.
 
 ### [`Lemma43_45_GeometricArithmetic.lean`](FractionalTriangles/Section4/Lemma43_45_GeometricArithmetic.lean)
 
-Contains the currently formalized discrete/arithmetic parts of the early Section 4 lemmas, including the discrete-data core used in Lemma 4.3.
+**Definition 4.1 and Lemmas 4.3–4.5 — numerical and arithmetic parts**
+
+For Definition 4.1, primitive weights are encoded as
+
+$$
+\boxed{
+\gcd(A,B,C)=1.
+}
+$$
+
+#### Lemma 4.3
+
+The geometric statement of Lemma 4.3 concerns local constancy of stabilizer
+and orbifold data in families.
+
+Lean records only the elementary discrete-data principle underlying that step:
+
+$$
+\boxed{
+f(x)=f(y)\ \text{for all }x,y
+\Longrightarrow
+f\text{ is constant}.
+}
+$$
+
+**External geometric input for Lemma 4.3:** relative inertia, tame local
+quotient structure, linear reductivity, coarse-space base change, and the
+standard local orbifold-curve model.
+
+#### Lemma 4.4
+
+The numerical degree appearing in the proof is
+
+$$
+\boxed{
+\deg\mathcal O_C(1)
+=
+\frac{h}{ABC}.
+}
+$$
+
+The rigidity statement itself is geometric and is **not** claimed to be
+formalized here.
+
+**External geometric input for Lemma 4.4:** irreducibility of the quasismooth
+locus, smooth proper tame DM-curve families, local constancy of genus and
+stabilizer data, the root-stack description, the Picard sequence, and
+\(\operatorname{Pic}^0(\mathbb P^1)=0\).
+
+#### Lemma 4.5 and equation (4.4)
+
+For an open coordinate line involving weights \(A_i,A_j\), the stabilizer
+order used in the paper is
+
+$$
+\boxed{
+r=\gcd(A_i,A_j).
+}
+$$
+
+The weighted-adjunction input is
+
+$$
+\frac{\delta h}{ABC}
+=
+2g-2+
+\sum_{i=1}^{3}
+\left(1-\frac1{r_i}\right).
+$$
+
+Lean verifies that this is algebraically equivalent to the displayed equation
+(4.4):
+
+$$
+\boxed{
+2g
+=
+\frac{\delta h}{ABC}
+-1
++\frac1{r_1}
++\frac1{r_2}
++\frac1{r_3}.
+}
+\tag{4.4}
+$$
+
+**External geometric input for Lemma 4.5:** the actual quotient-stack
+stabilizer calculation, the effective weighted-torus coordinate, the
+quasismoothness/distinct-root argument, weighted adjunction, and the geometric
+degree formula.
 
 ### [`Lemma46_Prop47_BranchedCases.lean`](FractionalTriangles/Section4/Lemma46_Prop47_BranchedCases.lean)
 
-Checks the case arithmetic in the graph/branched analysis leading to Proposition 4.7.
+**Lemma 4.6 and Proposition 4.7 — exclusion of the two branched ternary cases**
+
+#### Lemma 4.6 — five atomic types
+
+The ternary support classification has seven skeletons
+
+$$
+\mathrm{FFF},\quad
+\mathrm{C2F},\quad
+\mathrm{Branched3},\quad
+\mathrm{L2F},\quad
+\mathrm{C3},\quad
+\mathrm{Branched6},\quad
+\mathrm{L3}.
+$$
+
+Among these, Lean records the five atomic types
+
+$$
+\boxed{
+\mathrm{FFF},\quad
+\mathrm{C2F},\quad
+\mathrm{L2F},\quad
+\mathrm{C3},\quad
+\mathrm{L3}
+}
+$$
+
+and identifies
+
+$$
+\mathrm{Branched3},\qquad
+\mathrm{Branched6}
+$$
+
+as the two cases to be excluded in Proposition 4.7.
+
+**External input for Lemma 4.6:** the fact that these seven cases exhaust the
+ternary possibilities comes from the classical ternary graph/support
+classification; Lean does not reprove that classification.
+
+#### Proposition 4.7 — the \(f_3\) branched case
+
+Lean verifies the point-count arithmetic used in (4.7).
+
+If both open-line contributions are active, with
+
+$$
+r\ge1,\qquad s\ge1,
+$$
+
+then
+
+$$
+\boxed{
+1+1+r+s\ge4.
+}
+$$
+
+Thus this case cannot give exactly three stacky points.
+
+The Case (II) divisibility contradiction is also checked:
+
+$$
+C\mid e,\qquad
+\gcd(B,C)=1,\qquad
+C>1
+$$
+
+implies
+
+$$
+\boxed{
+C\nmid(e+1)B.
+}
+$$
+
+For the genus expression occurring in equation (4.8), Lean proves
+
+$$
+\boxed{
+2(a_0-1)(2e_0+1)+e_0>0
+}
+\tag{4.8}
+$$
+
+whenever
+
+$$
+a_0\ge1,\qquad e_0\ge1.
+$$
+
+This supplies the final numerical contradiction in the \(f_3\) branched case.
+
+#### Proposition 4.7 — the \(f_6\) branched case
+
+For the second branched case, Lean checks the point-count consequence
+
+$$
+2+d=3,\qquad d\ge1
+\Longrightarrow
+\boxed{d=1}.
+$$
+
+It also verifies the positivity used after equation (4.11):
+
+$$
+\boxed{
+d(a-1)+x>0
+}
+\tag{4.11}
+$$
+
+for
+
+$$
+d\ge1,\qquad a\ge2,\qquad x>0.
+$$
+
+Finally, Lean checks the positivity appearing in equation (4.12):
+
+$$
+\boxed{
+et+e+t-1>0
+}
+\tag{4.12}
+$$
+
+for
+
+$$
+e\ge1,\qquad t\ge1.
+$$
+
+Hence the explicit numerical expressions used at the end of both branched
+cases are strictly positive in the required ranges.
+
+**What remains external for the full Proposition 4.7:** Lemma 4.4 deformation
+rigidity, the geometric stacky-stratum count and weighted adjunction from
+Lemma 4.5, the derivation of the displayed weights from weighted homogeneity,
+and the support/classification theorem of Lemma 4.6.
 
 ### [`Lemma48_Table2_Eq413.lean`](FractionalTriangles/Section4/Lemma48_Table2_Eq413.lean)
 
-Checks the divisibility and gcd calculations associated with Lemma 4.8, Table 2, and (4.13).
+**Lemma 4.8 — Table 2 and the arithmetic behind (4.13)**
+
+This file checks the divisibility and primitivity arithmetic used in the
+coordinate-stratum analysis of Lemma 4.8.
+
+#### FFF case
+
+For the raw weights
+
+$$
+\boxed{
+(bc,\;ac,\;ab),
+}
+$$
+
+Lean proves that if
+
+$$
+\gcd(a,b)=\gcd(a,c)=\gcd(b,c)=1,
+$$
+
+then
+
+$$
+\boxed{
+\gcd(bc,ac,ab)=1.
+}
+$$
+
+Thus the FFF raw weight triple is primitive under the pairwise-coprimality
+hypothesis.
+
+#### C2F case
+
+For the raw weights
+
+$$
+\boxed{
+\bigl(c(b-1),\;ac,\;ab\bigr),
+}
+$$
+
+put
+
+$$
+r=\gcd(a,b-1),
+\qquad
+s=\gcd(b,c).
+$$
+
+Lean verifies
+
+$$
+\boxed{
+r\mid c(b-1),\qquad
+r\mid ac,\qquad
+r\mid ab,
+}
+$$
+
+and also
+
+$$
+\boxed{
+s\mid c(b-1),\qquad
+s\mid ac,\qquad
+s\mid ab.
+}
+$$
+
+Hence both gcd factors occurring in the C2F reduction divide every raw
+weight.
+
+#### L2F case
+
+For the raw weights
+
+$$
+\boxed{
+\bigl(c(b-1),\;c(a-1),\;ab-1\bigr),
+}
+$$
+
+let
+
+$$
+d=\gcd(a-1,b-1).
+$$
+
+Lean proves
+
+$$
+\boxed{
+d\mid c(b-1),\qquad
+d\mid c(a-1),\qquad
+d\mid ab-1.
+}
+$$
+
+The last divisibility uses the identity
+
+$$
+\boxed{
+ab-1
+=
+(a-1)(b-1)+(a-1)+(b-1).
+}
+$$
+
+#### C3 case
+
+For the raw weights
+
+$$
+\boxed{
+\bigl(c(b-1)+1,\;a(c-1),\;ab\bigr),
+}
+$$
+
+put
+
+$$
+d=\gcd(b,c-1).
+$$
+
+Lean verifies
+
+$$
+\boxed{
+d\mid c(b-1)+1,\qquad
+d\mid a(c-1),\qquad
+d\mid ab.
+}
+$$
+
+The first divisibility is the arithmetic consequence of
+
+$$
+b\equiv0\pmod d,
+\qquad
+c\equiv1\pmod d.
+$$
+
+These are the common-divisor reductions used in the numerical analysis
+leading to the signatures in equation (4.13).
+
+**What remains external for the full Lemma 4.8 and Table 2:** the geometric
+statement that Table 2 is exhaustive.  This requires restricting each atomic
+polynomial to the coordinate vertices and open coordinate lines, applying
+Lemma 4.5 to determine the stacky strata, and excluding additional
+dense-torus stabilizer strata.
 
 ### [`Lemma49_Thm410_Mutation.lean`](FractionalTriangles/Section4/Lemma49_Thm410_Mutation.lean)
 
-Checks the arithmetic part of Lemma 4.9 and the subsequent classification argument, including
+**Lemma 4.9 and Theorem 4.10 — mutation arithmetic and weighted-Euler step**
+
+#### Lemma 4.9
+
+Lean checks the integer case analysis used in the primitive atomic mutation
+argument.
+
+For the FFF case,
 
 $$
-|\det E_g|=h_0=qh.
+q(a-1)=a,
+\qquad
+q>1,\quad a\ge2
 $$
 
----
+forces
 
-# Section 5 — Atomic models and divisor arithmetic
+$$
+\boxed{
+q=2,\qquad a=2.
+}
+$$
 
-Directory: [`FractionalTriangles/Section5`](FractionalTriangles/Section5)
+In the remaining FFF case, under
+
+$$
+3\mid q,\qquad
+a,b\ge3,
+$$
+
+the equation
+
+$$
+q(ab-a-b)=ab
+$$
+
+forces
+
+$$
+\boxed{
+q=a=b=3.
+}
+$$
+
+For the corresponding C2F cases, Lean likewise verifies
+
+$$
+q(a-1)=a
+\Longrightarrow
+\boxed{q=a=2},
+$$
+
+and
+
+$$
+q(c-1)=c
+\Longrightarrow
+\boxed{q=c=2}.
+$$
+
+It also checks the remaining small-factor alternative
+
+$$
+e(c-1)=2,
+\qquad
+e\ge1,\quad c\ge2,
+$$
+
+which gives exactly
+
+$$
+\boxed{
+(e,c)=(1,3)
+\quad\text{or}\quad
+(e,c)=(2,2).
+}
+$$
+
+These are the integer possibilities used in the case analysis following
+equation (4.14).
+
+#### Theorem 4.10 — mixed quadratic case
+
+Lean checks the contradiction used when
+
+$$
+A+B=h,
+\qquad
+C>0,
+$$
+
+while positivity would require
+
+$$
+h-A-B-C>0.
+$$
+
+Indeed,
+
+$$
+h=A+B
+$$
+
+gives
+
+$$
+h-A-B-C=-C<0,
+$$
+
+contradicting the required positivity.
+
+Hence this numerical configuration is impossible.
+
+#### Theorem 4.10 — weighted Euler identity
+
+For a weighted-homogeneous polynomial \(F\) of weighted degree \(h\),
+
+$$
+\boxed{
+hF
+=
+AxF_x+ByF_y+CzF_z.
+}
+$$
+
+Lean verifies that at a critical point
+
+$$
+F_x=F_y=F_z=0
+$$
+
+one has
+
+$$
+\boxed{
+hF=0.
+}
+$$
+
+If
+
+$$
+h\neq0,
+$$
+
+then
+
+$$
+\boxed{
+F=0.
+}
+$$
+
+Thus every critical point lies on the hypersurface.  This is the
+weighted-Euler step used in the quasismoothness argument of Theorem 4.10.
+
+**Scope:** this file checks the displayed integer case arithmetic and the
+weighted-Euler implication above.  It does not claim to formalize the full
+geometric mutation/classification argument of Theorem 4.10.
 
 ### [`Prop51.lean`](FractionalTriangles/Section5/Prop51.lean)
 
-Checks the arithmetic part of Proposition 5.1, including the finite-group cardinality implication used in the order computation.
+**Proposition 5.1 — determinant condition and residual diagonal symmetry**
+
+For an invertible polynomial with exponent matrix \(A\), the paper uses
+
+$$
+|G_f|=|\det A|
+$$
+
+for the diagonal symmetry group \(G_f\), and
+
+$$
+|\langle J_f\rangle|=h
+$$
+
+for the exponential grading subgroup.
+
+Lean verifies the finite-group equivalence
+
+$$
+\boxed{
+|\det A|=h
+\iff
+G_f=\langle J_f\rangle.
+}
+\tag{5.1}
+$$
+
+More abstractly, for a subgroup \(J\le G\),
+
+$$
+|G|=D,\qquad |J|=h
+$$
+
+implies
+
+$$
+\boxed{
+D=h
+\iff
+J=G.
+}
+$$
+
+Thus equality of the two orders is exactly the condition that no residual
+diagonal symmetry remains after quotienting by the grading subgroup.
+
+**External standard inputs for the full Proposition 5.1:**
+
+- the torus-kernel formula
+  \[
+  |G_f|=|\det A|;
+  \]
+- weighted homogeneity gives
+  \[
+  J_f\in G_f;
+  \]
+- the order formula
+  \[
+  |J_f|
+  =
+  \operatorname{lcm}_j
+  \frac{h}{\gcd(h,a_j)},
+  \]
+  together with its simplification to \(h\) for primitive weights.
+
+The Lean file checks the final finite-group cardinality implication once these
+standard inputs are supplied.
 
 ### [`AtomicDivisor.lean`](FractionalTriangles/Section5/AtomicDivisor.lean)
 
-Checks the divisor arithmetic associated with the atomic cases and the numerical part of the classification leading to Theorem 5.6.
+**Table 3, Lemma 5.4, Proposition 5.5, and Theorem 5.6 — arithmetic and divisor parametrization**
 
-### [`Prop57.lean`](FractionalTriangles/Section5/Prop57.lean)
+#### Table 3 — the five atomic equations
 
-Checks the sufficiency arithmetic in Proposition 5.7.
+Lean checks the following equivalent forms of the Table 3 equations.
 
-### [`Prop57Necessity.lean`](FractionalTriangles/Section5/Prop57Necessity.lean)
+For FFF,
 
-Checks the necessity arithmetic in Proposition 5.7.
+$$
+\boxed{
+\delta
+=
+\alpha\beta\gamma
+-\alpha\beta-\alpha\gamma-\beta\gamma.
+}
+$$
 
-### [`Prop57L3.lean`](FractionalTriangles/Section5/Prop57L3.lean)
+For C2F,
 
-Checks the remaining $L3$ gcd/divisibility calculation and the arithmetic transition from Section 5 to Section 6.
+$$
+\gamma(\alpha-1)(\beta-1)=\alpha\beta+\delta
+$$
 
----
+is rewritten as
+
+$$
+\boxed{
+(\gamma-1)(\alpha-1)(\beta-1)
+=
+(\alpha-1)+(\beta-1)+\delta+1.
+}
+$$
+
+For L2F,
+
+$$
+\gamma(\alpha-1)(\beta-1)=\alpha\beta-1+\delta
+$$
+
+gives
+
+$$
+\boxed{
+(\gamma-1)(\alpha-1)(\beta-1)
+=
+(\alpha-1)+(\beta-1)+\delta.
+}
+$$
+
+For C3,
+
+$$
+\gamma(\alpha-1)(\beta-1)=\alpha\beta-\alpha+1+\delta
+$$
+
+gives
+
+$$
+\boxed{
+(\gamma-1)(\alpha-1)(\beta-1)
+=
+(\beta-1)+\delta+1.
+}
+$$
+
+For L3,
+
+$$
+\gamma(\alpha-1)(\beta-1)
+=
+\alpha\beta-\alpha-\beta+2+\delta
+$$
+
+gives
+
+$$
+\boxed{
+(\gamma-1)(\alpha-1)(\beta-1)=\delta+1.
+}
+$$
+
+#### Lemma 5.4 — elementary finiteness bounds
+
+Lean verifies the inequalities used to bound the atomic parameters.
+
+If
+
+$$
+(A-1)(B-1)\le \delta+2,
+\qquad
+A,B\ge1,
+$$
+
+then
+
+$$
+\boxed{
+A\le\delta+3,
+\qquad
+B\le\delta+3.
+}
+$$
+
+If
+
+$$
+(A-1)B\le\delta+1,
+\qquad
+B\ge1,
+$$
+
+then
+
+$$
+\boxed{
+A\le\delta+2.
+}
+$$
+
+In the FFF case with \(\alpha=2\),
+
+$$
+(\beta-2)(\gamma-2)=\delta+4,
+\qquad
+\beta,\gamma\ge2,
+$$
+
+implies
+
+$$
+\boxed{
+\beta\le\delta+6,
+\qquad
+\gamma\le\delta+6.
+}
+$$
+
+These are the elementary numerical bounds used in the finiteness argument.
+
+#### Proposition 5.5 — equation (5.2)
+
+Lean checks the positivity implication coming from
+
+$$
+\boxed{
+\frac{\delta h}{abc}
+=
+1-\frac1p-\frac1q-\frac1r.
+}
+\tag{5.2}
+$$
+
+Thus
+
+$$
+1-\frac1p-\frac1q-\frac1r>0
+$$
+
+implies
+
+$$
+\boxed{
+\frac{\delta h}{abc}>0.
+}
+$$
+
+**External for the full Proposition 5.5:** the Table 4 Cox monomial identities
+and the injectivity/Hilbert-function argument are not formalized in this file.
+
+#### Theorem 5.6 — completed-product divisor identities
+
+For the C2F equation
+
+$$
+tAB=A+B+\delta+1,
+$$
+
+Lean proves
+
+$$
+\boxed{
+(tA-1)(tB-1)
+=
+t(\delta+1)+1.
+}
+$$
+
+For L2F,
+
+$$
+tAB=A+B+\delta
+$$
+
+gives
+
+$$
+\boxed{
+(tA-1)(tB-1)
+=
+t\delta+1.
+}
+$$
+
+For FFF, writing
+
+$$
+\alpha=A+1,
+$$
+
+the Table 3 equation
+
+$$
+(A+1)\beta\gamma
+-(A+1)\beta
+-(A+1)\gamma
+-\beta\gamma
+=
+\delta
+$$
+
+is transformed into
+
+$$
+\boxed{
+\bigl(A(\beta-1)-1\bigr)
+\bigl(A(\gamma-1)-1\bigr)
+=
+A\delta+(A+1)^2.
+}
+$$
+
+This is the completed-product identity used for the FFF divisor
+parametrization.
+
+Lean also verifies the recovery-integrality step
+
+$$
+U\equiv -1\pmod t
+$$
+
+in the natural-number form
+
+$$
+U\bmod t=(t-1)\bmod t,
+\qquad t>0,
+$$
+
+which implies
+
+$$
+\boxed{
+t\mid U+1.
+}
+$$
+
+Thus the arithmetic transformations that turn the atomic equations into
+finite divisor problems are Lean-checked.
+
+**External for the full Lemma 5.4 / Proposition 5.5 / Theorem 5.6:** the atomic
+classification, the exact Table 4 Cox lifts and polynomial identities,
+normality and weighted-adjunction geometry, the finite torus-map and
+Hilbert-function arguments, and the converse reconstruction from atomic data.
+### [`Prop57.lean`](FractionalTriangles/Section5/Prop57.lean), [`Prop57Necessity.lean`](FractionalTriangles/Section5/Prop57Necessity.lean), [`Prop57L3.lean`](FractionalTriangles/Section5/Prop57L3.lean)
+
+**Proposition 5.7 — closed primitivity criteria**
+
+These three files formalize the number-theoretic primitivity criteria for all
+five atomic families.
+
+#### FFF
+
+For the raw weights
+
+$$
+(\beta\gamma,\alpha\gamma,\alpha\beta),
+$$
+
+Lean proves the exact equivalence
+
+$$
+\boxed{
+\gcd(\beta\gamma,\alpha\gamma,\alpha\beta)=1
+\iff
+\gcd(\alpha,\beta)=
+\gcd(\beta,\gamma)=
+\gcd(\gamma,\alpha)=1.
+}
+$$
+
+Thus primitivity is equivalent to pairwise coprimality of
+
+$$
+\alpha,\beta,\gamma.
+$$
+
+#### C2F
+
+For the weights
+
+$$
+\boxed{
+\bigl(
+B(t+1),\,
+(A+1)(t+1),\,
+(A+1)(B+1)
+\bigr),
+}
+$$
+
+Lean proves that primitivity is equivalent to the three closed conditions
+
+$$
+\boxed{
+\gcd(A+1,B)=1,
+}
+$$
+
+$$
+\boxed{
+\gcd(A+1,t+1)=1,
+}
+$$
+
+and
+
+$$
+\boxed{
+\gcd(t+1,B+1)=1.
+}
+$$
+
+The sufficiency direction is proved in `Prop57.lean`, and all three necessity
+directions are proved in `Prop57Necessity.lean`.
+
+#### L2F
+
+For the weights
+
+$$
+\boxed{
+\bigl(
+B(t+1),\,
+A(t+1),\,
+AB+A+B
+\bigr),
+}
+$$
+
+Lean proves that primitivity is equivalent to
+
+$$
+\boxed{
+\gcd(A,B)=1
+}
+$$
+
+and
+
+$$
+\boxed{
+\gcd(t+1,AB+A+B)=1.
+}
+$$
+
+Again, sufficiency and necessity are both Lean-checked.
+
+#### C3
+
+For the weights
+
+$$
+\boxed{
+\bigl(
+B(t+1)+1,\,
+t(A+1),\,
+(A+1)(B+1)
+\bigr),
+}
+$$
+
+Lean proves that primitivity is equivalent to
+
+$$
+\boxed{
+\gcd(A+1,B(t+1)+1)=1
+}
+$$
+
+and
+
+$$
+\boxed{
+\gcd(t,B+1)=1.
+}
+$$
+
+Both directions are formalized.
+
+#### L3
+
+Put
+
+$$
+\boxed{
+m=tAB,
+}
+$$
+
+and
+
+$$
+\boxed{
+w_1=B(t+1)+1,\qquad
+w_2=t(A+1)+1,\qquad
+w_3=A(B+1)+1.
+}
+$$
+
+Lean first verifies the three identities used in the paper:
+
+$$
+\boxed{
+Aw_1=(m-1)+w_3,
+}
+$$
+
+$$
+\boxed{
+Bw_2=(m-1)+w_1,
+}
+$$
+
+and
+
+$$
+\boxed{
+tw_3=(m-1)+w_2.
+}
+$$
+
+It also proves
+
+$$
+\boxed{
+\gcd(m,m-1)=1.
+}
+$$
+
+From these identities Lean proves both divisibility directions in the final
+gcd reduction and obtains
+
+$$
+\boxed{
+\gcd(w_1,w_2,w_3)
+=
+\gcd(m-1,w_1).
+}
+$$
+
+Consequently the L3 primitivity condition reduces exactly to
+
+$$
+\boxed{
+\gcd\bigl(tAB-1,\;B(t+1)+1\bigr)=1.
+}
+$$
+
+Thus the number-theoretic content of Proposition 5.7 is completely
+Lean-checked for all five atomic families.
 
 # Section 6 — Finite census and low-index enumeration
 
 Directory: [`FractionalTriangles/Section6`](FractionalTriangles/Section6)
 
-### [`Census.lean`](FractionalTriangles/Section6/Census.lean)
+### [`Corollary61.lean`](FractionalTriangles/Section6/Corollary61.lean)
 
-Provides the arithmetic infrastructure for the finite census.
+**Corollary 6.1 — explicit primitive families for \(6\nmid\delta\)**
 
-### [`IndependentLowIndex.lean`](FractionalTriangles/Section6/IndependentLowIndex.lean)
-
-Performs an independent low-index enumeration as a cross-check.
-
-### [`LowIndexActualEnumeration.lean`](FractionalTriangles/Section6/LowIndexActualEnumeration.lean)
-
-Checks the implemented low-index enumeration for
+If
 
 $$
-\delta=2,3,4,5,6.
+3\nmid\delta,
 $$
 
-The resulting class counts are
+Lean verifies that
 
 $$
-6,\ 8,\ 8,\ 21,\ 0.
+\boxed{
+(\delta+3,\;2\delta+3,\;3)
+}
 $$
 
-### [`FullCensusActual.lean`](FractionalTriangles/Section6/FullCensusActual.lean)
-
-Carries out the full implemented census in the checked range and reproduces
+is primitive:
 
 $$
-506
+\boxed{
+\gcd\bigl(\delta+3,\gcd(2\delta+3,3)\bigr)=1.
+}
 $$
 
-class keys.
+If
+
+$$
+\delta\equiv3\pmod6,
+$$
+
+Lean first proves
+
+$$
+\boxed{
+\gcd(\delta+2,\delta+4)=1
+}
+$$
+
+and then verifies that
+
+$$
+\boxed{
+(\delta+4,\;\delta+2,\;4)
+}
+$$
+
+is primitive:
+
+$$
+\boxed{
+\gcd\bigl(\delta+4,\gcd(\delta+2,4)\bigr)=1.
+}
+$$
+
+These are the two explicit primitive families used in Corollary 6.1 for
+
+$$
+\boxed{
+6\nmid\delta.
+}
+$$
+
+
+### [`Theorem62_Enumeration.lean`](FractionalTriangles/Section6/Theorem62_Enumeration.lean), [`Theorem62_ActualEnumeration.lean`](FractionalTriangles/Section6/Theorem62_ActualEnumeration.lean), [`Theorem62_FullCensus.lean`](FractionalTriangles/Section6/Theorem62_FullCensus.lean)
+
+**Theorem 6.2 — independent finite enumeration**
+
+These files independently reproduce the census from the structural formulas,
+rather than importing the printed census table.
+
+A candidate is retained only when
+
+$$
+\boxed{
+h=a+b+c+\delta
+}
+$$
+
+and
+
+$$
+\boxed{
+\gcd(a,b,c)=1.
+}
+$$
+
+The three weights are then sorted and candidates are deduplicated by
+
+$$
+\boxed{
+(\operatorname{sort}(a,b,c),h).
+}
+$$
+
+Thus permutations of the same weighted system are counted only once.
+
+#### Enumeration directly from Table 3
+
+For each fixed \(\delta\), Lean enumerates
+
+$$
+2\le \alpha,\beta,\gamma\le \delta+6,
+$$
+
+using the finite bound from Lemma 5.4, and evaluates all five atomic systems.
+
+The raw weight/degree formulas used by the executable enumeration are:
+
+$$
+\mathrm{FFF}:
+\qquad
+(a,b,c;h)
+=
+(\beta\gamma,\alpha\gamma,\alpha\beta;\alpha\beta\gamma),
+$$
+
+$$
+\mathrm{C2F}:
+\qquad
+(a,b,c;h)
+=
+(\gamma(\beta-1),\alpha\gamma,\alpha\beta;\alpha\beta\gamma),
+$$
+
+$$
+\mathrm{L2F}:
+\qquad
+(a,b,c;h)
+=
+(\gamma(\beta-1),\gamma(\alpha-1),\alpha\beta-1;
+\gamma(\alpha\beta-1)),
+$$
+
+$$
+\mathrm{C3}:
+\qquad
+(a,b,c;h)
+=
+(\beta\gamma-\gamma+1,\alpha(\gamma-1),\alpha\beta;
+\alpha\beta\gamma),
+$$
+
+and
+
+$$
+\mathrm{L3}:
+\qquad
+(a,b,c;h)
+=
+(\beta\gamma-\gamma+1,\alpha\gamma-\alpha+1,
+\alpha\beta-\beta+1;\alpha\beta\gamma+1).
+$$
+
+Lean first independently reproduces
+
+$$
+\boxed{
+(N_2,N_3,N_4,N_5,N_6)
+=
+(6,8,8,21,0).
+}
+$$
+
+For \(\delta=2\), the six canonical systems obtained by the enumeration are
+
+$$
+\boxed{
+\begin{aligned}
+&(3,5,5;15),\\
+&(3,5,7;17),\\
+&(3,5,10;20),\\
+&(3,7,9;21),\\
+&(3,7,12;24),\\
+&(3,10,15;30).
+\end{aligned}
+}
+$$
+
+#### Full census for \(2\le\delta\le30\)
+
+Lean independently computes
+
+$$
+\boxed{
+\begin{array}{c|rrrrrrrrrrrrrrr}
+\delta
+&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16\\
+\hline
+N_\delta
+&6&8&8&21&0&29&11&12&6&37&0&36&10&9&11
+\end{array}
+}
+$$
+
+and
+
+$$
+\boxed{
+\begin{array}{c|rrrrrrrrrrrrrr}
+\delta
+&17&18&19&20&21&22&23&24&25&26&27&28&29&30\\
+\hline
+N_\delta
+&40&2&46&11&12&9&55&3&28&16&18&10&52&0
+\end{array}
+}
+$$
+
+These values are obtained by executable enumeration from the five Table 3
+families; the printed census table is not used as input.
+
+Finally Lean verifies
+
+$$
+\boxed{
+\sum_{\delta=2}^{30} N_\delta=506.
+}
+$$
+
+Thus the numerical census in Theorem 6.2, including the total \(506\), is
+independently reproduced in Lean from the finite structural enumeration.
+
+**External mathematical input:** Table 3 and Lemma 5.4 must already be known
+to give an exhaustive finite search space.  The census computation itself is
+then executable and fully checked by Lean.
+
 
 ### [`Remark63_Examples.lean`](FractionalTriangles/Section6/Remark63_Examples.lean)
 
-Checks the explicit arithmetic systems appearing in Remark 6.3.
+**Remark 6.3 — six explicit weighted hypersurface systems**
 
----
+Lean checks the monomial degrees, the value
+
+$$
+\delta=h-a-b-c,
+$$
+
+and primitivity for each of the six systems listed in Remark 6.3.
+
+For \(\delta=3\),
+
+$$
+\boxed{
+(a,b,c;h)=(4,10,13;30)
+}
+$$
+
+with
+
+$$
+\boxed{
+xz^2+y^3+x^5y.
+}
+$$
+
+For \(\delta=4\),
+
+$$
+\boxed{
+(a,b,c;h)=(5,6,9;24)
+}
+$$
+
+with
+
+$$
+\boxed{
+zx^3+yz^2+y^4.
+}
+$$
+
+For \(\delta=5\), Lean checks the four systems
+
+$$
+\boxed{
+(6,8,19;38),
+\qquad
+z^2+xy^4+x^5y,
+}
+$$
+
+$$
+\boxed{
+(4,7,16;32),
+\qquad
+z^2+xy^4+zx^4,
+}
+$$
+
+$$
+\boxed{
+(4,7,12;28),
+\qquad
+xz^2+y^4+x^4z,
+}
+$$
+
+and
+
+$$
+\boxed{
+(4,7,9;25),
+\qquad
+yz^2+x^4z+xy^3.
+}
+$$
+
+For every example Lean verifies that all displayed monomials have degree \(h\),
+
+$$
+\boxed{
+h-a-b-c=\delta,
+}
+$$
+
+and
+
+$$
+\boxed{
+\gcd(a,b,c)=1.
+}
+$$
+
+Finally, Lean checks that all six systems actually occur among the
+independently enumerated canonical keys from Theorem 6.2.
 
 # Core
 
