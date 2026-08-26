@@ -80,7 +80,7 @@ Let
 
 
 ```math
-N=\operatorname{lcm}(p,q,r).
+N=\mathrm{lcm}(p,q,r).
 ```
 
 
@@ -88,13 +88,13 @@ Lean verifies the scaled degrees
 
 
 ```math
-\operatorname{sdeg}(\vec c)=N,
+\mathrm{sdeg}(\vec c)=N,
 \qquad
-\operatorname{sdeg}(\vec x)=\frac Np,
+\mathrm{sdeg}(\vec x)=\frac Np,
 \qquad
-\operatorname{sdeg}(\vec y)=\frac Nq,
+\mathrm{sdeg}(\vec y)=\frac Nq,
 \qquad
-\operatorname{sdeg}(\vec z)=\frac Nr.
+\mathrm{sdeg}(\vec z)=\frac Nr.
 ```
 
 
@@ -104,7 +104,7 @@ For each of the four generators it checks equation (2.2):
 ```math
 N\vec v
 =
-\operatorname{sdeg}(\vec v)\,\vec c.
+\mathrm{sdeg}(\vec v)\,\vec c.
 ```
 
 
@@ -297,7 +297,7 @@ Equivalently, in the Lean file,
 
 
 ```math
-\operatorname{RootIndexAdmissible}(\delta;k,N)
+\mathrm{RootIndexAdmissible}(\delta;k,N)
 \iff
 \delta\mid k\ \text{ and }\ \gcd(\delta,N)=1.
 ```
@@ -307,7 +307,7 @@ If \(d=d_{\max}\) is the maximal admissible index, Lean verifies
 
 
 ```math
-\operatorname{RootIndexAdmissible}(\delta;k,N)
+\mathrm{RootIndexAdmissible}(\delta;k,N)
 \Longrightarrow
 \delta\mid d_{\max}.
 ```
@@ -469,7 +469,7 @@ and hence, for
 
 
 ```math
-N=\operatorname{lcm}(p,q,r),
+N=\mathrm{lcm}(p,q,r),
 ```
 
 
@@ -733,7 +733,7 @@ Using
 
 
 ```math
-|\operatorname{tors}L|
+|\mathrm{tors}L|
 =
 \frac{pqr}{N}
 ```
@@ -985,7 +985,7 @@ The stabilizer of the reconstructed stack is governed by
 
 
 ```math
-\operatorname{Stab}(P_i)
+\mathrm{Stab}(P_i)
 =
 \mu_{\gcd(\Sigma_{P_i})}.
 ```
@@ -1208,7 +1208,7 @@ For
 ```math
 S_m=T_{m\vec\tau},
 \qquad
-Y=\operatorname{Proj}^{st}S,
+Y=\mathrm{Proj}^{st}S,
 ```
 
 
@@ -1225,7 +1225,7 @@ point
 
 
 ```math
-\delta\,\operatorname{char}\mathcal O(1)=-1.
+\delta\,\mathrm{char}\mathcal O(1)=-1.
 ```
 
 
@@ -1313,7 +1313,7 @@ formalized here.
 **External geometric input for Lemma 4.4:** irreducibility of the quasismooth
 locus, smooth proper tame DM-curve families, local constancy of genus and
 stabilizer data, the root-stack description, the Picard sequence, and
-\(\operatorname{Pic}^0(\mathbb P^1)=0\).
+\(\mathrm{Pic}^0(\mathbb P^1)=0\).
 
 #### Lemma 4.5 and equation (4.4)
 
@@ -1937,7 +1937,7 @@ diagonal symmetry remains after quotienting by the grading subgroup.
   \[
   |J_f|
   =
-  \operatorname{lcm}_j
+  \mathrm{lcm}_j
   \frac{h}{\gcd(h,a_j)},
   \]
   together with its simplification to \(h\) for primitive weights.
@@ -2549,7 +2549,7 @@ The three weights are then sorted and candidates are deduplicated by
 
 
 ```math
-(\operatorname{sort}(a,b,c),h).
+(\mathrm{sort}(a,b,c),h).
 ```
 
 
