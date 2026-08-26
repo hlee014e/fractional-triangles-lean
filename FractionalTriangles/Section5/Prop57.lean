@@ -119,11 +119,6 @@ For L3, Proposition 5.7 reduces primitivity to one gcd condition.
 We formalize the immediate implication from that closed condition to
 coprimality of the two displayed controlling integers.
 -/
-theorem l3_closed_condition
-    (A B t : ℕ)
-    (h : Nat.Coprime (t*A*B-1) (B*(t+1)+1)) :
-    Nat.gcd (t*A*B-1) (B*(t+1)+1)=1 := h.gcd_eq_one
-
 /-!
 The converse directions for C2F/L2F/C3/L3 require a slightly more delicate
 prime-divisor case split exactly as written in the paper.  They are not

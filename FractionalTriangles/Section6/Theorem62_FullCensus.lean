@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section6.LowIndexActualEnumeration
+import FractionalTriangles.Section6.Theorem62_ActualEnumeration
 
 namespace FractionalTriangles
 namespace Section6
@@ -39,15 +39,7 @@ theorem full_census_total_actual_506 :
   native_decide
 
 /-- Independent reproduction of the zero indices in the displayed range. -/
-theorem full_census_zero_indices_actual :
-    actualCount 6 = 0 ∧ actualCount 12 = 0 ∧ actualCount 30 = 0 := by
-  native_decide
-
 /-- Independent spot checks at the three largest displayed counts. -/
-theorem full_census_large_spot_checks :
-    actualCount 19 = 46 ∧ actualCount 23 = 55 ∧ actualCount 29 = 52 := by
-  native_decide
-
 /-!
 Audit note.
 

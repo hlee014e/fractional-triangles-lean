@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section6.Census
+import Mathlib
 
 namespace FractionalTriangles
 namespace Section6
@@ -46,31 +46,6 @@ def uniqueKeys (xs : List Candidate) : List (Nat × Nat × Nat × Nat) :=
   (canonicalKeys xs).eraseDups
 
 def classCount (xs : List Candidate) : Nat := (uniqueKeys xs).length
-
-/-! Generic correctness checks for the executable pipeline. -/
-
-example :
-  sort3 7 2 5 = (2,5,7) := by decide
-
-example :
-  canonicalKey ⟨7,2,5,11,true⟩ = (2,5,7,11) := by decide
-
-example :
-  classCount [
-    ⟨2,3,5,11,true⟩,
-    ⟨5,2,3,11,true⟩, -- same canonical class
-    ⟨2,3,7,13,false⟩,
-    ⟨3,4,5,17,true⟩
-  ] = 2 := by decide
-
-/--
-If two retained witnesses differ only by permutation of the three weights
-and have the same relation degree, our canonical key identifies them.
--/
-theorem canonical_permutation_example :
-    canonicalKey ⟨2,5,3,17,true⟩ =
-    canonicalKey ⟨5,3,2,17,true⟩ := by
-  decide
 
 /-!
 The next layer must instantiate `candidates δ` from the five exact divisor

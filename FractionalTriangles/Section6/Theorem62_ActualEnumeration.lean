@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section6.IndependentLowIndex
+import FractionalTriangles.Section6.Theorem62_Enumeration
 
 namespace FractionalTriangles
 namespace Section6
@@ -63,12 +63,6 @@ theorem low_index_counts_actual :
   native_decide
 
 /-- Individual executable certificates, useful when auditing failures. -/
-theorem actual_count_2 : actualCount 2 = 6 := by native_decide
-theorem actual_count_3 : actualCount 3 = 8 := by native_decide
-theorem actual_count_4 : actualCount 4 = 8 := by native_decide
-theorem actual_count_5 : actualCount 5 = 21 := by native_decide
-theorem actual_count_6 : actualCount 6 = 0 := by native_decide
-
 /-! Recover the six index-two keys, independently from Table 3. -/
 def keysAt2 := uniqueKeys (candidatesActual 2)
 

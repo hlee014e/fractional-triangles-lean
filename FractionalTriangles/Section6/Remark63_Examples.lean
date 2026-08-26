@@ -1,5 +1,5 @@
 import Mathlib
-import FractionalTriangles.Section6.FullCensusActual
+import FractionalTriangles.Section6.Theorem62_FullCensus
 
 namespace FractionalTriangles
 namespace Section6

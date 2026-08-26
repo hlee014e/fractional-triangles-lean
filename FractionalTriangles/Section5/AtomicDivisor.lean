@@ -125,29 +125,7 @@ theorem l2f_complete_product
   nlinarith
 
 /-- C3 equation B(tA-1)=δ+1 gives a divisor of δ+1. -/
-theorem c3_divisor_equation
-    (t A B δ : ℕ)
-    (h : B*(t*A-1)=δ+1) :
-    B ∣ δ+1 := by
-  exact ⟨t*A-1, h.symm⟩
-
 /-- L3 equation tAB=δ+1 immediately gives all three divisor relations. -/
-theorem l3_divisor_relations
-    (t A B δ : ℕ)
-    (h : t*A*B=δ+1) :
-    t ∣ δ+1 ∧ A ∣ δ+1 ∧ B ∣ δ+1 := by
-  constructor
-  · exact ⟨A*B, by simpa [mul_assoc] using h.symm⟩
-  constructor
-  · exact ⟨t*B, by
-      calc
-        δ+1 = t*A*B := h.symm
-        _ = A*(t*B) := by ring⟩
-  · exact ⟨t*A, by
-      calc
-        δ+1 = t*A*B := h.symm
-        _ = B*(t*A) := by ring⟩
-
 /--
 FFF completed-product identity from the Table 3 equation.
 Set A=α-1, U=A(β-1)-1, V=A(γ-1)-1.

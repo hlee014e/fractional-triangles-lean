@@ -294,7 +294,7 @@ Checks the sufficiency arithmetic in Proposition 5.7.
 
 Checks the necessity arithmetic in Proposition 5.7.
 
-### [`L3Section6.lean`](FractionalTriangles/Section5/L3Section6.lean)
+### [`Prop57L3.lean`](FractionalTriangles/Section5/Prop57L3.lean)
 
 Checks the remaining $L3$ gcd/divisibility calculation and the arithmetic transition from Section 5 to Section 6.
 
@@ -336,7 +336,7 @@ $$
 
 class keys.
 
-### [`Remark63Audit.lean`](FractionalTriangles/Section6/Remark63Audit.lean)
+### [`Remark63_Examples.lean`](FractionalTriangles/Section6/Remark63_Examples.lean)
 
 Checks the explicit arithmetic systems appearing in Remark 6.3.
 
