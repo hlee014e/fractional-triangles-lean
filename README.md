@@ -2644,7 +2644,7 @@ Lean first independently reproduces
 ```
 
 
-For \(\delta=2\), the six canonical systems obtained by the enumeration are
+For δ = 2, the six canonical systems obtained by the enumeration are
 
 
 ```math
@@ -2659,34 +2659,20 @@ For \(\delta=2\), the six canonical systems obtained by the enumeration are
 ```
 
 
-#### Full census for \(2\le\delta\le30\)
+#### Full census for 2 ≤ δ ≤ 30
 
 Lean independently computes
 
 
-```math
-\begin{array}{c|rrrrrrrrrrrrrrr}
-\delta
-&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16\\
-\hline
-N_\delta
-&6&8&8&21&0&29&11&12&6&37&0&36&10&9&11
-\end{array}
-```
-
+| δ | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Nδ | 6 | 8 | 8 | 21 | 0 | 29 | 11 | 12 | 6 | 37 | 0 | 36 | 10 | 9 | 11 |
 
 and
 
-
-```math
-\begin{array}{c|rrrrrrrrrrrrrr}
-\delta
-&17&18&19&20&21&22&23&24&25&26&27&28&29&30\\
-\hline
-N_\delta
-&40&2&46&11&12&9&55&3&28&16&18&10&52&0
-\end{array}
-```
+| δ | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Nδ | 40 | 2 | 46 | 11 | 12 | 9 | 55 | 3 | 28 | 16 | 18 | 10 | 52 | 0 |
 
 
 These values are obtained by executable enumeration from the five Table 3
