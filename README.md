@@ -1405,7 +1405,48 @@ as the two cases to be excluded in Proposition 4.7.
 **External input for Lemma 4.6:** the fact that these seven cases exhaust the
 ternary possibilities comes from the classical ternary graph/support
 classification; Lean does not reprove that classification.
+For the two branched supports
 
+\[
+R_3=\{x^a y,\ z^c y,\ y^b,\ x^m z^n\},
+\]
+
+and
+
+\[
+R_6=\{x^a y,\ y^b z,\ z^c y,\ x^m z^n\},
+\]
+
+Lean checks the support conditions for every nonempty proper subset
+
+\[
+J\subsetneq\{x,y,z\},
+\]
+
+namely
+
+\[
+J\in
+\bigl\{
+\{x\},\{y\},\{z\},
+\{x,y\},\{x,z\},\{y,z\}
+\bigr\}.
+\]
+
+For every such \(J\), Lean proves
+
+\[
+C1(R_3,J)\land C2(R_3,J),
+\]
+
+and
+
+\[
+C1(R_6,J)\land C2(R_6,J).
+\]
+
+Thus the finite support-condition checks for both branched rows
+\(R_3\) and \(R_6\) in Lemma 4.6 are Lean verified for all relevant \(J\).
 #### Proposition 4.7 — the \(f_3\) branched case
 
 Lean verifies the point-count arithmetic used in (4.7).
