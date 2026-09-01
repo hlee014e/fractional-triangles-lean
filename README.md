@@ -1596,9 +1596,9 @@ e=b-1,\qquad t=c-1,
 
 weighted homogeneity gives, by direct algebra,
 
+Equation **(4.9)**:
 ```math
 (A,B,C;h)=\frac{1}{G}\bigl(e(t+1),\,at,\,ae;\,a(et+e+t)\bigr).
-\tag{4.9}
 ```
 
 where
@@ -1683,51 +1683,11 @@ Using the three vertex orders \(A,B,C\), Lean verifies the exact adjunction
 identity
 
 ```math
-2g
-=
-\frac{\delta h}{ABC}
--1+\frac1A+\frac1B+\frac1C
-=
-d(a-1)+\frac a{e_0}-1.
-\tag{4.11}
+2g=\frac{\delta h}{ABC}-1+\frac{1}{Wt}+\frac{1}{We}+\frac{1}{W}
+=et+e+t-1>0.
 ```
 
-This is checked in
-
-[`Prop47_F6_Eq411.lean`](FractionalTriangles/Section4/Prop47_F6_Eq411.lean).
-
-In the \(W>1\) case,
-
-```math
-(A,B,C;h)
-=
-(1,Wt,We;W(et+e+t)),
-```
-
-so
-
-```math
-\delta=h-A-B-C=Wet-1.
-```
-
-The three nontrivial stacky orders are
-
-```math
-(Wt,We,W).
-```
-
-Lean verifies
-
-```math
-2g
-=
-\frac{\delta h}{ABC}
--1+\frac1{Wt}+\frac1{We}+\frac1W
-=
-et+e+t-1
->0.
-\tag{4.12}
-```
+This is equation **(4.12)**.
 
 This is checked in
 
