@@ -1637,9 +1637,10 @@ Lemma 4.5 supplies the geometric statement that the open coordinate line
 \(\gcd(B,C)=W\).  Thus the number of nontrivial stacky points is
 
 ```math
-[A>1]+[B>1]+[C>1]+d[W>1].
-\tag{4.10}
+\mathbf{1}_{A>1}+\mathbf{1}_{B>1}+\mathbf{1}_{C>1}+d\,\mathbf{1}_{W>1}.
 ```
+
+This is equation **(4.10)**.
 
 Lean verifies the discrete case split following (4.10).  In particular,
 
