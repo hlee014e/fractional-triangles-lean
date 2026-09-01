@@ -1361,6 +1361,8 @@ degree formula.
 
 ### [`Lemma46_Prop47_BranchedCases.lean`](FractionalTriangles/Section4/Lemma46_Prop47_BranchedCases.lean)
 
+### [`Lemma46AllJ.lean`](FractionalTriangles/Section4/Lemma46AllJ.lean)
+
 **Lemma 4.6 and Proposition 4.7 — exclusion of the two branched ternary cases**
 
 #### Lemma 4.6 — five atomic types
@@ -1447,118 +1449,305 @@ C1(R_6,J)\land C2(R_6,J).
 
 Thus the finite support-condition checks for both branched rows
 \(R_3\) and \(R_6\) in Lemma 4.6 are Lean verified for all relevant \(J\).
-#### Proposition 4.7 — the \(f_3\) branched case
+#### Proposition 4.7 — exclusion of the two branched ternary types
 
-Lean verifies the point-count arithmetic used in (4.7).
+The geometric reduction uses Lemmas 4.4–4.6.  The following arithmetic,
+divisibility, case-splitting, and adjunction computations have been checked
+separately.
 
-If both open-line contributions are active, with
+##### The \(f_3\) branched case
 
+For
 
-```math
-r\ge1,\qquad s\ge1,
-```
+\[
+f_3=x^ay+z^cy+y^b+\varepsilon x^mz^n,
+\qquad e=b-1,
+\]
 
+weighted homogeneity gives
 
-then
+\[
+aA+B=h,\qquad cC+B=h,\qquad bB=h.
+\]
 
+Lean verifies
 
-```math
-1+1+r+s\ge4.
-```
+\[
+aA=eB,\qquad cC=eB,\qquad h=(e+1)B.
+\]
 
+This is checked in
 
-Thus this case cannot give exactly three stacky points.
+[`Prop47_F3_Step1_STANDALONE_v2.lean`](FractionalTriangles/Section4/Prop47_F3_Step1_STANDALONE_v2.lean).
 
-The Case (II) divisibility contradiction is also checked:
+For the stacky-point count
 
+\[
+[A>1]+[C>1]+r[U>1]+s[V>1],
+\tag{4.7}
+\]
 
-```math
+the identification of the coordinate and open-line contributions is geometric
+input from Lemma 4.5.  In particular, the stabilizer orders and the number of
+quotient points on the open coordinate lines are not rederived here from the
+stack quotient itself.
+
+In Case (I), after the paper's reduction
+
+\[
+A=e_0U,\qquad B=a_0U,\qquad C=1,
+\]
+
+\[
+h=a_0U(2e_0+1),
+\]
+
+and with the three nontrivial stacky orders
+
+\[
+(e_0U,U,U),
+\]
+
+Lean verifies the complete adjunction calculation
+
+\[
+2g
+=
+2(2a_0e_0+a_0-e_0-1)
+=
+2\bigl((a_0-1)(2e_0+1)+e_0\bigr)>0.
+\tag{4.8}
+\]
+
+This is checked in
+
+[`Prop47_F3_CaseI_Eq48.lean`](FractionalTriangles/Section4/Prop47_F3_CaseI_Eq48.lean).
+
+In Case (II), Lean checks the complete divisibility contradiction.
+
+From
+
+\[
+\gcd(a,e)=1,\qquad aA=eB,
+\]
+
+it obtains
+
+\[
+B=aU,\qquad A=eU.
+\]
+
+From
+
+\[
+cC=eB,\qquad \gcd(B,C)=1,
+\]
+
+it obtains
+
+\[
+C\mid e,
+\qquad
+C\mid A.
+\]
+
+The link monomial has weighted degree \(h\),
+
+\[
+mA+nC=h,
+\]
+
+hence
+
+\[
+C\mid h.
+\]
+
+On the other hand,
+
+\[
+h=(e+1)B,\qquad
 C\mid e,\qquad
 \gcd(B,C)=1,\qquad
 C>1
-```
-
+\]
 
 implies
 
+\[
+C\nmid h,
+\]
 
-```math
-C\nmid(e+1)B.
-```
+a contradiction.
 
+This is checked in
 
-For the genus expression occurring in equation (4.8), Lean proves
+[`Prop47_F3_CaseII_fixed_v2.lean`](FractionalTriangles/Section4/Prop47_F3_CaseII_fixed_v2.lean).
 
+##### The \(f_6\) branched case
 
-```math
-2(a_0-1)(2e_0+1)+e_0>0
-\tag{4.8}
-```
+For
 
+\[
+f_6=x^ay+y^bz+z^cy+\varepsilon x^mz^n,
+\qquad
+e=b-1,\qquad t=c-1,
+\]
 
-whenever
+weighted homogeneity gives, by direct algebra,
 
+\[
+(A,B,C;h)
+=
+\frac1G
+\bigl(
+e(t+1),\,at,\,ae;\,a(et+e+t)
+\bigr),
+\tag{4.9}
+\]
 
-```math
-a_0\ge1,\qquad e_0\ge1.
-```
+where
 
+\[
+G=\gcd(e(t+1),at,ae).
+\]
 
-This supplies the final numerical contradiction in the \(f_3\) branched case.
+Equation (4.9) is a direct weighted-homogeneity calculation and is not
+formalized as a separate Lean theorem.
 
-#### Proposition 4.7 — the \(f_6\) branched case
+Put
 
-For the second branched case, Lean checks the point-count consequence
+\[
+d=\gcd(e,t),
+\qquad
+W=\frac{ad}{G}.
+\]
 
+From the primitive weights,
 
-```math
-2+d=3,\qquad d\ge1
+\[
+B=\frac{at}{G},
+\qquad
+C=\frac{ae}{G},
+\]
+
+one has
+
+\[
+W=\gcd(B,C).
+\]
+
+Lemma 4.5 supplies the geometric statement that the open coordinate line
+\(x=0\) contributes \(d\) points, each with stabilizer order
+\(\gcd(B,C)=W\).  Thus the number of nontrivial stacky points is
+
+\[
+[A>1]+[B>1]+[C>1]+d[W>1].
+\tag{4.10}
+\]
+
+Lean verifies the discrete case split following (4.10).  In particular,
+
+\[
+W>1
 \Longrightarrow
-d=1.
-```
+B>1,\ C>1
+\Longrightarrow
+d=1,\ A=1.
+\]
 
+This is checked in
 
-It also verifies the positivity used after equation (4.11):
+[`Prop47_F6_Eq410_CaseSplit_v2.lean`](FractionalTriangles/Section4/Prop47_F6_Eq410_CaseSplit_v2.lean).
 
+In the \(W=1\) case the paper writes
 
-```math
-d(a-1)+x>0
+\[
+e=de_0,\qquad
+t=dt_0,\qquad
+\gcd(e_0,t_0)=1,
+\]
+
+and
+
+\[
+A=\frac{e_0(dt_0+1)}a,
+\qquad
+B=t_0,
+\qquad
+C=e_0,
+\]
+
+\[
+h=de_0t_0+e_0+t_0,
+\qquad
+\delta=h-A-B-C.
+\]
+
+Using the three vertex orders \(A,B,C\), Lean verifies the exact adjunction
+identity
+
+\[
+2g
+=
+\frac{\delta h}{ABC}
+-1+\frac1A+\frac1B+\frac1C
+=
+d(a-1)+\frac a{e_0}-1.
 \tag{4.11}
-```
+\]
 
+This is checked in
 
-for
+[`Prop47_F6_Eq411.lean`](FractionalTriangles/Section4/Prop47_F6_Eq411.lean).
 
+In the \(W>1\) case,
 
-```math
-d\ge1,\qquad a\ge2,\qquad x>0.
-```
+\[
+(A,B,C;h)
+=
+(1,Wt,We;W(et+e+t)),
+\]
 
+so
 
-Finally, Lean checks the positivity appearing in equation (4.12):
+\[
+\delta=h-A-B-C=Wet-1.
+\]
 
+The three nontrivial stacky orders are
 
-```math
-et+e+t-1>0
+\[
+(Wt,We,W).
+\]
+
+Lean verifies
+
+\[
+2g
+=
+\frac{\delta h}{ABC}
+-1+\frac1{Wt}+\frac1{We}+\frac1W
+=
+et+e+t-1
+>0.
 \tag{4.12}
-```
+\]
 
+This is checked in
 
-for
+[`Prop47_F6_Eq412_v2.lean`](FractionalTriangles/Section4/Prop47_F6_Eq412_v2.lean).
 
+**Lean/external boundary for Proposition 4.7.**
 
-```math
-e\ge1,\qquad t\ge1.
-```
+Lean checks the displayed arithmetic identities, the Case (II) divisibility
+contradiction for \(f_3\), the discrete case split after (4.10), and the exact
+adjunction simplifications (4.8), (4.11), and (4.12).
 
-
-Hence the explicit numerical expressions used at the end of both branched
-cases are strictly positive in the required ranges.
-
-**What remains external for the full Proposition 4.7:** Lemma 4.4 deformation
-rigidity, the geometric stacky-stratum count and weighted adjunction from
-Lemma 4.5, the derivation of the displayed weights from weighted homogeneity,
-and the support/classification theorem of Lemma 4.6.
+The following remain geometric or external inputs: deformation rigidity from
+Lemma 4.4; the coordinate-stratum stabilizer calculation, binomial point count,
+and weighted adjunction theorem from Lemma 4.5; and the ternary
+support/classification theorem used in Lemma 4.6.
 
 ### [`Lemma48_Table2_Eq413.lean`](FractionalTriangles/Section4/Lemma48_Table2_Eq413.lean)
 
