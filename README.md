@@ -1597,12 +1597,7 @@ e=b-1,\qquad t=c-1,
 weighted homogeneity gives, by direct algebra,
 
 ```math
-(A,B,C;h)
-=
-\frac1G
-\bigl(
-e(t+1),\,at,\,ae;\,a(et+e+t)
-\bigr),
+(A,B,C;h)=\frac{1}{G}\bigl(e(t+1),\,at,\,ae;\,a(et+e+t)\bigr).
 \tag{4.9}
 ```
 
