@@ -1409,43 +1409,43 @@ ternary possibilities comes from the classical ternary graph/support
 classification; Lean does not reprove that classification.
 For the two branched supports
 
-\[
+```math
 R_3=\{x^a y,\ z^c y,\ y^b,\ x^m z^n\},
-\]
+```
 
 and
 
-\[
+```math
 R_6=\{x^a y,\ y^b z,\ z^c y,\ x^m z^n\},
-\]
+```
 
 Lean checks the support conditions for every nonempty proper subset
 
-\[
+```math
 J\subsetneq\{x,y,z\},
-\]
+```
 
 namely
 
-\[
+```math
 J\in
 \bigl\{
 \{x\},\{y\},\{z\},
 \{x,y\},\{x,z\},\{y,z\}
 \bigr\}.
-\]
+```
 
 For every such \(J\), Lean proves
 
-\[
+```math
 C1(R_3,J)\land C2(R_3,J),
-\]
+```
 
 and
 
-\[
+```math
 C1(R_6,J)\land C2(R_6,J).
-\]
+```
 
 Thus the finite support-condition checks for both branched rows
 \(R_3\) and \(R_6\) in Lemma 4.6 are Lean verified for all relevant \(J\).
@@ -1459,22 +1459,22 @@ separately.
 
 For
 
-\[
+```math
 f_3=x^ay+z^cy+y^b+\varepsilon x^mz^n,
 \qquad e=b-1,
-\]
+```
 
 weighted homogeneity gives
 
-\[
+```math
 aA+B=h,\qquad cC+B=h,\qquad bB=h.
-\]
+```
 
 Lean verifies
 
-\[
+```math
 aA=eB,\qquad cC=eB,\qquad h=(e+1)B.
-\]
+```
 
 This is checked in
 
@@ -1482,10 +1482,10 @@ This is checked in
 
 For the stacky-point count
 
-\[
+```math
 [A>1]+[C>1]+r[U>1]+s[V>1],
 \tag{4.7}
-\]
+```
 
 the identification of the coordinate and open-line contributions is geometric
 input from Lemma 4.5.  In particular, the stabilizer orders and the number of
@@ -1494,30 +1494,30 @@ stack quotient itself.
 
 In Case (I), after the paper's reduction
 
-\[
+```math
 A=e_0U,\qquad B=a_0U,\qquad C=1,
-\]
+```
 
-\[
+```math
 h=a_0U(2e_0+1),
-\]
+```
 
 and with the three nontrivial stacky orders
 
-\[
+```math
 (e_0U,U,U),
-\]
+```
 
 Lean verifies the complete adjunction calculation
 
-\[
+```math
 2g
 =
 2(2a_0e_0+a_0-e_0-1)
 =
 2\bigl((a_0-1)(2e_0+1)+e_0\bigr)>0.
 \tag{4.8}
-\]
+```
 
 This is checked in
 
@@ -1527,56 +1527,56 @@ In Case (II), Lean checks the complete divisibility contradiction.
 
 From
 
-\[
+```math
 \gcd(a,e)=1,\qquad aA=eB,
-\]
+```
 
 it obtains
 
-\[
+```math
 B=aU,\qquad A=eU.
-\]
+```
 
 From
 
-\[
+```math
 cC=eB,\qquad \gcd(B,C)=1,
-\]
+```
 
 it obtains
 
-\[
+```math
 C\mid e,
 \qquad
 C\mid A.
-\]
+```
 
 The link monomial has weighted degree \(h\),
 
-\[
+```math
 mA+nC=h,
-\]
+```
 
 hence
 
-\[
+```math
 C\mid h.
-\]
+```
 
 On the other hand,
 
-\[
+```math
 h=(e+1)B,\qquad
 C\mid e,\qquad
 \gcd(B,C)=1,\qquad
 C>1
-\]
+```
 
 implies
 
-\[
+```math
 C\nmid h,
-\]
+```
 
 a contradiction.
 
@@ -1588,15 +1588,15 @@ This is checked in
 
 For
 
-\[
+```math
 f_6=x^ay+y^bz+z^cy+\varepsilon x^mz^n,
 \qquad
 e=b-1,\qquad t=c-1,
-\]
+```
 
 weighted homogeneity gives, by direct algebra,
 
-\[
+```math
 (A,B,C;h)
 =
 \frac1G
@@ -1604,57 +1604,57 @@ weighted homogeneity gives, by direct algebra,
 e(t+1),\,at,\,ae;\,a(et+e+t)
 \bigr),
 \tag{4.9}
-\]
+```
 
 where
 
-\[
+```math
 G=\gcd(e(t+1),at,ae).
-\]
+```
 
 Equation (4.9) is a direct weighted-homogeneity calculation and is not
 formalized as a separate Lean theorem.
 
 Put
 
-\[
+```math
 d=\gcd(e,t),
 \qquad
 W=\frac{ad}{G}.
-\]
+```
 
 From the primitive weights,
 
-\[
+```math
 B=\frac{at}{G},
 \qquad
 C=\frac{ae}{G},
-\]
+```
 
 one has
 
-\[
+```math
 W=\gcd(B,C).
-\]
+```
 
 Lemma 4.5 supplies the geometric statement that the open coordinate line
 \(x=0\) contributes \(d\) points, each with stabilizer order
 \(\gcd(B,C)=W\).  Thus the number of nontrivial stacky points is
 
-\[
+```math
 [A>1]+[B>1]+[C>1]+d[W>1].
 \tag{4.10}
-\]
+```
 
 Lean verifies the discrete case split following (4.10).  In particular,
 
-\[
+```math
 W>1
 \Longrightarrow
 B>1,\ C>1
 \Longrightarrow
 d=1,\ A=1.
-\]
+```
 
 This is checked in
 
@@ -1662,32 +1662,32 @@ This is checked in
 
 In the \(W=1\) case the paper writes
 
-\[
+```math
 e=de_0,\qquad
 t=dt_0,\qquad
 \gcd(e_0,t_0)=1,
-\]
+```
 
 and
 
-\[
+```math
 A=\frac{e_0(dt_0+1)}a,
 \qquad
 B=t_0,
 \qquad
 C=e_0,
-\]
+```
 
-\[
+```math
 h=de_0t_0+e_0+t_0,
 \qquad
 \delta=h-A-B-C.
-\]
+```
 
 Using the three vertex orders \(A,B,C\), Lean verifies the exact adjunction
 identity
 
-\[
+```math
 2g
 =
 \frac{\delta h}{ABC}
@@ -1695,7 +1695,7 @@ identity
 =
 d(a-1)+\frac a{e_0}-1.
 \tag{4.11}
-\]
+```
 
 This is checked in
 
@@ -1703,27 +1703,27 @@ This is checked in
 
 In the \(W>1\) case,
 
-\[
+```math
 (A,B,C;h)
 =
 (1,Wt,We;W(et+e+t)),
-\]
+```
 
 so
 
-\[
+```math
 \delta=h-A-B-C=Wet-1.
-\]
+```
 
 The three nontrivial stacky orders are
 
-\[
+```math
 (Wt,We,W).
-\]
+```
 
 Lean verifies
 
-\[
+```math
 2g
 =
 \frac{\delta h}{ABC}
@@ -1732,7 +1732,7 @@ Lean verifies
 et+e+t-1
 >0.
 \tag{4.12}
-\]
+```
 
 This is checked in
 
