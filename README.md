@@ -27,13 +27,7 @@ Lean constructs
 
 
 ```math
-L(p,q,r)
-=
-\langle
-\vec x,\vec y,\vec z,\vec c
-\mid
-p\vec x=q\vec y=r\vec z=\vec c
-\rangle .
+L(p,q,r) = \langle \vec x,\vec y,\vec z,\vec c \mid p\vec x=q\vec y=r\vec z=\vec c \rangle .
 ```
 
 
@@ -41,9 +35,7 @@ In particular it verifies the defining relations
 
 
 ```math
-p\vec x=\vec c,\qquad
-q\vec y=\vec c,\qquad
-r\vec z=\vec c.
+p\vec x=\vec c,\qquad q\vec y=\vec c,\qquad r\vec z=\vec c.
 ```
 
 
@@ -51,9 +43,7 @@ The dualizing element is defined exactly as in the manuscript:
 
 
 ```math
-\vec\omega
-=
-\vec c-\vec x-\vec y-\vec z.
+\vec\omega = \vec c-\vec x-\vec y-\vec z.
 ```
 
 
@@ -63,12 +53,7 @@ Constructs the integral scaled-degree map
 
 
 ```math
-D=N\deg,
-\qquad
-D(\vec x)=\frac{N}{p},\;
-D(\vec y)=\frac{N}{q},\;
-D(\vec z)=\frac{N}{r},\;
-D(\vec c)=N.
+D=N\deg, \qquad D(\vec x)=\frac{N}{p},\; D(\vec y)=\frac{N}{q},\; D(\vec z)=\frac{N}{r},\; D(\vec c)=N.
 ```
 
 
@@ -88,13 +73,7 @@ Lean verifies the scaled degrees
 
 
 ```math
-\mathrm{sdeg}(\vec c)=N,
-\qquad
-\mathrm{sdeg}(\vec x)=\frac Np,
-\qquad
-\mathrm{sdeg}(\vec y)=\frac Nq,
-\qquad
-\mathrm{sdeg}(\vec z)=\frac Nr.
+\mathrm{sdeg}(\vec c)=N, \qquad \mathrm{sdeg}(\vec x)=\frac Np, \qquad \mathrm{sdeg}(\vec y)=\frac Nq, \qquad \mathrm{sdeg}(\vec z)=\frac Nr.
 ```
 
 
@@ -102,9 +81,7 @@ For each of the four generators it checks equation (2.2):
 
 
 ```math
-N\vec v
-=
-\mathrm{sdeg}(\vec v)\,\vec c.
+N\vec v = \mathrm{sdeg}(\vec v)\,\vec c.
 ```
 
 
@@ -112,9 +89,7 @@ Equivalently, using the paper's degree normalization,
 
 
 ```math
-N\vec v
-=
-N\deg(\vec v)\,\vec c.
+N\vec v = N\deg(\vec v)\,\vec c.
 ```
 
 
@@ -134,20 +109,17 @@ Lean proves
 
 
 ```math
-N\vec v
-=
-N\deg(\vec v)\,\vec c.
-\tag{2.2}
+N\vec v = N\deg(\vec v)\,\vec c.
 ```
+
+Equation **(2.2)**.
 
 
 A direct consequence used later is
 
 
 ```math
-\deg(\vec v)=0
-\Longrightarrow
-N\vec v=0.
+\deg(\vec v)=0 \Longrightarrow N\vec v=0.
 ```
 
 
@@ -161,13 +133,7 @@ Lean constructs the residue map
 
 
 ```math
-L(p,q,r)
-\longrightarrow
-\mathbb Z/p\mathbb Z
-\oplus
-\mathbb Z/q\mathbb Z
-\oplus
-\mathbb Z/r\mathbb Z
+L(p,q,r) \longrightarrow \mathbb Z/p\mathbb Z \oplus \mathbb Z/q\mathbb Z \oplus \mathbb Z/r\mathbb Z
 ```
 
 
@@ -183,24 +149,17 @@ Hence the formalized quotient description is
 
 
 ```math
-L/\mathbb Z\vec c
-\simeq
-\mathbb Z/p\mathbb Z
-\oplus
-\mathbb Z/q\mathbb Z
-\oplus
-\mathbb Z/r\mathbb Z.
-\tag{2.4}
+L/\mathbb Z\vec c \simeq \mathbb Z/p\mathbb Z \oplus \mathbb Z/q\mathbb Z \oplus \mathbb Z/r\mathbb Z.
 ```
+
+Equation **(2.4)**.
 
 
 Lean also checks the second statement in (2.4):
 
 
 ```math
-\vec\omega
-\longmapsto
-(-1,-1,-1).
+\vec\omega \longmapsto (-1,-1,-1).
 ```
 
 
@@ -216,9 +175,7 @@ reduces componentwise to
 
 
 ```math
-\delta s_p\equiv-1\pmod p,\qquad
-\delta s_q\equiv-1\pmod q,\qquad
-\delta s_r\equiv-1\pmod r.
+\delta s_p\equiv-1\pmod p,\qquad \delta s_q\equiv-1\pmod q,\qquad \delta s_r\equiv-1\pmod r.
 ```
 
 
@@ -230,9 +187,7 @@ From equation (2.2), Lean first proves
 
 
 ```math
-\deg(\vec v)=0
-\Longrightarrow
-N\vec v=0.
+\deg(\vec v)=0 \Longrightarrow N\vec v=0.
 ```
 
 
@@ -240,11 +195,7 @@ It then verifies the Bézout step
 
 
 ```math
-e\vec v=0,\qquad
-N\vec v=0,\qquad
-\gcd(e,N)=1
-\Longrightarrow
-\vec v=0.
+e\vec v=0,\qquad N\vec v=0,\qquad \gcd(e,N)=1 \Longrightarrow \vec v=0.
 ```
 
 
@@ -258,10 +209,7 @@ For the concrete grading group \(L(p,q,r)\), Lean proves
 
 
 ```math
-\gcd(e,N)=1
-\Longrightarrow
-[\;e\;]\colon L(p,q,r)\to L(p,q,r)
-\text{ is injective}.
+\gcd(e,N)=1 \Longrightarrow [\;e\;]\colon L(p,q,r)\to L(p,q,r) \text{ is injective}.
 ```
 
 
@@ -269,11 +217,7 @@ Equivalently,
 
 
 ```math
-e\vec v=0
-\Longrightarrow
-\vec v=0
-\qquad
-\text{when }\gcd(e,N)=1.
+e\vec v=0 \Longrightarrow \vec v=0 \qquad \text{when }\gcd(e,N)=1.
 ```
 
 
@@ -287,9 +231,7 @@ The admissible root-index condition is
 
 
 ```math
-\delta\mid k,
-\qquad
-\gcd(\delta,N)=1.
+\delta\mid k, \qquad \gcd(\delta,N)=1.
 ```
 
 
@@ -297,9 +239,7 @@ Equivalently, in the Lean file,
 
 
 ```math
-\mathrm{RootIndexAdmissible}(\delta;k,N)
-\iff
-\delta\mid k\ \text{ and }\ \gcd(\delta,N)=1.
+\mathrm{RootIndexAdmissible}(\delta;k,N) \iff \delta\mid k\ \text{ and }\ \gcd(\delta,N)=1.
 ```
 
 
@@ -307,9 +247,7 @@ If \(d=d_{\max}\) is the maximal admissible index, Lean verifies
 
 
 ```math
-\mathrm{RootIndexAdmissible}(\delta;k,N)
-\Longrightarrow
-\delta\mid d_{\max}.
+\mathrm{RootIndexAdmissible}(\delta;k,N) \Longrightarrow \delta\mid d_{\max}.
 ```
 
 
@@ -325,10 +263,7 @@ is given, every divisor \(\delta\mid d_{\max}\) produces the root
 
 
 ```math
-\vec\tau=
-\frac{d_{\max}}{\delta}\vec\varpi,
-\qquad
-\delta\vec\tau=\vec\omega.
+\vec\tau= \frac{d_{\max}}{\delta}\vec\varpi, \qquad \delta\vec\tau=\vec\omega.
 ```
 
 
@@ -336,11 +271,7 @@ Lean also verifies the uniqueness step
 
 
 ```math
-[\delta]\colon L\to L\ \text{injective},
-\qquad
-\delta\vec\tau_1=\delta\vec\tau_2=\vec\omega
-\Longrightarrow
-\vec\tau_1=\vec\tau_2.
+[\delta]\colon L\to L\ \text{injective}, \qquad \delta\vec\tau_1=\delta\vec\tau_2=\vec\omega \Longrightarrow \vec\tau_1=\vec\tau_2.
 ```
 
 
@@ -349,10 +280,7 @@ Section 2 files are supplied, the final criterion is
 
 
 ```math
-\exists!\,\vec\tau\in L:
-\delta\vec\tau=\vec\omega
-\iff
-\delta\mid k\ \text{ and }\ \gcd(\delta,N)=1.
+\exists!\,\vec\tau\in L: \delta\vec\tau=\vec\omega \iff \delta\mid k\ \text{ and }\ \gcd(\delta,N)=1.
 ```
 
 
@@ -380,12 +308,7 @@ Lean verifies the existence calculation
 
 
 ```math
-\delta
-\left(
-\frac{d_{\max}}{\delta}\vec\varpi
-\right)
-=
-\vec\omega.
+\delta \left( \frac{d_{\max}}{\delta}\vec\varpi \right) = \vec\omega.
 ```
 
 
@@ -401,12 +324,7 @@ Lean checks the identity used in the paper:
 
 
 ```math
-\delta
-\left(
-\vec\tau-
-\frac{d_{\max}}{\delta}\vec\varpi
-\right)
-=0.
+\delta \left( \vec\tau- \frac{d_{\max}}{\delta}\vec\varpi \right) =0.
 ```
 
 
@@ -422,8 +340,7 @@ this gives the uniqueness formula
 
 
 ```math
-\vec\tau=
-\frac{d_{\max}}{\delta}\vec\varpi.
+\vec\tau= \frac{d_{\max}}{\delta}\vec\varpi.
 ```
 
 
@@ -431,9 +348,7 @@ The file also isolates the elementary degree implication
 
 
 ```math
-k=\delta t
-\Longrightarrow
-\delta\mid k.
+k=\delta t \Longrightarrow \delta\mid k.
 ```
 
 
@@ -449,9 +364,7 @@ From the residue congruences
 
 
 ```math
-\delta s_p\equiv -1\pmod p,\qquad
-\delta s_q\equiv -1\pmod q,\qquad
-\delta s_r\equiv -1\pmod r,
+\delta s_p\equiv -1\pmod p,\qquad \delta s_q\equiv -1\pmod q,\qquad \delta s_r\equiv -1\pmod r,
 ```
 
 
@@ -459,9 +372,7 @@ Lean proves
 
 
 ```math
-\gcd(\delta,p)=
-\gcd(\delta,q)=
-\gcd(\delta,r)=1,
+\gcd(\delta,p)= \gcd(\delta,q)= \gcd(\delta,r)=1,
 ```
 
 
@@ -485,9 +396,7 @@ For equation (2.6), suppose
 
 
 ```math
-b_p p\equiv1\pmod d,\qquad
-b_q q\equiv1\pmod d,\qquad
-b_r r\equiv1\pmod d.
+b_p p\equiv1\pmod d,\qquad b_q q\equiv1\pmod d,\qquad b_r r\equiv1\pmod d.
 ```
 
 
@@ -495,9 +404,7 @@ Lean extracts integral coefficients
 
 
 ```math
-b_p p-1=dB_x,\qquad
-b_q q-1=dB_y,\qquad
-b_r r-1=dB_z,
+b_p p-1=dB_x,\qquad b_q q-1=dB_y,\qquad b_r r-1=dB_z,
 ```
 
 
@@ -513,9 +420,7 @@ checks directly that
 
 
 ```math
-\vec\varpi
-=
-A\vec c+B_x\vec x+B_y\vec y+B_z\vec z
+\vec\varpi = A\vec c+B_x\vec x+B_y\vec y+B_z\vec z
 ```
 
 
@@ -534,11 +439,7 @@ Finally, if
 
 
 ```math
-\delta\mid d_{\max},
-\qquad
-\delta\vec\tau=\vec\omega,
-\qquad
-d_{\max}\vec\varpi=\vec\omega,
+\delta\mid d_{\max}, \qquad \delta\vec\tau=\vec\omega, \qquad d_{\max}\vec\varpi=\vec\omega,
 ```
 
 
@@ -554,8 +455,7 @@ Lean verifies
 
 
 ```math
-\vec\tau=
-\frac{d_{\max}}{\delta}\vec\varpi.
+\vec\tau= \frac{d_{\max}}{\delta}\vec\varpi.
 ```
 
 
@@ -589,10 +489,7 @@ write
 
 
 ```math
-\alpha_x=\chi(\vec x),\qquad
-\alpha_y=\chi(\vec y),\qquad
-\alpha_z=\chi(\vec z),\qquad
-\rho=\chi(\vec c).
+\alpha_x=\chi(\vec x),\qquad \alpha_y=\chi(\vec y),\qquad \alpha_z=\chi(\vec z),\qquad \rho=\chi(\vec c).
 ```
 
 
@@ -608,9 +505,7 @@ Lean derives, rather than assumes,
 
 
 ```math
-\alpha_x^p=\rho,\qquad
-\alpha_y^q=\rho,\qquad
-\alpha_z^r=\rho.
+\alpha_x^p=\rho,\qquad \alpha_y^q=\rho,\qquad \alpha_z^r=\rho.
 ```
 
 
@@ -623,11 +518,7 @@ Assume the paper's relations
 
 
 ```math
-\delta\vec\tau=\vec\omega,
-\qquad
-N\vec\tau=u\vec c,
-\qquad
-\gcd(\delta,N)=1.
+\delta\vec\tau=\vec\omega, \qquad N\vec\tau=u\vec c, \qquad \gcd(\delta,N)=1.
 ```
 
 
@@ -643,15 +534,10 @@ if and only if
 
 
 ```math
-\begin{aligned}
-\alpha_x^p&=\rho,\\
-\alpha_y^q&=\rho,\\
-\alpha_z^r&=\rho,\\
-\rho&=\alpha_x\alpha_y\alpha_z,\\
-\rho^u&=1.
-\end{aligned}
-\tag{3.3}
+\begin{aligned} \alpha_x^p&=\rho,\\ \alpha_y^q&=\rho,\\ \alpha_z^r&=\rho,\\ \rho&=\alpha_x\alpha_y\alpha_z,\\ \rho^u&=1. \end{aligned}
 ```
+
+Equation **(3.3)**.
 
 
 In particular, the product equation follows from
@@ -666,9 +552,7 @@ since
 
 
 ```math
-\chi(\vec\omega)
-=
-\frac{\rho}{\alpha_x\alpha_y\alpha_z}.
+\chi(\vec\omega) = \frac{\rho}{\alpha_x\alpha_y\alpha_z}.
 ```
 
 
@@ -676,9 +560,7 @@ The converse uses both
 
 
 ```math
-\chi(\vec\tau)^\delta=1,
-\qquad
-\chi(\vec\tau)^N=1,
+\chi(\vec\tau)^\delta=1, \qquad \chi(\vec\tau)^N=1,
 ```
 
 
@@ -699,9 +581,7 @@ This file verifies explicitly the two nontrivial relations entering (3.3):
 
 
 ```math
-\chi(\vec\omega)=1
-\iff
-\rho=\alpha_x\alpha_y\alpha_z
+\chi(\vec\omega)=1 \iff \rho=\alpha_x\alpha_y\alpha_z
 ```
 
 
@@ -715,9 +595,7 @@ N\vec\tau=u\vec c,
 
 
 ```math
-\chi(\vec\tau)=1
-\Longrightarrow
-\rho^u=1.
+\chi(\vec\tau)=1 \Longrightarrow \rho^u=1.
 ```
 
 
@@ -733,9 +611,7 @@ Using
 
 
 ```math
-|\mathrm{tors}L|
-=
-\frac{pqr}{N}
+|\mathrm{tors}L| = \frac{pqr}{N}
 ```
 
 
@@ -744,11 +620,10 @@ cardinality calculation leading to
 
 
 ```math
-|G_\tau|
-=
-\mu pqr
-\tag{3.4}
+|G_\tau| = \mu pqr
 ```
+
+Equation **(3.4)**.
 
 
 when
@@ -763,11 +638,7 @@ In particular, the arithmetic reduction checked in Lean is
 
 
 ```math
-u\,\frac{pqr}{N}
-=
-(N\mu)\frac{pqr}{N}
-=
-\mu pqr.
+u\,\frac{pqr}{N} = (N\mu)\frac{pqr}{N} = \mu pqr.
 ```
 
 
@@ -780,10 +651,7 @@ For a finite abelian group \(A\) and \(\tau\in A\), Lean verifies
 
 
 ```math
-|A/\langle\tau\rangle|\,
-|\langle\tau\rangle|
-=
-|A|.
+|A/\langle\tau\rangle|\, |\langle\tau\rangle| = |A|.
 ```
 
 
@@ -800,8 +668,7 @@ and the character-separation principle used before (3.5):
 
 
 ```math
-\chi(x)=1\text{ for every character }\chi
-\Longrightarrow x=0
+\chi(x)=1\text{ for every character }\chi \Longrightarrow x=0
 ```
 
 
@@ -817,11 +684,10 @@ criterion and proves
 
 
 ```math
-\text{degree }v\text{ is invariant under all characters}
-\iff
-v\in\mathbb Z\vec\tau.
-\tag{3.5}
+\text{degree }v\text{ is invariant under all characters} \iff v\in\mathbb Z\vec\tau.
 ```
+
+Equation **(3.5)**.
 
 
 Thus the invariant degrees are precisely the multiples of the root
@@ -839,9 +705,7 @@ For a group element satisfying
 
 
 ```math
-\alpha_x^p=\alpha_y^q=\alpha_z^r=\rho,
-\qquad
-\rho=\alpha_x\alpha_y\alpha_z,
+\alpha_x^p=\alpha_y^q=\alpha_z^r=\rho, \qquad \rho=\alpha_x\alpha_y\alpha_z,
 ```
 
 
@@ -851,11 +715,7 @@ It also verifies the exponent calculation
 
 
 ```math
-\nu
-=
-1-\frac1p-\frac1q-\frac1r,
-\qquad
-\nu=\mu\delta
+\nu = 1-\frac1p-\frac1q-\frac1r, \qquad \nu=\mu\delta
 ```
 
 
@@ -863,24 +723,17 @@ implies
 
 
 ```math
-\frac1\mu
--\frac1{\mu p}
--\frac1{\mu q}
--\frac1{\mu r}
-=
-\delta.
-\tag{3.9}
+\frac1\mu -\frac1{\mu p} -\frac1{\mu q} -\frac1{\mu r} = \delta.
 ```
+
+Equation **(3.9)**.
 
 
 For a hypersurface Hilbert series
 
 
 ```math
-H(t)
-=
-\frac{1-t^h}
-{(1-t^a)(1-t^b)(1-t^c)},
+H(t) = \frac{1-t^h} {(1-t^a)(1-t^b)(1-t^c)},
 ```
 
 
@@ -970,14 +823,7 @@ For a stacky point of order \(p_i\), define
 
 
 ```math
-\Sigma_{P_i}
-=
-\left\{
-m\ge1\;:\;
-\exists\,s\in H^0(X,\mathcal L^m),
-\quad
-s(P_i)\neq0
-\right\}.
+\Sigma_{P_i} = \left\{ m\ge1\;:\; \exists\,s\in H^0(X,\mathcal L^m), \quad s(P_i)\neq0 \right\}.
 ```
 
 
@@ -985,9 +831,7 @@ The stabilizer of the reconstructed stack is governed by
 
 
 ```math
-\mathrm{Stab}(P_i)
-=
-\mu_{\gcd(\Sigma_{P_i})}.
+\mathrm{Stab}(P_i) = \mu_{\gcd(\Sigma_{P_i})}.
 ```
 
 
@@ -1012,11 +856,7 @@ Lean proves
 
 
 ```math
-\delta s_i\equiv-1\pmod{p_i},
-\qquad
-m s_i\equiv0\pmod{p_i}
-\Longrightarrow
-p_i\mid m.
+\delta s_i\equiv-1\pmod{p_i}, \qquad m s_i\equiv0\pmod{p_i} \Longrightarrow p_i\mid m.
 ```
 
 
@@ -1024,9 +864,7 @@ Thus
 
 
 ```math
-m\in\Sigma_{P_i}
-\Longrightarrow
-p_i\mid m.
+m\in\Sigma_{P_i} \Longrightarrow p_i\mid m.
 ```
 
 
@@ -1035,9 +873,7 @@ eventually:
 
 
 ```math
-m\gg0,\qquad p_i\mid m
-\Longrightarrow
-m\in\Sigma_{P_i}.
+m\gg0,\qquad p_i\mid m \Longrightarrow m\in\Sigma_{P_i}.
 ```
 
 
@@ -1053,10 +889,7 @@ Consequently the group-theoretic stabilizer calculation becomes
 
 
 ```math
-\{\lambda\in\mathbb G_m:
-\lambda^m=1\text{ for every }m\in\Sigma_{P_i}\}
-=
-\mu_{p_i}.
+\{\lambda\in\mathbb G_m: \lambda^m=1\text{ for every }m\in\Sigma_{P_i}\} = \mu_{p_i}.
 ```
 
 
@@ -1064,11 +897,7 @@ More generally Lean proves
 
 
 ```math
-\left(
-\forall m\in\Sigma,\ \lambda^m=1
-\right)
-\iff
-\lambda^{\gcd(\Sigma)}=1.
+\left( \forall m\in\Sigma,\ \lambda^m=1 \right) \iff \lambda^{\gcd(\Sigma)}=1.
 ```
 
 
@@ -1082,11 +911,7 @@ At a stacky point of order $p_i$, with character $s_i$ of $\mathcal O_X(\vec\tau
 
 
 ```math
-\delta\vec\tau=\vec\omega
-\Longrightarrow
-\delta s_i\equiv-1\pmod{p_i}
-\Longrightarrow
-\gcd(s_i,p_i)=1.
+\delta\vec\tau=\vec\omega \Longrightarrow \delta s_i\equiv-1\pmod{p_i} \Longrightarrow \gcd(s_i,p_i)=1.
 ```
 
 
@@ -1108,9 +933,7 @@ Lean proves the exact criterion
 
 
 ```math
-ms\equiv0\pmod p
-\iff
-p\mid m.
+ms\equiv0\pmod p \iff p\mid m.
 ```
 
 
@@ -1118,9 +941,7 @@ Hence
 
 
 ```math
-p\nmid m
-\Longrightarrow
-ms\not\equiv0\pmod p,
+p\nmid m \Longrightarrow ms\not\equiv0\pmod p,
 ```
 
 
@@ -1130,9 +951,7 @@ Lean also checks the elementary invariant-vector implication
 
 
 ```math
-a\neq1,\qquad av=v
-\Longrightarrow
-v=0.
+a\neq1,\qquad av=v \Longrightarrow v=0.
 ```
 
 
@@ -1141,11 +960,7 @@ For the three stacky points the root equation
 
 
 ```math
-\delta s_p=-1\in\mathbb Z/p,
-\quad
-\delta s_q=-1\in\mathbb Z/q,
-\quad
-\delta s_r=-1\in\mathbb Z/r.
+\delta s_p=-1\in\mathbb Z/p, \quad \delta s_q=-1\in\mathbb Z/q, \quad \delta s_r=-1\in\mathbb Z/r.
 ```
 
 
@@ -1157,10 +972,7 @@ For \(M>0\), Lean verifies
 
 
 ```math
-m=
-\left\lfloor\frac mM\right\rfloor M+(m\bmod M),
-\qquad
-0\le m\bmod M<M.
+m= \left\lfloor\frac mM\right\rfloor M+(m\bmod M), \qquad 0\le m\bmod M<M.
 ```
 
 
@@ -1172,11 +984,7 @@ threshold:
 
 
 ```math
-\exists Q\;
-\forall r<M,\;
-q\ge Q
-\Longrightarrow
-P(q,r).
+\exists Q\; \forall r<M,\; q\ge Q \Longrightarrow P(q,r).
 ```
 
 
@@ -1184,12 +992,7 @@ Consequently,
 
 
 ```math
-m\gg0
-\Longrightarrow
-P\!\left(
-\left\lfloor\frac mM\right\rfloor,
-m\bmod M
-\right).
+m\gg0 \Longrightarrow P\!\left( \left\lfloor\frac mM\right\rfloor, m\bmod M \right).
 ```
 
 
@@ -1206,9 +1009,7 @@ For
 
 
 ```math
-S_m=T_{m\vec\tau},
-\qquad
-Y=\mathrm{Proj}^{st}S,
+S_m=T_{m\vec\tau}, \qquad Y=\mathrm{Proj}^{st}S,
 ```
 
 
@@ -1233,9 +1034,7 @@ For a point of stabilizer order \(p\), Lean proves
 
 
 ```math
-\delta s=-1\in\mathbb Z/p
-\Longrightarrow
-\xi s=0\Longrightarrow\xi=0.
+\delta s=-1\in\mathbb Z/p \Longrightarrow \xi s=0\Longrightarrow\xi=0.
 ```
 
 
@@ -1245,9 +1044,7 @@ Lean then verifies the group-theoretic implication
 
 
 ```math
-\chi\circ\phi\text{ injective}
-\Longrightarrow
-\phi\text{ injective},
+\chi\circ\phi\text{ injective} \Longrightarrow \phi\text{ injective},
 ```
 
 
@@ -1285,9 +1082,7 @@ Lean records only the elementary discrete-data principle underlying that step:
 
 
 ```math
-f(x)=f(y)\ \text{for all }x,y
-\Longrightarrow
-f\text{ is constant}.
+f(x)=f(y)\ \text{for all }x,y \Longrightarrow f\text{ is constant}.
 ```
 
 
@@ -1301,9 +1096,7 @@ The numerical degree appearing in the proof is
 
 
 ```math
-\deg\mathcal O_C(1)
-=
-\frac{h}{ABC}.
+\deg\mathcal O_C(1) = \frac{h}{ABC}.
 ```
 
 
@@ -1330,11 +1123,7 @@ The weighted-adjunction input is
 
 
 ```math
-\frac{\delta h}{ABC}
-=
-2g-2+
-\sum_{i=1}^{3}
-\left(1-\frac1{r_i}\right).
+\frac{\delta h}{ABC} = 2g-2+ \sum_{i=1}^{3} \left(1-\frac1{r_i}\right).
 ```
 
 
@@ -1343,15 +1132,10 @@ Lean verifies that this is algebraically equivalent to the displayed equation
 
 
 ```math
-2g
-=
-\frac{\delta h}{ABC}
--1
-+\frac1{r_1}
-+\frac1{r_2}
-+\frac1{r_3}.
-\tag{4.4}
+2g = \frac{\delta h}{ABC} -1 +\frac1{r_1} +\frac1{r_2} +\frac1{r_3}.
 ```
+
+Equation **(4.4)**.
 
 
 **External geometric input for Lemma 4.5:** the actual quotient-stack
@@ -1371,13 +1155,7 @@ The ternary support classification has seven skeletons
 
 
 ```math
-\mathrm{FFF},\quad
-\mathrm{C2F},\quad
-\mathrm{Branched3},\quad
-\mathrm{L2F},\quad
-\mathrm{C3},\quad
-\mathrm{Branched6},\quad
-\mathrm{L3}.
+\mathrm{FFF},\quad \mathrm{C2F},\quad \mathrm{Branched3},\quad \mathrm{L2F},\quad \mathrm{C3},\quad \mathrm{Branched6},\quad \mathrm{L3}.
 ```
 
 
@@ -1385,11 +1163,7 @@ Among these, Lean records the five atomic types
 
 
 ```math
-\mathrm{FFF},\quad
-\mathrm{C2F},\quad
-\mathrm{L2F},\quad
-\mathrm{C3},\quad
-\mathrm{L3}
+\mathrm{FFF},\quad \mathrm{C2F},\quad \mathrm{L2F},\quad \mathrm{C3},\quad \mathrm{L3}
 ```
 
 
@@ -1397,8 +1171,7 @@ and identifies
 
 
 ```math
-\mathrm{Branched3},\qquad
-\mathrm{Branched6}
+\mathrm{Branched3},\qquad \mathrm{Branched6}
 ```
 
 
@@ -1428,11 +1201,7 @@ J\subsetneq\{x,y,z\},
 namely
 
 ```math
-J\in
-\bigl\{
-\{x\},\{y\},\{z\},
-\{x,y\},\{x,z\},\{y,z\}
-\bigr\}.
+J\in \bigl\{ \{x\},\{y\},\{z\}, \{x,y\},\{x,z\},\{y,z\} \bigr\}.
 ```
 
 For every such \(J\), Lean proves
@@ -1460,8 +1229,7 @@ separately.
 For
 
 ```math
-f_3=x^ay+z^cy+y^b+\varepsilon x^mz^n,
-\qquad e=b-1,
+f_3=x^ay+z^cy+y^b+\varepsilon x^mz^n, \qquad e=b-1,
 ```
 
 weighted homogeneity gives
@@ -1483,9 +1251,10 @@ This is checked in
 For the stacky-point count
 
 ```math
-[A>1]+[C>1]+r[U>1]+s[V>1],
-\tag{4.7}
+\mathbf{1}_{A>1}+\mathbf{1}_{C>1}+r\,\mathbf{1}_{U>1}+s\,\mathbf{1}_{V>1}.
 ```
+
+This is equation **(4.7)**.
 
 the identification of the coordinate and open-line contributions is geometric
 input from Lemma 4.5.  In particular, the stabilizer orders and the number of
@@ -1511,13 +1280,10 @@ and with the three nontrivial stacky orders
 Lean verifies the complete adjunction calculation
 
 ```math
-2g
-=
-2(2a_0e_0+a_0-e_0-1)
-=
-2\bigl((a_0-1)(2e_0+1)+e_0\bigr)>0.
-\tag{4.8}
+2g = 2(2a_0e_0+a_0-e_0-1) = 2\bigl((a_0-1)(2e_0+1)+e_0\bigr)>0.
 ```
+
+Equation **(4.8)**.
 
 This is checked in
 
@@ -1546,9 +1312,7 @@ cC=eB,\qquad \gcd(B,C)=1,
 it obtains
 
 ```math
-C\mid e,
-\qquad
-C\mid A.
+C\mid e, \qquad C\mid A.
 ```
 
 The link monomial has weighted degree \(h\),
@@ -1566,10 +1330,7 @@ C\mid h.
 On the other hand,
 
 ```math
-h=(e+1)B,\qquad
-C\mid e,\qquad
-\gcd(B,C)=1,\qquad
-C>1
+h=(e+1)B,\qquad C\mid e,\qquad \gcd(B,C)=1,\qquad C>1
 ```
 
 implies
@@ -1589,9 +1350,7 @@ This is checked in
 For
 
 ```math
-f_6=x^ay+y^bz+z^cy+\varepsilon x^mz^n,
-\qquad
-e=b-1,\qquad t=c-1,
+f_6=x^ay+y^bz+z^cy+\varepsilon x^mz^n, \qquad e=b-1,\qquad t=c-1,
 ```
 
 weighted homogeneity gives, by direct algebra,
@@ -1613,17 +1372,13 @@ formalized as a separate Lean theorem.
 Put
 
 ```math
-d=\gcd(e,t),
-\qquad
-W=\frac{ad}{G}.
+d=\gcd(e,t), \qquad W=\frac{ad}{G}.
 ```
 
 From the primitive weights,
 
 ```math
-B=\frac{at}{G},
-\qquad
-C=\frac{ae}{G},
+B=\frac{at}{G}, \qquad C=\frac{ae}{G},
 ```
 
 one has
@@ -1645,11 +1400,7 @@ This is equation **(4.10)**.
 Lean verifies the discrete case split following (4.10).  In particular,
 
 ```math
-W>1
-\Longrightarrow
-B>1,\ C>1
-\Longrightarrow
-d=1,\ A=1.
+W>1 \Longrightarrow B>1,\ C>1 \Longrightarrow d=1,\ A=1.
 ```
 
 This is checked in
@@ -1659,33 +1410,24 @@ This is checked in
 In the \(W=1\) case the paper writes
 
 ```math
-e=de_0,\qquad
-t=dt_0,\qquad
-\gcd(e_0,t_0)=1,
+e=de_0,\qquad t=dt_0,\qquad \gcd(e_0,t_0)=1,
 ```
 
 and
 
 ```math
-A=\frac{e_0(dt_0+1)}a,
-\qquad
-B=t_0,
-\qquad
-C=e_0,
+A=\frac{e_0(dt_0+1)}a, \qquad B=t_0, \qquad C=e_0,
 ```
 
 ```math
-h=de_0t_0+e_0+t_0,
-\qquad
-\delta=h-A-B-C.
+h=de_0t_0+e_0+t_0, \qquad \delta=h-A-B-C.
 ```
 
 Using the three vertex orders \(A,B,C\), Lean verifies the exact adjunction
 identity
 
 ```math
-2g=\frac{\delta h}{ABC}-1+\frac{1}{Wt}+\frac{1}{We}+\frac{1}{W}
-=et+e+t-1>0.
+2g=\frac{\delta h}{ABC}-1+\frac{1}{Wt}+\frac{1}{We}+\frac{1}{W} =et+e+t-1>0.
 ```
 
 This is equation **(4.12)**.
@@ -1755,9 +1497,7 @@ put
 
 
 ```math
-r=\gcd(a,b-1),
-\qquad
-s=\gcd(b,c).
+r=\gcd(a,b-1), \qquad s=\gcd(b,c).
 ```
 
 
@@ -1765,9 +1505,7 @@ Lean verifies
 
 
 ```math
-r\mid c(b-1),\qquad
-r\mid ac,\qquad
-r\mid ab,
+r\mid c(b-1),\qquad r\mid ac,\qquad r\mid ab,
 ```
 
 
@@ -1775,9 +1513,7 @@ and also
 
 
 ```math
-s\mid c(b-1),\qquad
-s\mid ac,\qquad
-s\mid ab.
+s\mid c(b-1),\qquad s\mid ac,\qquad s\mid ab.
 ```
 
 
@@ -1806,9 +1542,7 @@ Lean proves
 
 
 ```math
-d\mid c(b-1),\qquad
-d\mid c(a-1),\qquad
-d\mid ab-1.
+d\mid c(b-1),\qquad d\mid c(a-1),\qquad d\mid ab-1.
 ```
 
 
@@ -1816,9 +1550,7 @@ The last divisibility uses the identity
 
 
 ```math
-ab-1
-=
-(a-1)(b-1)+(a-1)+(b-1).
+ab-1 = (a-1)(b-1)+(a-1)+(b-1).
 ```
 
 
@@ -1844,9 +1576,7 @@ Lean verifies
 
 
 ```math
-d\mid c(b-1)+1,\qquad
-d\mid a(c-1),\qquad
-d\mid ab.
+d\mid c(b-1)+1,\qquad d\mid a(c-1),\qquad d\mid ab.
 ```
 
 
@@ -1854,9 +1584,7 @@ The first divisibility is the arithmetic consequence of
 
 
 ```math
-b\equiv0\pmod d,
-\qquad
-c\equiv1\pmod d.
+b\equiv0\pmod d, \qquad c\equiv1\pmod d.
 ```
 
 
@@ -1882,9 +1610,7 @@ For the FFF case,
 
 
 ```math
-q(a-1)=a,
-\qquad
-q>1,\quad a\ge2
+q(a-1)=a, \qquad q>1,\quad a\ge2
 ```
 
 
@@ -1900,8 +1626,7 @@ In the remaining FFF case, under
 
 
 ```math
-3\mid q,\qquad
-a,b\ge3,
+3\mid q,\qquad a,b\ge3,
 ```
 
 
@@ -1925,9 +1650,7 @@ For the corresponding C2F cases, Lean likewise verifies
 
 
 ```math
-q(a-1)=a
-\Longrightarrow
-q=a=2,
+q(a-1)=a \Longrightarrow q=a=2,
 ```
 
 
@@ -1935,9 +1658,7 @@ and
 
 
 ```math
-q(c-1)=c
-\Longrightarrow
-q=c=2.
+q(c-1)=c \Longrightarrow q=c=2.
 ```
 
 
@@ -1945,9 +1666,7 @@ It also checks the remaining small-factor alternative
 
 
 ```math
-e(c-1)=2,
-\qquad
-e\ge1,\quad c\ge2,
+e(c-1)=2, \qquad e\ge1,\quad c\ge2,
 ```
 
 
@@ -1955,9 +1674,7 @@ which gives exactly
 
 
 ```math
-(e,c)=(1,3)
-\quad\text{or}\quad
-(e,c)=(2,2).
+(e,c)=(1,3) \quad\text{or}\quad (e,c)=(2,2).
 ```
 
 
@@ -1970,9 +1687,7 @@ Lean checks the contradiction used when
 
 
 ```math
-A+B=h,
-\qquad
-C>0,
+A+B=h, \qquad C>0,
 ```
 
 
@@ -2010,9 +1725,7 @@ For a weighted-homogeneous polynomial \(F\) of weighted degree \(h\),
 
 
 ```math
-hF
-=
-AxF_x+ByF_y+CzF_z.
+hF = AxF_x+ByF_y+CzF_z.
 ```
 
 
@@ -2081,11 +1794,10 @@ Lean verifies the finite-group equivalence
 
 
 ```math
-|\det A|=h
-\iff
-G_f=\langle J_f\rangle.
-\tag{5.1}
+|\det A|=h \iff G_f=\langle J_f\rangle.
 ```
+
+Equation **(5.1)**.
 
 
 More abstractly, for a subgroup \(J\le G\),
@@ -2100,9 +1812,7 @@ implies
 
 
 ```math
-D=h
-\iff
-J=G.
+D=h \iff J=G.
 ```
 
 
@@ -2126,10 +1836,7 @@ J_f\in G_f.
 The order of the exponential grading element is
 
 ```math
-|J_f|
-=
-\mathrm{lcm}_j
-\frac{h}{\gcd(h,a_j)}.
+|J_f| = \mathrm{lcm}_j \frac{h}{\gcd(h,a_j)}.
 ```
 
 For primitive weights this simplifies to
@@ -2153,10 +1860,7 @@ For FFF,
 
 
 ```math
-\delta
-=
-\alpha\beta\gamma
--\alpha\beta-\alpha\gamma-\beta\gamma.
+\delta = \alpha\beta\gamma -\alpha\beta-\alpha\gamma-\beta\gamma.
 ```
 
 
@@ -2172,9 +1876,7 @@ is rewritten as
 
 
 ```math
-(\gamma-1)(\alpha-1)(\beta-1)
-=
-(\alpha-1)+(\beta-1)+\delta+1.
+(\gamma-1)(\alpha-1)(\beta-1) = (\alpha-1)+(\beta-1)+\delta+1.
 ```
 
 
@@ -2190,9 +1892,7 @@ gives
 
 
 ```math
-(\gamma-1)(\alpha-1)(\beta-1)
-=
-(\alpha-1)+(\beta-1)+\delta.
+(\gamma-1)(\alpha-1)(\beta-1) = (\alpha-1)+(\beta-1)+\delta.
 ```
 
 
@@ -2208,9 +1908,7 @@ gives
 
 
 ```math
-(\gamma-1)(\alpha-1)(\beta-1)
-=
-(\beta-1)+\delta+1.
+(\gamma-1)(\alpha-1)(\beta-1) = (\beta-1)+\delta+1.
 ```
 
 
@@ -2218,9 +1916,7 @@ For L3,
 
 
 ```math
-\gamma(\alpha-1)(\beta-1)
-=
-\alpha\beta-\alpha-\beta+2+\delta
+\gamma(\alpha-1)(\beta-1) = \alpha\beta-\alpha-\beta+2+\delta
 ```
 
 
@@ -2240,9 +1936,7 @@ If
 
 
 ```math
-(A-1)(B-1)\le \delta+2,
-\qquad
-A,B\ge1,
+(A-1)(B-1)\le \delta+2, \qquad A,B\ge1,
 ```
 
 
@@ -2250,9 +1944,7 @@ then
 
 
 ```math
-A\le\delta+3,
-\qquad
-B\le\delta+3.
+A\le\delta+3, \qquad B\le\delta+3.
 ```
 
 
@@ -2260,9 +1952,7 @@ If
 
 
 ```math
-(A-1)B\le\delta+1,
-\qquad
-B\ge1,
+(A-1)B\le\delta+1, \qquad B\ge1,
 ```
 
 
@@ -2278,9 +1968,7 @@ In the FFF case with \(\alpha=2\),
 
 
 ```math
-(\beta-2)(\gamma-2)=\delta+4,
-\qquad
-\beta,\gamma\ge2,
+(\beta-2)(\gamma-2)=\delta+4, \qquad \beta,\gamma\ge2,
 ```
 
 
@@ -2288,9 +1976,7 @@ implies
 
 
 ```math
-\beta\le\delta+6,
-\qquad
-\gamma\le\delta+6.
+\beta\le\delta+6, \qquad \gamma\le\delta+6.
 ```
 
 
@@ -2302,11 +1988,10 @@ Lean checks the positivity implication coming from
 
 
 ```math
-\frac{\delta h}{abc}
-=
-1-\frac1p-\frac1q-\frac1r.
-\tag{5.2}
+\frac{\delta h}{abc} = 1-\frac1p-\frac1q-\frac1r.
 ```
+
+Equation **(5.2)**.
 
 
 Thus
@@ -2342,9 +2027,7 @@ Lean proves
 
 
 ```math
-(tA-1)(tB-1)
-=
-t(\delta+1)+1.
+(tA-1)(tB-1) = t(\delta+1)+1.
 ```
 
 
@@ -2360,9 +2043,7 @@ gives
 
 
 ```math
-(tA-1)(tB-1)
-=
-t\delta+1.
+(tA-1)(tB-1) = t\delta+1.
 ```
 
 
@@ -2378,12 +2059,7 @@ the Table 3 equation
 
 
 ```math
-(A+1)\beta\gamma
--(A+1)\beta
--(A+1)\gamma
--\beta\gamma
-=
-\delta
+(A+1)\beta\gamma -(A+1)\beta -(A+1)\gamma -\beta\gamma = \delta
 ```
 
 
@@ -2391,10 +2067,7 @@ is transformed into
 
 
 ```math
-\bigl(A(\beta-1)-1\bigr)
-\bigl(A(\gamma-1)-1\bigr)
-=
-A\delta+(A+1)^2.
+\bigl(A(\beta-1)-1\bigr) \bigl(A(\gamma-1)-1\bigr) = A\delta+(A+1)^2.
 ```
 
 
@@ -2413,8 +2086,7 @@ in the natural-number form
 
 
 ```math
-U\bmod t=(t-1)\bmod t,
-\qquad t>0,
+U\bmod t=(t-1)\bmod t, \qquad t>0,
 ```
 
 
@@ -2454,11 +2126,7 @@ Lean proves the exact equivalence
 
 
 ```math
-\gcd(\beta\gamma,\alpha\gamma,\alpha\beta)=1
-\iff
-\gcd(\alpha,\beta)=
-\gcd(\beta,\gamma)=
-\gcd(\gamma,\alpha)=1.
+\gcd(\beta\gamma,\alpha\gamma,\alpha\beta)=1 \iff \gcd(\alpha,\beta)= \gcd(\beta,\gamma)= \gcd(\gamma,\alpha)=1.
 ```
 
 
@@ -2476,11 +2144,7 @@ For the weights
 
 
 ```math
-\bigl(
-B(t+1),\,
-(A+1)(t+1),\,
-(A+1)(B+1)
-\bigr),
+\bigl( B(t+1),\, (A+1)(t+1),\, (A+1)(B+1) \bigr),
 ```
 
 
@@ -2515,11 +2179,7 @@ For the weights
 
 
 ```math
-\bigl(
-B(t+1),\,
-A(t+1),\,
-AB+A+B
-\bigr),
+\bigl( B(t+1),\, A(t+1),\, AB+A+B \bigr),
 ```
 
 
@@ -2547,11 +2207,7 @@ For the weights
 
 
 ```math
-\bigl(
-B(t+1)+1,\,
-t(A+1),\,
-(A+1)(B+1)
-\bigr),
+\bigl( B(t+1)+1,\, t(A+1),\, (A+1)(B+1) \bigr),
 ```
 
 
@@ -2587,9 +2243,7 @@ and
 
 
 ```math
-w_1=B(t+1)+1,\qquad
-w_2=t(A+1)+1,\qquad
-w_3=A(B+1)+1.
+w_1=B(t+1)+1,\qquad w_2=t(A+1)+1,\qquad w_3=A(B+1)+1.
 ```
 
 
@@ -2628,9 +2282,7 @@ gcd reduction and obtains
 
 
 ```math
-\gcd(w_1,w_2,w_3)
-=
-\gcd(m-1,w_1).
+\gcd(w_1,w_2,w_3) = \gcd(m-1,w_1).
 ```
 
 
@@ -2767,43 +2419,25 @@ The raw weight/degree formulas used by the executable enumeration are:
 
 
 ```math
-\mathrm{FFF}:
-\qquad
-(a,b,c;h)
-=
-(\beta\gamma,\alpha\gamma,\alpha\beta;\alpha\beta\gamma),
+\mathrm{FFF}: \qquad (a,b,c;h) = (\beta\gamma,\alpha\gamma,\alpha\beta;\alpha\beta\gamma),
 ```
 
 
 
 ```math
-\mathrm{C2F}:
-\qquad
-(a,b,c;h)
-=
-(\gamma(\beta-1),\alpha\gamma,\alpha\beta;\alpha\beta\gamma),
+\mathrm{C2F}: \qquad (a,b,c;h) = (\gamma(\beta-1),\alpha\gamma,\alpha\beta;\alpha\beta\gamma),
 ```
 
 
 
 ```math
-\mathrm{L2F}:
-\qquad
-(a,b,c;h)
-=
-(\gamma(\beta-1),\gamma(\alpha-1),\alpha\beta-1;
-\gamma(\alpha\beta-1)),
+\mathrm{L2F}: \qquad (a,b,c;h) = (\gamma(\beta-1),\gamma(\alpha-1),\alpha\beta-1; \gamma(\alpha\beta-1)),
 ```
 
 
 
 ```math
-\mathrm{C3}:
-\qquad
-(a,b,c;h)
-=
-(\beta\gamma-\gamma+1,\alpha(\gamma-1),\alpha\beta;
-\alpha\beta\gamma),
+\mathrm{C3}: \qquad (a,b,c;h) = (\beta\gamma-\gamma+1,\alpha(\gamma-1),\alpha\beta; \alpha\beta\gamma),
 ```
 
 
@@ -2811,12 +2445,7 @@ and
 
 
 ```math
-\mathrm{L3}:
-\qquad
-(a,b,c;h)
-=
-(\beta\gamma-\gamma+1,\alpha\gamma-\alpha+1,
-\alpha\beta-\beta+1;\alpha\beta\gamma+1).
+\mathrm{L3}: \qquad (a,b,c;h) = (\beta\gamma-\gamma+1,\alpha\gamma-\alpha+1, \alpha\beta-\beta+1;\alpha\beta\gamma+1).
 ```
 
 
@@ -2824,9 +2453,7 @@ Lean first independently reproduces
 
 
 ```math
-(N_2,N_3,N_4,N_5,N_6)
-=
-(6,8,8,21,0).
+(N_2,N_3,N_4,N_5,N_6) = (6,8,8,21,0).
 ```
 
 
@@ -2834,14 +2461,7 @@ For δ = 2, the six canonical systems obtained by the enumeration are
 
 
 ```math
-\begin{aligned}
-&(3,5,5;15),\\
-&(3,5,7;17),\\
-&(3,5,10;20),\\
-&(3,7,9;21),\\
-&(3,7,12;24),\\
-&(3,10,15;30).
-\end{aligned}
+\begin{aligned} &(3,5,5;15),\\ &(3,5,7;17),\\ &(3,5,10;20),\\ &(3,7,9;21),\\ &(3,7,12;24),\\ &(3,10,15;30). \end{aligned}
 ```
 
 
@@ -2930,25 +2550,19 @@ For \(\delta=5\), Lean checks the four systems
 
 
 ```math
-(6,8,19;38),
-\qquad
-z^2+xy^4+x^5y,
+(6,8,19;38), \qquad z^2+xy^4+x^5y,
 ```
 
 
 
 ```math
-(4,7,16;32),
-\qquad
-z^2+xy^4+zx^4,
+(4,7,16;32), \qquad z^2+xy^4+zx^4,
 ```
 
 
 
 ```math
-(4,7,12;28),
-\qquad
-xz^2+y^4+x^4z,
+(4,7,12;28), \qquad xz^2+y^4+x^4z,
 ```
 
 
@@ -2956,9 +2570,7 @@ and
 
 
 ```math
-(4,7,9;25),
-\qquad
-yz^2+x^4z+xy^3.
+(4,7,9;25), \qquad yz^2+x^4z+xy^3.
 ```
 
 
