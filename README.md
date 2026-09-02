@@ -1872,85 +1872,482 @@ supplied by Lemma 4.5.
 
 **Lemma 4.9 and Theorem 4.10 — mutation arithmetic and weighted-Euler step**
 
-#### Lemma 4.9
+#### Lemma 4.9 — primitive atomic mutation
 
-Lean checks the integer case analysis used in the primitive atomic mutation
-argument.
-
-For the FFF case,
-
+Let \(g\) be a three-variable atomic invertible polynomial with primitive
+weights \((A,B,C;h)\). For its raw adjugate weights put
 
 ```math
-q(a-1)=a, \qquad q>1,\quad a\ge2
+q=\gcd(A_0,B_0,C_0).
 ```
 
-
-forces
-
+Then
 
 ```math
-q=2,\qquad a=2.
+(A,B,C;h)=\frac{1}{q}(A_0,B_0,C_0;h_0),
 ```
 
-
-In the remaining FFF case, under
-
+and for each atomic type
 
 ```math
-3\mid q,\qquad a,b\ge3,
+|\det E_g|=h_0=qh. \qquad \text{(4.14)}
 ```
 
+The proof therefore reduces to showing either \(q=1\), or that \(g\)
+belongs to one of the exceptional families which admits a primitive
+atomic mutation.
 
-the equation
+##### FFF
 
+For
 
 ```math
-q(ab-a-b)=ab
+g=x^a+y^b+z^c,
 ```
 
-
-forces
-
+write
 
 ```math
-q=a=b=3.
+d_{ab}=\gcd(a,b),\quad d_{ac}=\gcd(a,c),\quad d_{bc}=\gcd(b,c),
 ```
-
-
-For the corresponding C2F cases, Lean likewise verifies
-
-
-```math
-q(a-1)=a \Longrightarrow q=a=2,
-```
-
 
 and
 
-
 ```math
-q(c-1)=c \Longrightarrow q=c=2.
+D_{ab}=\frac{c d_{ab}}q,\quad
+D_{ac}=\frac{b d_{ac}}q,\quad
+D_{bc}=\frac{a d_{bc}}q.
 ```
 
+Call a pair active if \(D_{ij}>1\), so that its open coordinate line
+contributes nontrivial stacky points.
 
-It also checks the remaining small-factor alternative
+| FFF case | conclusion |
+|---|---|
+| all three pairs active | \(q=1\) |
+| exactly two pairs active | \(q=2\), family (4.16) |
+| exactly one pair active | \(q=3\), family (4.17) |
 
+When all three pairs are active, (4.15) reduces to
 
 ```math
-e(c-1)=2, \qquad e\ge1,\quad c\ge2,
+2g=q-1,
 ```
 
+hence \(g=0\) gives \(q=1\).
 
-which gives exactly
-
+With exactly two active pairs, after relabeling,
 
 ```math
-(e,c)=(1,3) \quad\text{or}\quad (e,c)=(2,2).
+d_{ab}=2,\qquad d_{ac}=1,\qquad D_{bc}=1,
 ```
 
+and genus zero gives
 
-These are the integer possibilities used in the case analysis following
-equation (4.14).
+```math
+0=q\left(1-\frac1a\right)-1.
+```
+
+Lean proves \(a=q=2\). Thus
+
+```math
+g=x^2+y^{2k}+z^\ell,\qquad
+\gcd(2k,\ell)=1,\qquad q=2. \qquad \text{(4.16)}
+```
+
+With exactly one active pair, its contribution is three points, so
+\(d_{ab}=3\). The genus equation is
+
+```math
+0=q\left(1-\frac1a-\frac1b\right)-1.
+```
+
+Using \(3\mid q\) and \(a,b\ge3\), Lean proves
+
+```math
+q=3,\qquad a=b=3.
+```
+
+Hence
+
+```math
+g=x^3+y^3+z^\ell,\qquad
+\gcd(3,\ell)=1,\qquad q=3. \qquad \text{(4.17)}
+```
+
+Lean files:
+[`Lemma49_FFF_AllThreeActive.lean`](FractionalTriangles/Section4/Lemma49_FFF_AllThreeActive.lean),
+[`Lemma49_FFF_TwoActive.lean`](FractionalTriangles/Section4/Lemma49_FFF_TwoActive.lean),
+[`Lemma49_FFF_OneActive.lean`](FractionalTriangles/Section4/Lemma49_FFF_OneActive.lean).
+
+##### C2F
+
+For
+
+```math
+g=x^a y+y^b+z^c,
+```
+
+put
+
+```math
+e=b-1,\qquad r=\gcd(a,e),\qquad s=\gcd(b,c),
+```
+
+```math
+U=\frac{cr}{q},\qquad V=\frac{as}{q},
+```
+
+and
+
+```math
+X=\left[\frac{ce}{q}>1\right],\qquad
+Y=[U>1],\qquad Z=[V>1].
+```
+
+The three-point count is
+
+```math
+X+rY+sZ=3.
+```
+
+| C2F case | conclusion |
+|---|---|
+| \(Y=Z=1\) | \(q=1\) |
+| \(Y=1,\ Z=0\) | \(q=2\), family (4.19) |
+| \(Y=0,\ Z=1,\ X=1\) | \(q=2\), family (4.20) |
+| \(X=Y=0,\ Z=1\) | impossible |
+
+For \(Y=Z=1\), the count gives \(r=s=1\), and (4.18) reduces to
+
+```math
+2g=q-1,
+```
+
+so \(q=1\).
+
+For \(Y=1,\ Z=0\), the count gives \(r=2\), while genus zero gives
+
+```math
+0=q\left(1-\frac1a\right)-1.
+```
+
+Lean proves \(a=q=2\), and the inactive \(yz\)-line gives
+\(\gcd(b,c)=1\). Thus
+
+```math
+g=x^2y+y^{2k+1}+z^\ell,\qquad
+\gcd(2k+1,\ell)=1,\qquad q=2. \qquad \text{(4.19)}
+```
+
+For \(Y=0,\ Z=1,\ X=1\), Lean similarly proves \(c=q=2\), and obtains
+
+```math
+g=x^\alpha y+y^{2k}+z^2,\qquad
+\gcd(\alpha,2k-1)=1,\qquad q=2. \qquad \text{(4.20)}
+```
+
+Finally, \(X=Y=0,\ Z=1\) gives
+
+```math
+e(c-1)=2.
+```
+
+Lean proves that the only possibilities are
+
+```math
+(e,c)=(1,3)\quad\text{or}\quad(e,c)=(2,2),
+```
+
+both of which give \(\gcd(e+1,c)=1\), contradicting \(s=3\).
+
+Lean files:
+[`Lemma49_C2F_BothLinesActive.lean`](FractionalTriangles/Section4/Lemma49_C2F_BothLinesActive.lean),
+[`Lemma49_C2F_YActive_ZInactive.lean`](FractionalTriangles/Section4/Lemma49_C2F_YActive_ZInactive.lean),
+[`Lemma49_C2F_YInactive_ZActive.lean`](FractionalTriangles/Section4/Lemma49_C2F_YInactive_ZActive.lean),
+[`Lemma49_C2F_RemainingContradiction.lean`](FractionalTriangles/Section4/Lemma49_C2F_RemainingContradiction.lean).
+
+
+##### L2F
+
+For
+
+```math
+g=x^a y+xy^b+z^c,
+```
+
+put
+
+```math
+d=\gcd(a-1,b-1),\qquad D=\frac{cd}{q}.
+```
+
+If \(D=1\), the open coordinate line contributes no nontrivial stacky
+point, so at most two nontrivial stacky points occur. Hence the
+three-point hypothesis forces \(D>1\).
+
+Then both coordinate vertices occur, and the point count is
+
+```math
+1+1+d=3,
+```
+
+so Lean proves
+
+```math
+d=1.
+```
+
+The three stacky orders are
+
+```math
+\frac{c(b-1)}q,\qquad
+\frac{c(a-1)}q,\qquad
+\frac cq.
+```
+
+Adjunction gives equation **(4.21)**,
+
+```math
+2g=q-1,
+```
+
+and genus zero therefore gives
+
+```math
+q=1.
+```
+
+Lean file:
+[`Lemma49_L2F_Full.lean`](FractionalTriangles/Section4/Lemma49_L2F_Full.lean).
+
+
+##### C3
+
+For
+
+```math
+g=x^a y+y^b z+z^c,
+```
+
+put
+
+```math
+p=c(b-1)+1,\qquad
+d=\gcd(b,c-1),\qquad
+D=\frac{ad}{q}.
+```
+
+If the first coordinate vertex is present, then the three-point count gives
+
+```math
+1+1+d=3,
+```
+
+so Lean proves
+
+```math
+d=1.
+```
+
+Adjunction then reduces to
+
+```math
+2g=q-1,
+```
+
+and genus zero gives
+
+```math
+q=1.
+```
+
+If the first coordinate vertex is absent, then
+
+```math
+\frac pq=1,
+```
+
+hence \(q=p\), while the point count gives
+
+```math
+d=2.
+```
+
+Since
+
+```math
+d=\gcd(b,c-1)=2,
+```
+
+Lean proves \(c\ge3\). Together with \(b\ge2\),
+
+```math
+q=p=c(b-1)+1\ge4.
+```
+
+But in this case adjunction gives
+
+```math
+2g=q-2.
+```
+
+Genus zero would force \(q=2\), a contradiction. Hence the C3 case has
+
+```math
+q=1.
+```
+
+Lean file:
+[`Lemma49_C3_Full.lean`](FractionalTriangles/Section4/Lemma49_C3_Full.lean).
+
+
+##### L3
+
+For
+
+```math
+g=x^a y+y^b z+z^c x,
+```
+
+Lemma 4.8 gives exactly the three coordinate vertices as the relevant
+coordinate-stratum contributions.
+
+Adjunction gives equation **(4.22)**,
+
+```math
+2g=q-1.
+```
+
+Hence genus zero gives
+
+```math
+q=1.
+```
+
+Lean file:
+[`Lemma49_L3_Full.lean`](FractionalTriangles/Section4/Lemma49_L3_Full.lean).
+
+##### Exceptional mutations
+
+Thus the only \(q>1\) cases are, up to permutation,
+
+```math
+x^2+y^{2k}+z^\ell,
+```
+
+```math
+x^3+y^3+z^\ell,
+```
+
+```math
+x^2y+y^{2k+1}+z^\ell,
+```
+
+and
+
+```math
+x^\alpha y+y^{2k}+z^2,
+```
+
+namely the exceptional families **(4.16)**, **(4.17)**, **(4.19)**,
+and **(4.20)**.
+
+The paper replaces them by graded-equivalent atomic polynomials:
+
+```math
+x^2+y^{2k}+z^\ell
+\rightsquigarrow
+X^2+Xy^k+z^\ell,
+```
+
+```math
+x^3+y^3+z^\ell
+\rightsquigarrow
+X^2Y+XY^2+z^\ell,
+```
+
+```math
+x^2y+y^{2k+1}+z^\ell
+\rightsquigarrow
+X^2y+Xy^{k+1}+z^\ell,
+```
+
+```math
+x^\alpha y+y^{2k}+z^2
+\rightsquigarrow
+x^\alpha y+y^kZ+Z^2.
+```
+
+For **(4.16)** the replacement raw weights are
+
+```math
+(k\ell,\ell,2k;2k\ell),
+```
+
+with primitivity condition
+
+```math
+\gcd(\ell,2k)=1.
+```
+
+For **(4.17)** the replacement raw weights are
+
+```math
+(\ell,\ell,3;3\ell),
+```
+
+with
+
+```math
+\gcd(\ell,3)=1.
+```
+
+For **(4.19)** the replacement raw weights are
+
+```math
+(k\ell,\ell,2k+1;(2k+1)\ell),
+```
+
+with
+
+```math
+\gcd(\ell,2k+1)=1.
+```
+
+For **(4.20)** the correct replacement raw weights are
+
+```math
+(2k-1,\alpha,\alpha k;2\alpha k),
+```
+
+and
+
+```math
+\gcd(\alpha,2k-1)=1
+```
+
+implies
+
+```math
+\gcd(2k-1,\alpha,\alpha k)=1.
+```
+
+Thus the replacement weight systems are primitive, so the common factor
+has been removed and the replacement has primitive weighted degree \(h\).
+
+Lean file:
+[`Lemma49_MutationFull.lean`](FractionalTriangles/Section4/Lemma49_MutationFull.lean).
+
+**Verification boundary.** Lean checks the arithmetic and divisibility
+case analysis above, including the exceptional-family classification and
+the replacement weight systems, weighted homogeneity, and primitivity.
+The coordinate-stratum computations are those already Lean-checked in
+Lemma 4.8. The stacky adjunction formulas used in **(4.15)**, **(4.18)**,
+**(4.21)**, and **(4.22)** belong to the geometric input supplied by
+Lemma 4.5. The elementary graded coordinate changes used to identify
+the four exceptional families with their replacements are intentionally
+not formalized in Lean.
 
 #### Theorem 4.10 — mixed quadratic case
 
