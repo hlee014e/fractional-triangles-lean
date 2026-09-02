@@ -1447,155 +1447,426 @@ Lemma 4.4; the coordinate-stratum stabilizer calculation, binomial point count,
 and weighted adjunction theorem from Lemma 4.5; and the ternary
 support/classification theorem used in Lemma 4.6.
 
-### [`Lemma48_Table2_Eq413.lean`](FractionalTriangles/Section4/Lemma48_Table2_Eq413.lean)
+## Lemma 4.8 — coordinate-stratum audit for the five atomic curves
 
-**Lemma 4.8 — Table 2 and the arithmetic behind (4.13)**
-
-This file checks the divisibility and primitivity arithmetic used in the
-coordinate-stratum analysis of Lemma 4.8.
-
-#### FFF case
-
-For the raw weights
-
+Lemma 4.8 starts with one of the five atomic polynomials, its raw adjugate
+weights
 
 ```math
-(bc,\;ac,\;ab),
+(A_0,B_0,C_0;h_0),
 ```
 
-
-Lean proves that if
-
+and
 
 ```math
-\gcd(a,b)=\gcd(a,c)=\gcd(b,c)=1,
+q=\gcd(A_0,B_0,C_0),
+\qquad
+(A,B,C;h)=\frac{1}{q}(A_0,B_0,C_0;h_0).
 ```
 
+The Lean audit is split into three standalone files:
 
-then
+- [`Lemma48_StandaloneAudit.lean`](FractionalTriangles/Section4/Lemma48_StandaloneAudit.lean) — raw weights, weighted homogeneity, gcd/order arithmetic, the primitive case, and equation **(4.13)**.
+- [`Lemma48_GeometricStrataAudit.lean`](FractionalTriangles/Section4/Lemma48_GeometricStrataAudit.lean) — direct substitution into all coordinate vertices and all three coordinate lines for every atomic polynomial.
+- [`Lemma48_QuotientStabilizerAudit.lean`](FractionalTriangles/Section4/Lemma48_QuotientStabilizerAudit.lean) — the elementary weighted-action fixed-point equations and the binomial quotient coordinate.
 
+All three files compile independently with `import Mathlib`.
+
+### Raw atomic weight systems
+
+Lean checks weighted homogeneity for all five raw systems.
+
+For FFF,
 
 ```math
-\gcd(bc,ac,ab)=1.
+g=x^a+y^b+z^c,
+\qquad
+(A_0,B_0,C_0;h_0)=(bc,ac,ab;abc).
 ```
 
-
-Thus the FFF raw weight triple is primitive under the pairwise-coprimality
-hypothesis.
-
-#### C2F case
-
-For the raw weights
-
+For C2F,
 
 ```math
-\bigl(c(b-1),\;ac,\;ab\bigr),
+g=x^ay+y^b+z^c,
+\qquad
+(A_0,B_0,C_0;h_0)=\bigl(c(b-1),ac,ab;abc\bigr).
 ```
 
-
-put
-
+For L2F, using the representative compatible with the displayed raw weights,
 
 ```math
-r=\gcd(a,b-1), \qquad s=\gcd(b,c).
+g=x^ay+xy^b+z^c,
 ```
 
-
-Lean verifies
-
+and
 
 ```math
-r\mid c(b-1),\qquad r\mid ac,\qquad r\mid ab,
+(A_0,B_0,C_0;h_0)
+=
+\bigl(c(b-1),c(a-1),ab-1;c(ab-1)\bigr).
 ```
 
-
-and also
-
+In particular Lean checks
 
 ```math
-s\mid c(b-1),\qquad s\mid ac,\qquad s\mid ab.
+aA_0+B_0=bB_0+A_0=cC_0=h_0.
 ```
 
-
-Hence both gcd factors occurring in the C2F reduction divide every raw
-weight.
-
-#### L2F case
-
-For the raw weights
-
+For C3,
 
 ```math
-\bigl(c(b-1),\;c(a-1),\;ab-1\bigr),
+g=x^ay+y^bz+z^c,
 ```
 
-
-let
-
+with
 
 ```math
-d=\gcd(a-1,b-1).
+(A_0,B_0,C_0;h_0)
+=
+\bigl(c(b-1)+1,a(c-1),ab;abc\bigr).
 ```
 
-
-Lean proves
-
+For L3,
 
 ```math
-d\mid c(b-1),\qquad d\mid c(a-1),\qquad d\mid ab-1.
+g=x^ay+y^bz+z^cx,
 ```
 
-
-The last divisibility uses the identity
-
+with
 
 ```math
-ab-1 = (a-1)(b-1)+(a-1)+(b-1).
+(A_0,B_0,C_0;h_0)
+=
+\bigl(c(b-1)+1,a(c-1)+1,b(a-1)+1;abc+1\bigr).
 ```
 
+### Direct coordinate-stratum audit
 
-#### C3 case
-
-For the raw weights
-
+The file
+[`Lemma48_GeometricStrataAudit.lean`](FractionalTriangles/Section4/Lemma48_GeometricStrataAudit.lean)
+checks the coordinate strata exactly as in the proof of Lemma 4.8: for each
+atomic polynomial Lean substitutes
 
 ```math
-\bigl(c(b-1)+1,\;a(c-1),\;ab\bigr),
+x=0,\qquad y=0,\qquad z=0
 ```
 
-
-put
-
+and also evaluates the three coordinate vertices
 
 ```math
-d=\gcd(b,c-1).
+(1,0,0),\qquad(0,1,0),\qquad(0,0,1).
 ```
 
+Thus every listed and unlisted coordinate line in Table 2 is checked directly.
 
-Lean verifies
-
+For FFF,
 
 ```math
-d\mid c(b-1)+1,\qquad d\mid a(c-1),\qquad d\mid ab.
+g|_{z=0}=x^a+y^b,\qquad
+g|_{y=0}=x^a+z^c,\qquad
+g|_{x=0}=y^b+z^c,
 ```
 
+and none of the three coordinate vertices lies on the curve.
 
-The first divisibility is the arithmetic consequence of
-
+For C2F,
 
 ```math
-b\equiv0\pmod d, \qquad c\equiv1\pmod d.
+g|_{z=0}=y\bigl(x^a+y^{b-1}\bigr),
 ```
 
+```math
+g|_{x=0}=y^b+z^c,
+```
 
-These are the common-divisor reductions used in the numerical analysis
-leading to the signatures in equation (4.13).
+while on the open `xz`-line the restriction is the single nonzero monomial
+`z^c`, so there is no point there.  Lean also checks that only the `x`-vertex
+lies on the curve.
 
-**What remains external for the full Lemma 4.8 and Table 2:** the geometric
-statement that Table 2 is exhaustive.  This requires restricting each atomic
-polynomial to the coordinate vertices and open coordinate lines, applying
-Lemma 4.5 to determine the stacky strata, and excluding additional
-dense-torus stabilizer strata.
+For L2F,
+
+```math
+g|_{z=0}
+=
+xy\bigl(x^{a-1}+y^{b-1}\bigr).
+```
+
+The open `xz`- and `yz`-lines contain no points of the curve, and the `x`- and
+`y`-vertices lie on the curve whereas the `z`-vertex does not.
+
+For C3,
+
+```math
+g|_{x=0}
+=
+z\bigl(y^b+z^{c-1}\bigr).
+```
+
+The other two open coordinate lines contain no curve points; the `x`- and
+`y`-vertices occur and the `z`-vertex does not.
+
+For L3 all three coordinate vertices occur, while all three open coordinate
+lines are empty.
+
+Thus the coordinate-incidence part of Table 2 is Lean-verified rather than
+left as an unchecked geometric assertion.
+
+### Orders on the open coordinate lines
+
+The arithmetic audit checks the raw weight gcds appearing in Table 2:
+
+```math
+\gcd(bc,ac)=c\gcd(a,b),
+```
+
+```math
+\gcd(bc,ab)=b\gcd(a,c),
+```
+
+```math
+\gcd(ac,ab)=a\gcd(b,c)
+```
+
+for FFF, and
+
+```math
+\gcd\bigl(c(b-1),ac\bigr)=c\gcd(a,b-1),
+```
+
+```math
+\gcd(ac,ab)=a\gcd(b,c)
+```
+
+for C2F.
+
+Likewise, Lean verifies
+
+```math
+\gcd\bigl(c(b-1),c(a-1)\bigr)
+=
+c\gcd(a-1,b-1)
+```
+
+for L2F, and
+
+```math
+\gcd\bigl(a(c-1),ab\bigr)
+=
+a\gcd(b,c-1)
+```
+
+for C3.
+
+After division by the common factor `q`, Lean checks the corresponding
+primitive stabilizer-order arithmetic
+
+```math
+\gcd(A_0/q,B_0/q)=\gcd(A_0,B_0)/q.
+```
+
+### Weighted-action check
+
+For a point on an open coordinate line with both coordinates nonzero, Lean
+checks directly that
+
+```math
+(\lambda^A x,\lambda^B y)=(x,y)
+\quad\Longleftrightarrow\quad
+\lambda^A=\lambda^B=1.
+```
+
+Similarly, at a dense-torus point,
+
+```math
+(\lambda^A x,\lambda^B y,\lambda^C z)=(x,y,z)
+```
+
+is equivalent to
+
+```math
+\lambda^A=\lambda^B=\lambda^C=1.
+```
+
+The immediate conclusion that the open-line stabilizer is
+`\mu_{\gcd(A,B)}` is the standard Bézout argument and is not separately
+formalized.
+
+### Binomial orbit coordinate
+
+For the binomial appearing on a listed open coordinate line, write
+
+```math
+m=dm',\qquad n=dn'.
+```
+
+Lean checks that
+
+```math
+x^m+y^n=0
+```
+
+implies, for the invariant quotient coordinate
+
+```math
+u=\frac{x^{m'}}{y^{n'}},
+```
+
+that
+
+```math
+u^d=-1.
+```
+
+The standard fact that this equation has exactly `d` distinct complex
+solutions is left as elementary complex algebra rather than formalized
+separately.
+
+Consequently the direct polynomial restrictions, together with the elementary
+Bézout and complex-root observations above, give precisely the multiplicities
+and stabilizer orders in Table 2.
+
+### Table 2 arithmetic
+
+Writing
+
+```math
+d_{ab}=\gcd(a,b),\qquad
+d_{ac}=\gcd(a,c),\qquad
+d_{bc}=\gcd(b,c),
+```
+
+Lean checks the arithmetic underlying the FFF entries
+
+```math
+L_{xy}\left(d_{ab},\frac{cd_{ab}}q\right),\qquad
+L_{xz}\left(d_{ac},\frac{bd_{ac}}q\right),\qquad
+L_{yz}\left(d_{bc},\frac{ad_{bc}}q\right).
+```
+
+For C2F, with
+
+```math
+r=\gcd(a,b-1),\qquad s=\gcd(b,c),
+```
+
+the checked entries are
+
+```math
+V_x\left(\frac{c(b-1)}q\right),\qquad
+L_{xy}\left(r,\frac{cr}q\right),\qquad
+L_{yz}\left(s,\frac{as}q\right).
+```
+
+For L2F, with
+
+```math
+d=\gcd(a-1,b-1),
+```
+
+the checked entries are
+
+```math
+V_x\left(\frac{c(b-1)}q\right),\qquad
+V_y\left(\frac{c(a-1)}q\right),\qquad
+L_{xy}\left(d,\frac{cd}q\right).
+```
+
+For C3, with
+
+```math
+d=\gcd(b,c-1),
+```
+
+the checked entries are
+
+```math
+V_x\left(\frac{c(b-1)+1}q\right),\qquad
+V_y\left(\frac{a(c-1)}q\right),\qquad
+L_{yz}\left(d,\frac{ad}q\right).
+```
+
+For L3, the three checked vertex orders are
+
+```math
+V_x\left(\frac{c(b-1)+1}q\right),\qquad
+V_y\left(\frac{a(c-1)+1}q\right),\qquad
+V_z\left(\frac{b(a-1)+1}q\right).
+```
+
+### Primitive case and equation (4.13)
+
+Lean proves that for FFF,
+
+```math
+\gcd(bc,ac,ab)=1
+```
+
+is equivalent, under the stated positivity hypotheses, to pairwise
+coprimality of `a,b,c`.
+
+For C2F the two factors
+
+```math
+r=\gcd(a,b-1),\qquad s=\gcd(b,c)
+```
+
+divide all three raw weights.  Hence `q=1` forces
+
+```math
+r=s=1.
+```
+
+Similarly, for L2F,
+
+```math
+d=\gcd(a-1,b-1)
+```
+
+divides all raw weights, so `q=1` forces `d=1`; and for C3,
+
+```math
+d=\gcd(b,c-1)
+```
+
+divides all raw weights, so again `q=1` forces `d=1`.
+
+Substitution into the verified Table 2 data gives the five signatures in
+equation **(4.13)**:
+
+```math
+\mathrm{FFF}:\qquad (a,b,c),
+```
+
+```math
+\mathrm{C2F}:\qquad \bigl(a,c(b-1),c\bigr),
+```
+
+```math
+\mathrm{L2F}:\qquad \bigl(c(a-1),c(b-1),c\bigr),
+```
+
+```math
+\mathrm{C3}:\qquad \bigl(a,c(b-1)+1,a(c-1)\bigr),
+```
+
+```math
+\mathrm{L3}:\qquad \bigl(b(a-1)+1,c(b-1)+1,a(c-1)+1\bigr).
+```
+
+**Lean/external boundary for Lemma 4.8.**
+
+Lean now checks the five raw weight systems, weighted homogeneity, every
+coordinate vertex, every `x=0`, `y=0`, and `z=0` restriction, emptiness of the
+unlisted open coordinate lines, all gcd/order arithmetic in Table 2, the
+weighted-action fixed-point equations, the binomial reduction to `u^d=-1`,
+the `q=1` gcd collapse, and the derivation of all five signatures in **(4.13)**.
+
+We intentionally do not formalize the immediate Bézout consequence
+`\lambda^A=\lambda^B=1 => \lambda^{\gcd(A,B)}=1`, nor the elementary fact that
+`u^d=-1` has `d` distinct roots over `\mathbb C`.  The quotient-stack
+interpretation of these elementary calculations is the geometric framework
+supplied by Lemma 4.5.
+
 
 ### [`Lemma49_Thm410_Mutation.lean`](FractionalTriangles/Section4/Lemma49_Thm410_Mutation.lean)
 
