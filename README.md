@@ -1868,10 +1868,6 @@ interpretation of these elementary calculations is the geometric framework
 supplied by Lemma 4.5.
 
 
-### [`Lemma49_Thm410_Mutation.lean`](FractionalTriangles/Section4/Lemma49_Thm410_Mutation.lean)
-
-**Lemma 4.9 and Theorem 4.10 — mutation arithmetic and weighted-Euler step**
-
 #### Lemma 4.9 — primitive atomic mutation
 
 Let \(g\) be a three-variable atomic invertible polynomial with primitive
@@ -2348,93 +2344,6 @@ Lemma 4.8. The stacky adjunction formulas used in **(4.15)**, **(4.18)**,
 Lemma 4.5. The elementary graded coordinate changes used to identify
 the four exceptional families with their replacements are intentionally
 not formalized in Lean.
-
-#### Theorem 4.10 — mixed quadratic case
-
-Lean checks the contradiction used when
-
-
-```math
-A+B=h, \qquad C>0,
-```
-
-
-while positivity would require
-
-
-```math
-h-A-B-C>0.
-```
-
-
-Indeed,
-
-
-```math
-h=A+B
-```
-
-
-gives
-
-
-```math
-h-A-B-C=-C<0,
-```
-
-
-contradicting the required positivity.
-
-Hence this numerical configuration is impossible.
-
-#### Theorem 4.10 — weighted Euler identity
-
-For a weighted-homogeneous polynomial \(F\) of weighted degree \(h\),
-
-
-```math
-hF = AxF_x+ByF_y+CzF_z.
-```
-
-
-Lean verifies that at a critical point
-
-
-```math
-F_x=F_y=F_z=0
-```
-
-
-one has
-
-
-```math
-hF=0.
-```
-
-
-If
-
-
-```math
-h\neq0,
-```
-
-
-then
-
-
-```math
-F=0.
-```
-
-
-Thus every critical point lies on the hypersurface.  This is the
-weighted-Euler step used in the quasismoothness argument of Theorem 4.10.
-
-**Scope:** this file checks the displayed integer case arithmetic and the
-weighted-Euler implication above.  It does not claim to formalize the full
-geometric mutation/classification argument of Theorem 4.10.
 
 ### [`Prop51.lean`](FractionalTriangles/Section5/Prop51.lean)
 
