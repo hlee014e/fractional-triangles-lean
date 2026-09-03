@@ -2422,7 +2422,7 @@ Assuming
 
 Lean proves
 
-    D = h ↔ J = ⊤.
+    D = h ↔ J = ⊤ (= G).
 
 For Proposition 5.1, with `D = |det A|`, `G = G_f`, and `J = <J_f>`, this is the final group-theoretic step giving
 
