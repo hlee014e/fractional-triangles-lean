@@ -134,6 +134,19 @@ theorem prop51_lcm_coordinate_orders
 
   rw [hfour]
   simp
+theorem grading_element_order
+    (h a b c : ℕ)
+    (hh : h ≠ 0)
+    (hg : Nat.gcd h (Nat.gcd a (Nat.gcd b c)) = 1) :
+    addOrderOf ((a : ZMod h), (b : ZMod h), (c : ZMod h)) = h := by
 
+  rw [Prod.addOrderOf_mk]
+  rw [Prod.addOrderOf_mk]
+
+  rw [ZMod.addOrderOf_coe a hh]
+  rw [ZMod.addOrderOf_coe b hh]
+  rw [ZMod.addOrderOf_coe c hh]
+
+  exact prop51_lcm_coordinate_orders h a b c hg
 end Section5
 end FractionalTriangles
