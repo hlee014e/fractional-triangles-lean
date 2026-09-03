@@ -2396,34 +2396,48 @@ D=h \iff J=G.
 Thus equality of the two orders is exactly the condition that no residual
 diagonal symmetry remains after quotienting by the grading subgroup.
 
-**External standard inputs for the full Proposition 5.1:**
+**What Lean verifies in Proposition 5.1:**
 
-The torus-kernel formula is
+The file `FractionalTriangles/Section5/Prop51.lean` proves two parts.
 
-```math
-|G_f|=|\det A|.
-```
+1. **Arithmetic core of the order computation** (`prop51_lcm_coordinate_orders`).
 
-Weighted homogeneity gives
+Assuming
 
-```math
-J_f\in G_f.
-```
+    gcd(h, gcd(a, gcd(b,c))) = 1,
 
-The order of the exponential grading element is
+Lean proves
 
-```math
-|J_f| = \mathrm{lcm}_j \frac{h}{\gcd(h,a_j)}.
-```
+    lcm(h/gcd(h,a),
+        lcm(h/gcd(h,b), h/gcd(h,c))) = h.
 
-For primitive weights this simplifies to
+This is the number-theoretic identity used in the computation of `ord(J_f) = h`.
 
-```math
-|J_f|=h.
-```
+2. **Final finite-group comparison** (`determinant_condition_iff_no_residual_symmetry`).
 
-The Lean file checks the final finite-group cardinality implication once these
-standard inputs are supplied.
+Assuming
+
+    Nat.card G = D
+    Nat.card J = h,
+
+Lean proves
+
+    D = h ↔ J = ⊤.
+
+For Proposition 5.1, with `D = |det A|`, `G = G_f`, and `J = <J_f>`, this is the final group-theoretic step giving
+
+    |det A| = h ↔ <J_f> = G_f,
+
+once the corresponding group orders are supplied.
+
+**Not yet formalized in Lean:**
+
+- the torus-kernel / character-lattice proof of `|G_f| = |det A|`;
+- the complex exponential definition of `J_f`;
+- the proof `J_f ∈ G_f` from weighted homogeneity;
+- the root-of-unity identification `ord(exp(2πia/h)) = h/gcd(h,a)`.
+
+Thus Proposition 5.1 is **partially Lean-verified**: Lean verifies the arithmetic order identity and the final finite-group cardinality argument; the torus/character-lattice and complex root-of-unity inputs remain external.
 
 ### [`AtomicDivisor.lean`](FractionalTriangles/Section5/AtomicDivisor.lean)
 
