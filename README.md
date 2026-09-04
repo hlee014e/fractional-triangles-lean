@@ -2501,59 +2501,35 @@ gives
 ```
 
 
-#### Lemma 5.4 — elementary finiteness bounds
+#### Lemma 5.4 — complete Lean verification
 
-Lean verifies the inequalities used to bound the atomic parameters.
-
-If
-
+Lean verifies Lemma 5.4 for all five atomic families. Put
 
 ```math
-(A-1)(B-1)\le \delta+2, \qquad A,B\ge1,
+A=\alpha-1,\qquad B=\beta-1,\qquad t=\gamma-1.
 ```
 
+| Type | Atomic equation | Lean theorem | Verified bound |
+|---|---|---|---|
+| FFF | `αβγ = αβ + αγ + βγ + δ` | `lemma54_FFF_bound` | `α,β,γ ≤ δ+6` |
+| C2F | `tAB = A+B+δ+1` | `lemma54_C2F_bound` | `A+1,B+1,t+1 ≤ δ+6` |
+| L2F | `tAB = A+B+δ` | `lemma54_L2F_bound` | `A+1,B+1,t+1 ≤ δ+6` |
+| C3 | `tAB = B+δ+1` | `lemma54_C3_bound` | `A+1,B+1,t+1 ≤ δ+6` |
+| L3 | `tAB = δ+1` | `lemma54_L3_bound` | `A+1,B+1,t+1 ≤ δ+6` |
 
-then
-
+For C2F and L2F, Lean explicitly separates the boundary cases
 
 ```math
-A\le\delta+3, \qquad B\le\delta+3.
+A=1,\qquad B=1,\qquad A,B\ge2,
 ```
 
+because the product inequality alone does not bound both variables when one factor is \(1\).
 
-If
-
+Hence, for every atomic type,
 
 ```math
-(A-1)B\le\delta+1, \qquad B\ge1,
+\boxed{\alpha,\beta,\gamma\le\delta+6}.
 ```
-
-
-then
-
-
-```math
-A\le\delta+2.
-```
-
-
-In the FFF case with \(\alpha=2\),
-
-
-```math
-(\beta-2)(\gamma-2)=\delta+4, \qquad \beta,\gamma\ge2,
-```
-
-
-implies
-
-
-```math
-\beta\le\delta+6, \qquad \gamma\le\delta+6.
-```
-
-
-These are the elementary numerical bounds used in the finiteness argument.
 
 #### Proposition 5.5 — equation (5.2)
 
