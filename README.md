@@ -3226,3 +3226,10 @@ The following ingredients are not yet formalized in this file:
 - hence the full theorem `ord(J_f) = h` inside the actual complex diagonal symmetry group.
 
 No `sorry`. No axioms.
+
+## Example
+
+The GCD forest for the signature $(2,4,7,9,15)$:
+
+![GCD forest for the signature (2,4,7,9,15)](images/gcd_forest_example.png)
+
